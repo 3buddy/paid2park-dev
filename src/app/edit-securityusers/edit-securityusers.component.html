@@ -1,0 +1,99 @@
+<div class="container bg-white"> 
+    <div layout="row">
+              <div class="col-md-12 menu form">
+    
+                 <div class="menu form-2">
+                     <form  class="container px-4 py-3" [formGroup]="editUser"  (ngSubmit)="onSubmit(editUser)">
+                         
+                        <div class="form-group form-style">
+                          <label for="FirstName">First Name:</label>
+                          <input type="text" formControlName="FirstName" class="form-control" id="FirstName"  >
+                          <span class="error" *ngIf="(submitted || editUser.controls['FirstName'].touched ) && editUser.controls['FirstName'].errors">
+                             This Is A Required Field .
+                          </span>
+     
+                        </div>
+                         
+                         <div class="form-group form-style" >
+                          <label for="LastName"> Last Name :</label>
+                          <input type="text"  formControlName="LastName" class="form-control" id="LastName"  >
+                          <span class="error"  *ngIf="(submitted || editUser.controls['LastName'].touched ) && editUser.controls['LastName'].errors">
+                            This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class=" form-group form-style" >
+                          <label for="Title">Title  :</label>
+                          <input type="text" formControlName="Title" class="form-control"   id="Title">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['Title'].touched ) && editUser.controls['Title'].errors">
+                             This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style" >
+                          <label for="Office">Office :</label>
+                          <input type="text" formControlName="Office" class="form-control" id="Office">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['Office'].touched ) && editUser.controls['Office'].errors">
+                            This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style" >
+                          <label for="Email">Email :</label>
+                          <input type="text" formControlName="Email" class="form-control" id="Email">
+                            <span  class="error"  *ngIf="(submitted || editUser.controls['Email'].touched ) && editUser.controls['Email'].errors">
+                             This Is A Required Field .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style "  >
+                          <label for="Login">Login:</label>
+                          <input type="text" formControlName="Login" class="form-control" id="Login">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['Login'].touched ) && editUser.controls['Login'].errors">
+                             This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style" >
+                          <label for="Password">Password:</label>
+                          <input type="text" formControlName="Password" class="form-control" id="Password">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['Password'].touched ) && editUser.controls['Password'].errors">
+                             This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style" >
+                          <label for="Role">Role :</label>
+                          <input type="text" formControlName="Role" class="form-control" id="Role">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['Role'].touched ) && editUser.controls['Role'].errors">
+                            This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style" >
+                          <label for="CustomerLastPaymentDate">Active :</label>
+                          <input type="text" formControlName="Active" class="form-control" id="CustomerLastPaymentDate">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['Active'].touched ) && editUser.controls['Active'].errors">
+                             This Is A Required Field .
+                          </span>
+                        </div>
+                         
+                        
+    
+                        
+                         
+                         
+                         <div class="form-group">
+                             
+                             <button [disabled]="!editUser.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Customer <nb-icon icon="save-outline"></nb-icon>
+                            </button>
+                         
+                         </div>
+                         
+                     </form>
+                 </div>
+            </div>
+    
+    </div>	 
+    
+    </div>

@@ -1,0 +1,88 @@
+<div class="container bg-white"> 
+<div layout="row">
+		  <div class="col-md-12 menu form">
+
+             <div class="menu form-2">
+				 <form  class="container px-4 py-3" [formGroup]="addKiosks"  (ngSubmit)="onSubmit(addKiosks)">
+					 
+					 
+					 <div class="form-group form-style" >
+					  <label for="kiosksNumber">kiosks Number :</label>
+					  <input type="text"  formControlName="kiosksNumber" class="form-control" id="kiosksNumber"  >
+					  <span class="error"  *ngIf="(submitted || addKiosks.controls['kiosksNumber'].touched ) && addKiosks.controls['kiosksNumber'].errors">
+                        This Is A Required Field  .
+                      </span>
+					</div>
+					 
+					<div class=" form-group form-style" >
+					  <label for="MacAddress">Mac Address :</label>
+					  <input type="text" formControlName="MacAddress" class="form-control"   id="MacAddress">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['MacAddress'].touched ) && addKiosks.controls['MacAddress'].errors">
+                         This Is A Required Field  .
+                      </span>
+					</div>
+					 
+					<div class="form-group form-style" >
+					  <label for="GUID">GUID :</label>
+					  <input type="text" formControlName="GUID" class="form-control" id="GUID">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['GUID'].touched ) && addKiosks.controls['GUID'].errors">
+                        This Is A Required Field  .
+                      </span>
+					</div>
+					 
+					<div class="form-group form-style" >
+					  <label for="Password">Password :</label>
+					  <input type="text" formControlName="Password" class="form-control" id="Password">
+						<span  class="error"  *ngIf="(submitted || addKiosks.controls['Password'].touched ) && addKiosks.controls['Password'].errors">
+                         This Is A Required Field .
+                      </span>
+					</div>
+					 
+					<div class="form-group form-style "  >
+					  <label for="LocationAddress">Location Address :</label>
+					  <input type="text" formControlName="LocationAddress" class="form-control" id="LocationAddress">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['LocationAddress'].touched ) && addKiosks.controls['LocationAddress'].errors">
+                         This Is A Required Field  .
+                      </span>
+					</div>
+					 
+					<div class="form-group form-style" >
+					  <label for="City">City :</label>
+					  <input type="text" formControlName="City" class="form-control" id="City">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['City'].touched ) && addKiosks.controls['City'].errors">
+                         This Is A Required Field  .
+                      </span>
+					</div>
+					 
+					<div class="form-group form-style" >
+					  <label for="NetworkLogin">Network Login :</label>
+					  <input type="text" formControlName="NetworkLogin" class="form-control" id="NetworkLogin">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['NetworkLogin'].touched ) && addKiosks.controls['NetworkLogin'].errors">
+                        This Is A Required Field  .
+                      </span>
+					</div>
+					 
+					<div class="form-group form-style" >
+					  <label for="NetworkPassword">Network Password:</label>
+					  <input type="text" formControlName="NetworkPassword" class="form-control" id="NetworkPassword">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['NetworkPassword'].touched ) && addKiosks.controls['NetworkPassword'].errors">
+                         This Is A Required Field .
+                      </span>
+					</div>
+					 
+					
+					 
+					 <div class="form-group">
+						 
+						 <button [disabled]="!addKiosks.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Kiosks <nb-icon icon="save-outline"></nb-icon>
+						</button>
+					 
+					 </div>
+					 
+				 </form>
+			 </div>
+		</div>
+
+</div>	 
+
+</div>

@@ -1,0 +1,21 @@
+.page-content
+{
+	width: 100% !important;
+}
+
+.block
+{
+	background: #fff !important;
+}
+
+
+table {
+  width: 100%;
+}
+
+a
+{
+	text-decoration: none;
+    cursor: pointer;
+	margin-left: 2px;
+}

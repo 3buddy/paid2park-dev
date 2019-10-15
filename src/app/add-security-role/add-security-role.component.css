@@ -1,0 +1,26 @@
+.checkbox-style
+{
+    width: 100%;
+}
+
+.checkbox-style-div
+{
+    width: 18%;
+}
+
+.error
+{
+	color: red;
+}
+
+.checkbox-style-div input
+{
+    margin-right: 10px;
+    margin: 8px;
+    cursor: pointer;
+    padding-left: 18px;
+    padding-right: 0;
+    line-height: 26px;
+    min-width: 18px;
+    min-height: 18px;
+}
