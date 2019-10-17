@@ -1,0 +1,14 @@
+.mat-dialog-content
+{
+    text-align: center;
+}
+.mat-dialog-actions button 
+{
+    margin: 5px;
+}
+
+.button-div
+{
+    width: 70%;
+    margin: 0px auto;
+}
