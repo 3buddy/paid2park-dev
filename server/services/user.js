@@ -25,7 +25,7 @@ function addUser(req,res,cb)
 	  
 	  
 	    var now = moment.utc().format();
-        let encrypted_password = bcrypt.hashSync(user_password, saltRounds);
+      let encrypted_password = bcrypt.hashSync(user_password, saltRounds);
 
 		const createUser = new Promise((resolve, reject) => {
 
@@ -44,7 +44,7 @@ function addUser(req,res,cb)
 			  if(data.insertId)
 			  {
                 response.status =  1;
-				response.message = "User Has Been Created Successfully !";
+				        response.message = "User Has Been Created Successfully !";
 			  }
 			  
 			  res.json(response)
@@ -269,7 +269,7 @@ function getUserList(req,res,cb)
     const getUserlist = new Promise((resolve, reject) => {
 
         con.query(`
-             SELECT user_id , user_fname , user_lname , user_title , user_office , user_email , user_login  , user_role_id , user_isactive FROM user
+             SELECT user_id AS Id  , CONCAT(user_fname,' ',user_lname) AS FullName , user_title , user_office , user_email  AS Email , user_login  , user_role_id , ( SELECT role_name FROM role WHERE role_id = user_role_id ) AS RoleName , user_isactive AS IsActive  FROM user
             `,  (err, result) => {
                 if (err) reject(err)
                 else {
@@ -352,16 +352,12 @@ function getUserDetails(req,res,cb)
 
 function deleteUser(req,res,cb)
 {
-   const { user_id } = req.body;
+   const { user_id } = req.params;
    let response = {
     status: 0,
     body: {},
     message: ""  
   }  
-
-var now = moment.utc().format();
-
-
 
 const deleteUser = new Promise((resolve, reject) => {
 

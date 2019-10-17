@@ -12,7 +12,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 
 import { MatListModule , MatPaginatorModule , MatFormFieldModule , MatInputModule , MatTableModule } from '@angular/material';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -52,6 +52,12 @@ import { EditDeploymentComponent } from './edit-deployment/edit-deployment.compo
 import { EditSecurityrolesComponent } from './edit-securityroles/edit-securityroles.component';
 import { EditSecurityusersComponent } from './edit-securityusers/edit-securityusers.component';
 
+/*  Delete Dialog  */
+
+import { DialogContentExampleDialog } from './securityusers/securityusers.component';
+import { DialogDeleteCustomer } from './customers/customers.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +94,9 @@ import { EditSecurityusersComponent } from './edit-securityusers/edit-securityus
     EditEnforcementsComponent,
     EditDeploymentComponent,
     EditSecurityrolesComponent,
-    EditSecurityusersComponent
+    EditSecurityusersComponent,
+    DialogContentExampleDialog,
+    DialogDeleteCustomer
   ],
   imports: [
     BrowserAnimationsModule,
@@ -111,9 +119,11 @@ import { EditSecurityusersComponent } from './edit-securityusers/edit-securityus
 	MatFormFieldModule, 
 	MatInputModule,
 	MatIconModule,
-	MatListModule
+  MatListModule,
+  MatDialogModule
   ],
   providers: [NbSidebarService, NbMenuService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[DialogContentExampleDialog,DialogDeleteCustomer]
 })
 export class AppModule { }

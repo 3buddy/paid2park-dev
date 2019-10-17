@@ -7,8 +7,8 @@
 					 
 					<div class="form-group form-style">
 					  <label for="CustomerID">Customer ID (Assigned):</label>
-					  <input type="text" formControlName="CustomerID" class="form-control" id="CustomerID"  >
-					  <span class="error" *ngIf="(submitted || addCustomer.controls['CustomerID'].touched ) && addCustomer.controls['CustomerID'].errors">
+					  <input type="text" formControlName="customer_assign_id" class="form-control" id="CustomerID"  >
+					  <span class="error" *ngIf="(submitted || addCustomer.controls['customer_assign_id'].touched ) && addCustomer.controls['customer_assign_id'].errors">
                          This Is A Required Field .
                       </span>
  
@@ -16,128 +16,128 @@
 					 
 					 <div class="form-group form-style" >
 					  <label for="CustomerFirstName">Customer First Name:</label>
-					  <input type="text"  formControlName="CustomerFirstName" class="form-control" id="CustomerFirstName"  >
-					  <span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerFirstName'].touched ) && addCustomer.controls['CustomerFirstName'].errors">
+					  <input type="text"  formControlName="customer_first_name" class="form-control" id="CustomerFirstName"  >
+					  <span class="error"  *ngIf="(submitted || addCustomer.controls['customer_first_name'].touched ) && addCustomer.controls['customer_first_name'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class=" form-group form-style" >
 					  <label for="CustomerLastName">Customer Last Name :</label>
-					  <input type="text" formControlName="CustomerLastName" class="form-control"   id="CustomerLastName">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastName'].touched ) && addCustomer.controls['CustomerLastName'].errors">
+					  <input type="text" formControlName="customer_last_name" class="form-control"   id="CustomerLastName">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_name'].touched ) && addCustomer.controls['customer_last_name'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerMailAddress">Customer Mail Address:</label>
-					  <input type="text" formControlName="CustomerMailAddress" class="form-control" id="CustomerMailAddress">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerMailAddress'].touched ) && addCustomer.controls['CustomerMailAddress'].errors">
+					  <input type="text" formControlName="customer_mail_address" class="form-control" id="CustomerMailAddress">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_mail_address'].touched ) && addCustomer.controls['customer_mail_address'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerMailCity">Customer Mail City:</label>
-					  <input type="text" formControlName="CustomerMailCity" class="form-control" id="CustomerMailCity">
-						<span  class="error"  *ngIf="(submitted || addCustomer.controls['CustomerMailCity'].touched ) && addCustomer.controls['CustomerMailCity'].errors">
+					  <input type="text" formControlName="customer_mail_city" class="form-control" id="CustomerMailCity">
+						<span  class="error"  *ngIf="(submitted || addCustomer.controls['customer_mail_city'].touched ) && addCustomer.controls['customer_mail_city'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style "  >
 					  <label for="CustomerMailState">Customer Mail State:</label>
-					  <input type="text" formControlName="CustomerMailState" class="form-control" id="CustomerMailState">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerMailState'].touched ) && addCustomer.controls['CustomerMailState'].errors">
+					  <input type="text" formControlName="customer_mail_state" class="form-control" id="CustomerMailState">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_mail_state'].touched ) && addCustomer.controls['customer_mail_state'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerMailZip">Customer Mail Zip:</label>
-					  <input type="text" formControlName="CustomerMailZip" class="form-control" id="CustomerMailZip">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerMailZip'].touched ) && addCustomer.controls['CustomerMailZip'].errors">
+					  <input type="text" formControlName="customer_mail_zip" class="form-control" id="CustomerMailZip">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_mail_zip'].touched ) && addCustomer.controls['customer_mail_zip'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerMinuteAvailable">Customer Minute Available:</label>
-					  <input type="text" formControlName="CustomerMinuteAvailable" class="form-control" id="CustomerMinuteAvailable">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerMinuteAvailable'].touched ) && addCustomer.controls['CustomerMinuteAvailable'].errors">
+					  <input type="text" formControlName="customer_minute_available" class="form-control" id="CustomerMinuteAvailable">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_minute_available'].touched ) && addCustomer.controls['customer_minute_available'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastPaymentDate">Last Payment Date:</label>
-					  <input type="text" formControlName="CustomerLastPaymentDate" class="form-control" id="CustomerLastPaymentDate">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastPaymentDate'].touched ) && addCustomer.controls['CustomerLastPaymentDate'].errors">
+					  <input type="text" formControlName="customer_last_payment_date" class="form-control" id="CustomerLastPaymentDate">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_payment_date'].touched ) && addCustomer.controls['customer_last_payment_date'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastPaymentAmount">Last Payment Amount:</label>
-					  <input type="text" formControlName="CustomerLastPaymentAmount" class="form-control" id="CustomerLastPaymentAmount">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastPaymentAmount'].touched ) && addCustomer.controls['CustomerLastPaymentAmount'].errors">
+					  <input type="text" formControlName="customer_last_payment_amount" class="form-control" id="CustomerLastPaymentAmount">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_payment_amount'].touched ) && addCustomer.controls['customer_last_payment_amount'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastMinutesReceived">Last Minutes Received:</label>
-					  <input type="text" formControlName="CustomerLastMinutesReceived" class="form-control" id="CustomerLastMinutesReceived">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastMinutesReceived'].touched ) && addCustomer.controls['CustomerLastMinutesReceived'].errors">
+					  <input type="text" formControlName="customer_last_minutes_received" class="form-control" id="CustomerLastMinutesReceived">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_minutes_received'].touched ) && addCustomer.controls['customer_last_minutes_received'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastParkingDate">Last Parking Date:</label>
-					  <input type="text" formControlName="CustomerLastParkingDate" class="form-control" id="CustomerLastParkingDate">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastParkingDate'].touched ) && addCustomer.controls['CustomerLastParkingDate'].errors">
+					  <input type="text" formControlName="customer_last_parking_date" class="form-control" id="CustomerLastParkingDate">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_parking_date'].touched ) && addCustomer.controls['customer_last_parking_date'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastPassPurchaseDate">Last Pass Purchase Date:</label>
-					  <input type="text"  formControlName="CustomerLastPassPurchaseDate" class="form-control"  id="CustomerLastPassPurchaseDate">
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastPassPurchaseDate'].touched ) && addCustomer.controls['CustomerLastPassPurchaseDate'].errors">
+					  <input type="text"  formControlName="customer_last_pass_purchase_date" class="form-control"  id="CustomerLastPassPurchaseDate">
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_pass_purchase_date'].touched ) && addCustomer.controls['customer_last_pass_purchase_date'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastPassStartDate">Last Pass Start Date:</label>
-					  <input type="text" formControlName="CustomerLastPassStartDate" class="form-control" id="CustomerLastPassStartDate" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastPassStartDate'].touched ) && addCustomer.controls['CustomerLastPassStartDate'].errors">
+					  <input type="text" formControlName="customer_last_pass_start_date" class="form-control" id="CustomerLastPassStartDate" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_pass_start_date'].touched ) && addCustomer.controls['customer_last_pass_start_date'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastPassEndDate">Last Pass End Date:</label>
-					  <input type="text" formControlName="CustomerLastPassEndDate" class="form-control" id="CustomerLastPassEndDate" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastPassEndDate'].touched ) && addCustomer.controls['CustomerLastPassEndDate'].errors">
+					  <input type="text" formControlName="customer_last_pass_end_date" class="form-control" id="CustomerLastPassEndDate" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_pass_end_date'].touched ) && addCustomer.controls['customer_last_pass_end_date'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerLastPassCost">Last Pass Cost:</label>
-					  <input type="text" formControlName="CustomerLastPassCost" class="form-control" id="CustomerLastPassCost" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerLastPassCost'].touched ) && addCustomer.controls['CustomerLastPassCost'].errors">
+					  <input type="text" formControlName="customer_last_pass_cost" class="form-control" id="CustomerLastPassCost" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_last_pass_cost'].touched ) && addCustomer.controls['customer_last_pass_cost'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerEmailAddress">Email Address:</label>
-					  <input type="text" formControlName="CustomerEmailAddress" class="form-control" id="CustomerEmailAddress" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerEmailAddress'].touched ) && addCustomer.controls['CustomerEmailAddress'].errors">
+					  <input type="text" formControlName="customer_email_address" class="form-control" id="CustomerEmailAddress" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_email_address'].touched ) && addCustomer.controls['customer_email_address'].errors">
                          This Is A Required Field .
                       </span>
 						
@@ -145,42 +145,46 @@
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerCell">Cell #:</label>
-					  <input type="text" id="CustomerCell" formControlName="CustomerCell" class="form-control" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerCell'].touched ) && addCustomer.controls['CustomerCell'].errors">
+					  <input type="text" id="customer_cell" formControlName="customer_cell" class="form-control" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_cell'].touched ) && addCustomer.controls['customer_cell'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerCellCarrier">Cell Carrier:</label>
-					  <input type="text" formControlName="CustomerCellCarrier" class="form-control" id="CustomerCellCarrier" >
-						<span  class="error"  *ngIf="(submitted || addCustomer.controls['CustomerCellCarrier'].touched ) && addCustomer.controls['CustomerCellCarrier'].errors">
+					  <input type="text" formControlName="customer_cell_carrier" class="form-control" id="CustomerCellCarrier" >
+						<span  class="error"  *ngIf="(submitted || addCustomer.controls['customer_cell_carrier'].touched ) && addCustomer.controls['customer_cell_carrier'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
 					  <label for="CustomerNotifyMinsInAdvance">Notify Mins in advance:</label>
-					  <input type="text" formControlName="CustomerNotifyMinsInAdvance" class="form-control" id="CustomerNotifyMinsInAdvance" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerNotifyMinsInAdvance'].touched ) && addCustomer.controls['CustomerNotifyMinsInAdvance'].errors">
+					  <input type="text" formControlName="customer_notify_mins_in_advance" class="form-control" id="CustomerNotifyMinsInAdvance" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_notify_mins_in_advance'].touched ) && addCustomer.controls['customer_notify_mins_in_advance'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style">
 					  <label for="CustomerNumberOfTicketsYTD">Number of Tickets YTD:</label>
-					  <input type="text" formControlName="CustomerNumberOfTicketsYTD" class="form-control" id="CustomerNumberOfTicketsYTD" >
-						<span class="error"  *ngIf="(submitted || addCustomer.controls['CustomerNumberOfTicketsYTD'].touched ) && addCustomer.controls['CustomerNumberOfTicketsYTD'].errors">
+					  <input type="text" formControlName="customer_number_of_tickets_ytd" class="form-control" id="CustomerNumberOfTicketsYTD" >
+						<span class="error"  *ngIf="(submitted || addCustomer.controls['customer_number_of_tickets_ytd'].touched ) && addCustomer.controls['customer_number_of_tickets_ytd'].errors">
                         This Is A Required Field .
                       </span>
 					</div>
 					 
-					 <div class="form-group">
+					 <div class="form-group btn-space">
 						 
 						 <button [disabled]="!addCustomer.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Customer <nb-icon icon="save-outline"></nb-icon>
 						</button>
 					 
 					 </div>
+
+					 <div *ngIf="showMessage" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+						{{ messageText  }}
+				     </div>
 					 
 				 </form>
 			 </div>

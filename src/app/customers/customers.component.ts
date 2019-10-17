@@ -1,27 +1,23 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { CustomerService } from '../customer.service';
+
 
 export interface PeriodicElement {
-  _id:number;
-  DeploymentName: string;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  IsActive:string;
+  customer_id:number;
+  //DeploymentName: string;
+  customer_first_name: string;
+  customer_last_name: string;
+  customer_email_address: string;
 }
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {_id:1,DeploymentName: 'Dove Creek CO', FirstName: 'John', LastName: 'Mac',Email:'johnmac@gmail.com',IsActive:'Yes'},
-  {_id:2,DeploymentName: 'DTPHX Test Deployment', FirstName: 'Rusi', LastName: 'Hart',Email:'rusihart@gmail.com',IsActive:'Yes'},
-  {_id:3,DeploymentName: 'Indian Wells Valley', FirstName: 'Cristal', LastName: 'Roz',Email:'cristalroz@gmail.com',IsActive:'Yes'},
-  {_id:4,DeploymentName: 'Jons Test Deployment', FirstName: 'Lucci', LastName: 'Hart',Email:'luccihart@gmail.com',IsActive:'Yes'},
-  {_id:5,DeploymentName: 'Jons New Test Deployment', FirstName: 'Lucciy', LastName: 'Hart',Email:'pb@c.com',IsActive:'No'}
-];
+let ELEMENT_DATA: PeriodicElement[];
 
 
 @Component({
@@ -32,21 +28,57 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class CustomersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['DeploymentName', 'FirstName', 'LastName','Email','IsActive','Action'];
+  //displayedColumns: string[] = ['DeploymentName', 'FirstName', 'LastName','Email','IsActive','Action'];
+  
+  displayedColumns: string[] = ['DeploymentName','customer_first_name', 'customer_last_name','customer_email_address','Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() {  this.dataSource = new MatTableDataSource(ELEMENT_DATA);  }
+  constructor( private CM : CustomerService , public dialog: MatDialog) {    }
+
+  openDialog(Id) {
+
+    const dialogRef = this.dialog.open(DialogDeleteCustomer,{
+      height: '18%',
+      width: '25%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if(result === true)
+      {
+        this.deleteCustomer(Id);
+        console.log('deleted');
+        this.applyFilter('');
+      }
+
+    });
+  }
 
   ngOnInit() {
-  
-     
-	 this.dataSource.paginator = this.paginator;
-     this.dataSource.sort = this.sort;
+     this.getCustomerList();
   }
   
+
+  getCustomerList()
+  {
+    this.CM.getCustomer().subscribe( response => {
+        ELEMENT_DATA = response['body'];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort; 
+    });
+  }
+
+  deleteCustomer(customerId)
+  {
+    this.CM.deleteCustomer(customerId)
+    .subscribe(response =>{
+      return customerId;
+    });
+  }
   
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -58,3 +90,11 @@ export class CustomersComponent implements OnInit {
   
 
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './dialog-content-example-dialog.html',
+  styleUrls:['./dialog-content-css.css']
+})
+
+export class DialogDeleteCustomer {}

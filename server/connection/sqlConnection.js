@@ -1,12 +1,31 @@
 const mysql = require('mysql');
 
-global.con = mysql.createConnection({
-    host : 'localhost',
-    user : 'nb53dc5_user',
-    password : '$0SW5hvtRo}.',
-    database : 'nb53dc5_paid2park'
+const NODE_ENV = process.env.NODE_ENV;
 
-});
+if(NODE_ENV == 'production')
+{
+
+    global.con = mysql.createConnection({
+        host : process.env.mysql_host,
+        user : process.env.mysql_user,
+        password : process.env.mysql_password,
+        database : process.env.mysql_database
+    
+    });
+}
+else
+{
+    global.con = mysql.createConnection({
+        host : process.env.mysql_host_local,
+        user : process.env.mysql_user_local,
+        password : process.env.mysql_password_local,
+        database : process.env.mysql_database_local,
+        socketPath: process.env.socketPath_local,
+        port:process.env.mysql_port_local
+    
+    });
+}
+
 
 
 let connection = async function () {

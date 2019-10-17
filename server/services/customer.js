@@ -28,7 +28,7 @@ function addCustomer(req,res,cb)
     customer_minute_available,
     customer_last_payment_date,
     customer_last_payment_amount,
-    customer_last_minutes_recieved,
+    customer_last_minutes_received,
     customer_last_parking_date,
     customer_last_pass_purchase_date,
     customer_last_pass_start_date,
@@ -115,7 +115,7 @@ function addCustomer(req,res,cb)
                       customer_minute_available,
                       customer_last_payment_date,
                       customer_last_payment_amount,
-                      customer_last_minutes_recieved,
+                      customer_last_minutes_received,
                       customer_last_parking_date,
                       customer_last_pass_purchase_date,
                       customer_last_pass_start_date,
@@ -137,7 +137,7 @@ function addCustomer(req,res,cb)
                       customer_minute_available,
                       customer_last_payment_date,
                       customer_last_payment_amount,
-                      customer_last_minutes_recieved,
+                      customer_last_minutes_received,
                       customer_last_parking_date,
                       customer_last_pass_purchase_date,
                       customer_last_pass_start_date,
@@ -189,7 +189,7 @@ function getCustomer(req,res,cb)
              customer_minute_available,
              customer_last_payment_date,
              customer_last_payment_amount,
-             customer_last_minutes_recieved,
+             customer_last_minutes_received,
              customer_last_parking_date,
              customer_last_pass_purchase_date,
              customer_last_pass_start_date,
@@ -262,7 +262,7 @@ function getCustomerDetails(req,res,cb)
            customer_minute_available,
            customer_last_payment_date,
            customer_last_payment_amount,
-           customer_last_minutes_recieved,
+           customer_last_minutes_received,
            customer_last_parking_date,
            customer_last_pass_purchase_date,
            customer_last_pass_start_date,
@@ -309,9 +309,7 @@ function getCustomerDetails(req,res,cb)
 
 function deleteCustomer(req,res,cb)
 {
-
-
-  const { customerId } = req.body;
+  const { customerId } = req.params;
    let response = {
     status: 0,
     body: {},
@@ -406,7 +404,7 @@ function updateCustomer(req,res,cb)
     customer_minute_available,
     customer_last_payment_date,
     customer_last_payment_amount,
-    customer_last_minutes_recieved,
+    customer_last_minutes_received,
     customer_last_parking_date,
     customer_last_pass_purchase_date,
     customer_last_pass_start_date,
@@ -569,13 +567,13 @@ function updateCustomer(req,res,cb)
               customer_last_payment_amount = result[0].customer_last_payment_amount;
             }
 
-            if(!!customer_last_minutes_recieved)
+            if(!!customer_last_minutes_received)
             {
-              customer_last_minutes_recieved = customer_last_minutes_recieved;
+              customer_last_minutes_received = customer_last_minutes_received;
             }
             else
             {
-              customer_last_minutes_recieved = result[0].customer_last_minutes_recieved;
+              customer_last_minutes_received = result[0].customer_last_minutes_received;
             }
 
 
@@ -686,7 +684,7 @@ function updateCustomer(req,res,cb)
           customer_minute_available = ?,
           customer_last_payment_date = ?,
           customer_last_payment_amount = ?,
-          customer_last_minutes_recieved =?,
+          customer_last_minutes_received =?,
           customer_last_parking_date = ?,
           customer_last_pass_purchase_date =? ,
           customer_last_pass_start_date =?,
@@ -708,7 +706,7 @@ function updateCustomer(req,res,cb)
             customer_minute_available,
             customer_last_payment_date,
             customer_last_payment_amount,
-            customer_last_minutes_recieved,
+            customer_last_minutes_received,
             customer_last_parking_date,
             customer_last_pass_purchase_date,
             customer_last_pass_start_date,

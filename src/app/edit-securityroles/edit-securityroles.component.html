@@ -1,4 +1,6 @@
-<div class="container bg-white" > 
+{{pageload}}
+<div class="container bg-white" *ngIf="pageload === ture; else loading"> 
+
     <div layout="row">
               <div class="col-md-12 menu form">
     
@@ -7,7 +9,7 @@
                          
                         <div class="form-group form-style">
                           <label for="RoleName"> Role Name :</label>
-                          <input type="text" formControlName="RoleName" class="form-control" id="RoleName"  value="{{ roledetails.role_name }}">
+                          <input type="text" formControlName="RoleName" class="form-control" id="RoleName"  >
                           <span class="error" *ngIf="(submitted || addRole.controls['RoleName'].touched ) && addRole.controls['RoleName'].errors">
                              This Is A Required Field .
                           </span>
@@ -110,3 +112,14 @@
     </div>	 
     
     </div>
+    <ng-template #loading>
+            <div class="loader_custom">
+                <div class="loader">
+                  <div class="snippet">
+                    <div class="stage">
+                      <div class="dot-spin"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </ng-template>

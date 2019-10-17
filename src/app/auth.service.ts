@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
  
-  private _adminLoginUrl = 'http://173.231.205.186:49156/api/v1/admin/login';
+  private _adminLoginUrl = `${environment.apiUrl}/admin/login`;
   data;
   error;
 

@@ -8,34 +8,34 @@
 				  <table mat-table [dataSource]="dataSource" matSort>
 
 					
-					<ng-container matColumnDef="DeploymentName">
+				 <ng-container matColumnDef="DeploymentName">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Deployment Name </th>
-					  <td mat-cell *matCellDef="let row"> {{row.DeploymentName}} </td>
-					</ng-container>
+					  <td mat-cell *matCellDef="let row"> Will Add it later  </td>
+					</ng-container>  	
 
 					
-					<ng-container matColumnDef="FirstName">
+					<ng-container matColumnDef="customer_first_name">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-					  <td mat-cell *matCellDef="let row"> {{row.FirstName}} </td>
+					  <td mat-cell *matCellDef="let row"> {{row.customer_first_name}} </td>
 					</ng-container>
 
 					
-					<ng-container matColumnDef="LastName">
+					<ng-container matColumnDef="customer_last_name">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-					  <td mat-cell *matCellDef="let row" > {{row.LastName}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.customer_last_name}} </td>
 					</ng-container>
 					  
 					  
-					<ng-container matColumnDef="Email">
+					<ng-container matColumnDef="customer_email_address">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-					  <td mat-cell *matCellDef="let row" > {{row.Email}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.customer_email_address}} </td>
 					</ng-container>
 					  
-					  
-					<ng-container matColumnDef="IsActive">
+					<!-- <ng-container matColumnDef="IsActive">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Active </th>
 					  <td mat-cell *matCellDef="let row" > {{row.IsActive}} </td>
-					</ng-container>
+					</ng-container> -->  
+					
 
 					  <!-- Action Column -->
 					<ng-container matColumnDef="Action">
@@ -57,7 +57,7 @@
 					  <td mat-cell *matCellDef="let row" >
 
 
-						  <a mat-flat-button color="info" [routerLink]="['/customers', row._id,'edit']">
+						  <a mat-flat-button color="info" [routerLink]="['/customers', row.customer_id,'edit']">
 									  <button  size="small" shape="semi-round" nbButton hero status="info"> 
 
 										  Edit 
@@ -67,7 +67,7 @@
 									  </button>
 						  </a>
 
-						  <a mat-flat-button color="info" [routerLink]="['/product-add']">
+						  <a mat-flat-button color="info" (click)="openDialog(row.customer_id)">
 									  <button  size="small" shape="semi-round" nbButton hero status="warning"> 
 
 										  Delete
@@ -77,7 +77,7 @@
 									  </button>
 						 </a>
 						   
-						    <a mat-flat-button color="info" [routerLink]="['/customers', row._id,'add-vehicles']">
+						    <a mat-flat-button color="info" [routerLink]="['/customers', row.customer_id,'add-vehicles']">
 									  <button  size="small" shape="semi-round" nbButton hero status="info"> 
 
 										  Add Vehicles

@@ -1,52 +1,92 @@
-import { Component, OnInit  , ViewChild} from '@angular/core';
+import { Component, OnInit  , ViewChild } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { UserService } from '../user.service'
+
 
 export interface PeriodicElement {
   Id:number,
-  AllDeployments: Array<string>;
+  //AllDeployments: Array<string>;
   FullName: string;
   Email: string;
   RoleName:string;
   IsActive:string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {Id:1,AllDeployments: ['DTPHS Test Deployment', 'Jenis Test David Deployment', 'Indian Wells Valley','Dove Creek CO'],FullName: 'David Admin',Email: 'davidadmin@gmail.com',RoleName:'Administrator',IsActive:'Yes'},
-  {Id:2,AllDeployments: ['DTPHS Test Deployment'],FullName: 'Test Aque Track',Email: 'testaquetrack@gmail.com',RoleName:'Deployment Manager',IsActive:'Yes'},
-  {Id:3,AllDeployments: ['Indians Wells Valley'],FullName: 'Amber Chapin',Email: 'amber.chapin@hgmail.com	',RoleName:'Deployment Service Account',IsActive:'Yes'},
-  {Id:4,AllDeployments: ['DTPHS Test Deployment', 'Jenis Test David Deployment', 'Indian Wells Valley',' Dove Creek CO'],FullName: 'Gienn Kess',Email: 'giennkess@gmail.com',RoleName:'Deployment User',IsActive:'Yes'},
-  {Id:5,AllDeployments: ['Jonis Test Deployment'	, 'Jenis Test David Deployment', 'Indian Wells Valley',' Dove Creek CO'],FullName: 'Gienn Kess',Email: 'giennkess@gmail.com',RoleName:'CreateAccountRate',IsActive:'Yes'}
-];
+let ELEMENT_DATA: PeriodicElement[];
 
 @Component({
   selector: 'app-securityusers',
   templateUrl: './securityusers.component.html',
   styleUrls: ['./securityusers.component.css']
 })
+
+
 export class SecurityusersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['AllDeployments', 'FullName', 'Email','RoleName','IsActive','Action'];
+  displayedColumns: string[] = ['AllDeployments','FullName', 'Email','RoleName','IsActive','Action'];
   
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+  
+
+  constructor(private US : UserService,public dialog: MatDialog) {
+    
+  }
+
+
+  openDialog(Id) {
+
+    const dialogRef = this.dialog.open(DialogContentExampleDialog,{
+      height: '18%',
+      width: '25%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if(result === true)
+      {
+        this.deleteUser(Id);
+        console.log('deleted');
+        this.applyFilter('');
+      }
+
+    });
   }
 
   ngOnInit() {
-  
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-	
+    this.getUserList();
+  }
+
+  getUserList()
+  {
+    this.US.getUser()
+    .subscribe( response =>{
+
+      ELEMENT_DATA = response['body'];
+      this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    });
+  }
+
+  deleteUser(Id)
+  {
+    this.US.deleteUser(Id).subscribe(response=>{
+      return Id;
+    })
+    
+
   }
 
   applyFilter(filterValue: string) {
@@ -58,3 +98,11 @@ export class SecurityusersComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './dialog-content-example-dialog.html',
+  styleUrls:['./dialog-content-css.css']
+})
+
+export class DialogContentExampleDialog {}

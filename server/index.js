@@ -1,9 +1,12 @@
+const dotenv = require('dotenv').config();
 const express = require("express");
 const app = express();
 
 var http = require('http');
 var server = http.createServer(app);
 
+const NODE_ENV = process.env.NODE_ENV;
+const socketPath = dotenv.socketPath;
 
 const PORT = process.env.PORT || 49156;
 const bodyParser = require("body-parser");
@@ -40,5 +43,7 @@ app.all('*', function (req, res) {
 
 server.listen(PORT, () => {
   //console.log(listEndpoints(app));
+  //console.log(dotenv);
+  //console.log(process.env.mysql_host);
   console.log(`Server listening to PORT: ${PORT}`)
 })

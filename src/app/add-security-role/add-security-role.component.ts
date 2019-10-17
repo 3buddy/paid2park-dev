@@ -150,7 +150,7 @@ export class AddSecurityRoleComponent implements OnInit {
 
     this._US.addRole(role)
     .subscribe(response =>{
-        if(response['status'] == 1)
+        if(response['status'] === 1)
         {
           
             this.showMessage = true;
@@ -160,7 +160,7 @@ export class AddSecurityRoleComponent implements OnInit {
 
             setTimeout(() => {
               this.router.navigate(['/securityroles']);
-          }, 3000);
+             }, 3000);
             
         }
         else
