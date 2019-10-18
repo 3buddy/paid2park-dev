@@ -11,7 +11,7 @@ import { NbThemeModule ,NbMenuModule, NbLayoutModule , NbSidebarModule ,NbSideba
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 
-import { MatListModule , MatPaginatorModule , MatFormFieldModule , MatInputModule , MatTableModule } from '@angular/material';
+import {MatToolbarModule, MatProgressBarModule , MatListModule , MatPaginatorModule , MatFormFieldModule , MatInputModule , MatTableModule } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -120,7 +120,9 @@ import { DialogDeleteCustomer } from './customers/customers.component';
 	MatInputModule,
 	MatIconModule,
   MatListModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressBarModule,
+  MatToolbarModule
   ],
   providers: [NbSidebarService, NbMenuService],
   bootstrap: [AppComponent],

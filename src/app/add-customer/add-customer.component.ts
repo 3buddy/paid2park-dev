@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class AddCustomerComponent implements OnInit {
     messageClass:string = '';
     messageText:string = '';
 	
-    constructor(private fb: FormBuilder,private CS : CustomerService ,private router : Router) { }
+    constructor(private fb: FormBuilder,private CS : CustomerService ,private router : Router,private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
      
@@ -67,7 +67,7 @@ export class AddCustomerComponent implements OnInit {
           this.messageText = response['message'];
           this.messageClass = 'success';
 
-
+          this.cdRef.detectChanges();
           setTimeout(() => {
             this.router.navigate(['/customers']);
            }, 3000);
@@ -77,6 +77,7 @@ export class AddCustomerComponent implements OnInit {
           this.showMessage = true;
           this.messageText = response['message'];
           this.messageClass = 'danger';
+          this.cdRef.detectChanges();
         }
     })
       /*

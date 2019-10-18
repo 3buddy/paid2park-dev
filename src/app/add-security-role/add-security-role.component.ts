@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl , FormArray} from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -66,7 +66,7 @@ export class AddSecurityRoleComponent implements OnInit {
   }
   
 	
-  constructor(private fb: FormBuilder , protected _US : UserService,protected router : Router) { }
+  constructor(private fb: FormBuilder , protected _US : UserService,protected router : Router, private cd : ChangeDetectorRef) { }
 
   ngOnInit() {
      
@@ -156,6 +156,7 @@ export class AddSecurityRoleComponent implements OnInit {
             this.showMessage = true;
             this.messageText = response['message'];
             this.messageClass = 'success';
+            this.cd.detectChanges();
 
 
             setTimeout(() => {
@@ -169,7 +170,7 @@ export class AddSecurityRoleComponent implements OnInit {
           this.showMessage = true;
           this.messageText = response['message'];
           this.messageClass = 'danger';
-          
+          this.cd.detectChanges();
         }
          
           

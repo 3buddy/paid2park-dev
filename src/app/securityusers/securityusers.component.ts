@@ -56,8 +56,6 @@ export class SecurityusersComponent implements OnInit {
       if(result === true)
       {
         this.deleteUser(Id);
-        console.log('deleted');
-        this.applyFilter('');
       }
 
     });
@@ -72,10 +70,21 @@ export class SecurityusersComponent implements OnInit {
     this.US.getUser()
     .subscribe( response =>{
 
-      ELEMENT_DATA = response['body'];
-      this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      if(response['status'] === 1)
+      {
+        ELEMENT_DATA = response['body'];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+      else
+      {
+        ELEMENT_DATA = [];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+      
 
     });
   }
@@ -83,10 +92,11 @@ export class SecurityusersComponent implements OnInit {
   deleteUser(Id)
   {
     this.US.deleteUser(Id).subscribe(response=>{
-      return Id;
+      if(response['status'] === 1)
+      {
+         this.getUserList();
+      }
     })
-    
-
   }
 
   applyFilter(filterValue: string) {

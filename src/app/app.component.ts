@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy , Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event,
+	NavigationCancel,
+	NavigationEnd,
+	NavigationError,
+	NavigationStart,
+	Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { NbSidebarService , NbMenuService , NbMenuItem } from '@nebular/theme';
 
@@ -11,6 +16,7 @@ import { NbSidebarService , NbMenuService , NbMenuItem } from '@nebular/theme';
 })
 export class AppComponent {
   title = 'Paid2Park';
+  loading = false;
   
    items= [
      {
@@ -82,7 +88,7 @@ export class AppComponent {
 	 }
   ];
   
-   constructor(public _authService: AuthService, private router: Router , private sidebarService: NbSidebarService) {}
+   constructor(public _authService: AuthService, private router: Router , private sidebarService: NbSidebarService) { }
   
   logout() {
     this._authService.logoutUser();

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl , FormArray} from '@angular/forms';
 import { Router , ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
-import { Observable }   from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable , of }   from 'rxjs';
+import { map  } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-securityroles',
@@ -21,7 +21,9 @@ export class EditSecurityrolesComponent implements OnInit {
   submitted = false;
   roleId:number;
 
-  pageload:boolean = false;
+  testPage:boolean;
+  testPromise:Promise<boolean>;
+  pageLoad:boolean;
 
    claimsList = {
 
@@ -70,10 +72,10 @@ export class EditSecurityrolesComponent implements OnInit {
   }
   
 	
-  constructor(private fb: FormBuilder, private _ar : ActivatedRoute , private route :Router,private _US : UserService) {  }
+  constructor(private fb: FormBuilder, private _ar : ActivatedRoute , private route :Router,private _US : UserService , private _CD : ChangeDetectorRef) {  }
 
   ngOnInit() {
-     
+
     try
     {
        this.getRoleDetails();
@@ -87,13 +89,10 @@ export class EditSecurityrolesComponent implements OnInit {
       
   }
 
-  public async getRoleDetails()
+  getRoleDetails()
   {
-
-    
-     //this._US.getRoleDetails(this._ar.snapshot.params['roleId']).pipe(map(response => response.data));
-
-    await this._US.getRoleDetails(this._ar.snapshot.params['roleId'])
+     //this._US.getRoleDetails(this._ar.snapshot.params['roleId']).pipe(map(response => response.data)); 
+     this._US.getRoleDetails(this._ar.snapshot.params['roleId'])
     .subscribe(response=>{
 
       const deploymentCntrol = this.claimsList.Deployment.map(deployment => { return this.fb.control(deployment.selected); });
@@ -104,8 +103,8 @@ export class EditSecurityrolesComponent implements OnInit {
       const paymentsCntrol = this.claimsList.Payments.map(payments => { return this.fb.control(payments.selected); });
     
 
-      this.addRole = this.fb.group({
-        RoleName: [response['body'].role_name, Validators.required],
+        this.addRole = this.fb.group({
+        RoleName: [response['body']['role_name'], Validators.required],
         Deployment:  new FormArray(kiosksCntrol),
         Kiosks:  new FormArray(deploymentCntrol),
         Customers:  new FormArray(customerCntrol),
@@ -114,9 +113,10 @@ export class EditSecurityrolesComponent implements OnInit {
         Payments:  new FormArray(paymentsCntrol)
         });
 
-        this.pageload = true;
-        
+        this.pageLoad = true;
+        this._CD.detectChanges();
     });
+
   }
 
 

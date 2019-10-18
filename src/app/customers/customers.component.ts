@@ -16,9 +16,7 @@ export interface PeriodicElement {
   customer_email_address: string;
 }
 
-
 let ELEMENT_DATA: PeriodicElement[];
-
 
 @Component({
   selector: 'app-customers',
@@ -46,14 +44,10 @@ export class CustomersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
       if(result === true)
       {
         this.deleteCustomer(Id);
-        console.log('deleted');
-        this.applyFilter('');
       }
-
     });
   }
 
@@ -76,13 +70,12 @@ export class CustomersComponent implements OnInit {
   {
     this.CM.deleteCustomer(customerId)
     .subscribe(response =>{
-      return customerId;
+      this.getCustomerList();
     });
   }
   
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

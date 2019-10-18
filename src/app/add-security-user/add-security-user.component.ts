@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -15,14 +15,14 @@ export class AddSecurityUserComponent implements OnInit {
   addUser: FormGroup;
   submitted = false;
 
-  showMessage:boolean = false;
+  showMessage:Promise<boolean>;
   messageClass:string = '';
   messageText:string = '';
   
   activeData : Array<string> = ['YES','NO'];
   roleDate : [];
 	
-  constructor(private fb: FormBuilder , private US : UserService , private router :Router) { }
+  constructor(private fb: FormBuilder , private US : UserService , private router :Router,private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
      
@@ -57,16 +57,15 @@ export class AddSecurityUserComponent implements OnInit {
   
   onSubmit(form: FormGroup)
   {
-
     this.US.addUser(form.value)
     .subscribe( response => {
           
           if(response['status'] === 1)
           {
-            this.showMessage = true;
+            this.showMessage = Promise.resolve(true);
             this.messageText = response['message'];
             this.messageClass = 'success';
-
+            this.cdRef.detectChanges();
 
             setTimeout(() => {
               this.router.navigate(['/securityusers']);
@@ -74,9 +73,10 @@ export class AddSecurityUserComponent implements OnInit {
           }
           else
           {
-            this.showMessage = true;
+            this.showMessage = Promise.resolve(true);
             this.messageText = response['message'];
             this.messageClass = 'danger';
+            this.cdRef.detectChanges();
           }
     })
     

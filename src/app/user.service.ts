@@ -26,7 +26,7 @@ export class UserService {
   private _getrole        = `${this.apiurl}/role/get-role-list`;
   private _addrole        = `${this.apiurl}/role/add-role`;
   private _updaterole     = `${this.apiurl}/role/edit-role`;
-  private _roledetails    = `${this.apiurl}/role/get-role-details/`
+  private _roledetails    = `${this.apiurl}/role/get-role-details`
 
   private _getclaim       = `${this.apiurl}/claim/get-claim`;
   
@@ -76,7 +76,7 @@ export class UserService {
 
   getRoleDetails(roleId): Observable<any>
   {
-    return this.http.get<any>(`${this._roledetails}/roleId`,httpOptions)
+    return this.http.get<any>(`${this._roledetails}/${roleId}`,httpOptions)
   }
 
   addRole(role)

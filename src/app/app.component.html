@@ -29,15 +29,19 @@
       </div>
     </div>
   </nb-layout-header>
-	
-  <nb-sidebar *ngIf="_authService.loggedIn()">
-	  
-     <nb-menu [items]="items"></nb-menu> 
 
-  </nb-sidebar>
 	
-  <nb-layout-column class="main-content">
-    <router-outlet></router-outlet>
-  </nb-layout-column>
+    <nb-sidebar *ngIf="_authService.loggedIn()">
+	  
+      <nb-menu [items]="items"></nb-menu> 
+ 
+   </nb-sidebar>
+   
+   <nb-layout-column class="main-content">
+     <router-outlet></router-outlet>
+
+   </nb-layout-column>
+ 
+ 
 	
 </nb-layout>
