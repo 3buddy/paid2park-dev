@@ -4,6 +4,7 @@ const kiosk = require("./kiosk");
 const claim = require('./claim');
 const role  = require('./role');
 const user  = require('./user');
+const vehicle    = require('./vehicle');
 
 
 module.exports = {
@@ -12,5 +13,6 @@ module.exports = {
     kiosk,
     claim,
     role,
-    user
+    user,
+    vehicle
 }

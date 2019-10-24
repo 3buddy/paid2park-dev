@@ -15,20 +15,20 @@ const httpOptions = {
 })
 export class UserService {
 
-  apiurl = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
-  private _adduser        = `${this.apiurl}/user/add-user`;
-  private _updateuser     = `${this.apiurl}/user/edit-user`;
-  private _deleteuser     = `${this.apiurl}/user/delete-user`;
-  private _getuser        = `${this.apiurl}/user/get-user-list`;
-  private _getuserdetails = `${this.apiurl}/user/get-user-details/`;
+  private _adduser        = `${this.apiUrl}/user/add-user`;
+  private _updateuser     = `${this.apiUrl}/user/edit-user`;
+  private _deleteuser     = `${this.apiUrl}/user/delete-user`;
+  private _getuser        = `${this.apiUrl}/user/get-user-list`;
+  private _getuserdetails = `${this.apiUrl}/user/get-user-details`;
 
-  private _getrole        = `${this.apiurl}/role/get-role-list`;
-  private _addrole        = `${this.apiurl}/role/add-role`;
-  private _updaterole     = `${this.apiurl}/role/edit-role`;
-  private _roledetails    = `${this.apiurl}/role/get-role-details`
+  private _getrole        = `${this.apiUrl}/role/get-role-list`;
+  private _addrole        = `${this.apiUrl}/role/add-role`;
+  private _updaterole     = `${this.apiUrl}/role/edit-role`;
+  private _roledetails    = `${this.apiUrl}/role/get-role-details`
 
-  private _getclaim       = `${this.apiurl}/claim/get-claim`;
+  private _getclaim       = `${this.apiUrl}/claim/get-claim`;
   
 
 
@@ -61,6 +61,7 @@ export class UserService {
 
   getuserdetails(userId)
   {
+    console.log(`user id : ${userId}`)
     return this.http.get(`${this._getuserdetails}/${userId}`,httpOptions);
   }
 

@@ -1,4 +1,4 @@
-<div class="container bg-white"> 
+<div class="container bg-white" *ngIf="pageLoad;"> 
     <div layout="row">
               <div class="col-md-12 menu form">
     
@@ -7,8 +7,8 @@
                          
                         <div class="form-group form-style">
                           <label for="FirstName">First Name:</label>
-                          <input type="text" formControlName="FirstName" class="form-control" id="FirstName"  >
-                          <span class="error" *ngIf="(submitted || editUser.controls['FirstName'].touched ) && editUser.controls['FirstName'].errors">
+                          <input type="text" formControlName="user_fname" class="form-control" id="FirstName"  >
+                          <span class="error" *ngIf="(submitted || editUser.controls['user_fname'].touched ) && editUser.controls['user_fname'].errors">
                              This Is A Required Field .
                           </span>
      
@@ -16,64 +16,73 @@
                          
                          <div class="form-group form-style" >
                           <label for="LastName"> Last Name :</label>
-                          <input type="text"  formControlName="LastName" class="form-control" id="LastName"  >
-                          <span class="error"  *ngIf="(submitted || editUser.controls['LastName'].touched ) && editUser.controls['LastName'].errors">
+                          <input type="text"  formControlName="user_lname" class="form-control" id="LastName"  >
+                          <span class="error"  *ngIf="(submitted || editUser.controls['user_lname'].touched ) && editUser.controls['user_lname'].errors">
                             This Is A Required Field  .
                           </span>
                         </div>
                          
                         <div class=" form-group form-style" >
                           <label for="Title">Title  :</label>
-                          <input type="text" formControlName="Title" class="form-control"   id="Title">
-                            <span class="error"  *ngIf="(submitted || editUser.controls['Title'].touched ) && editUser.controls['Title'].errors">
+                          <input type="text" formControlName="user_title" class="form-control"   id="Title">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['user_title'].touched ) && editUser.controls['user_title'].errors">
                              This Is A Required Field  .
                           </span>
                         </div>
                          
                         <div class="form-group form-style" >
                           <label for="Office">Office :</label>
-                          <input type="text" formControlName="Office" class="form-control" id="Office">
-                            <span class="error"  *ngIf="(submitted || editUser.controls['Office'].touched ) && editUser.controls['Office'].errors">
+                          <input type="text" formControlName="user_office" class="form-control" id="Office">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['user_office'].touched ) && editUser.controls['user_office'].errors">
                             This Is A Required Field  .
                           </span>
                         </div>
                          
                         <div class="form-group form-style" >
                           <label for="Email">Email :</label>
-                          <input type="text" formControlName="Email" class="form-control" id="Email">
-                            <span  class="error"  *ngIf="(submitted || editUser.controls['Email'].touched ) && editUser.controls['Email'].errors">
+                          <input type="text" formControlName="user_email" class="form-control" id="Email">
+                            <span  class="error"  *ngIf="(submitted || editUser.controls['user_email'].touched ) && editUser.controls['user_email'].errors">
                              This Is A Required Field .
                           </span>
                         </div>
                          
                         <div class="form-group form-style "  >
                           <label for="Login">Login:</label>
-                          <input type="text" formControlName="Login" class="form-control" id="Login">
-                            <span class="error"  *ngIf="(submitted || editUser.controls['Login'].touched ) && editUser.controls['Login'].errors">
+                          <input type="text" formControlName="user_login" class="form-control" id="Login">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['user_login'].touched ) && editUser.controls['user_login'].errors">
                              This Is A Required Field  .
                           </span>
                         </div>
                          
                         <div class="form-group form-style" >
                           <label for="Password">Password:</label>
-                          <input type="text" formControlName="Password" class="form-control" id="Password">
-                            <span class="error"  *ngIf="(submitted || editUser.controls['Password'].touched ) && editUser.controls['Password'].errors">
+                          <input type="text" formControlName="user_password" class="form-control" id="Password">
+                            <span class="error"  *ngIf="(submitted || editUser.controls['user_password'].touched ) && editUser.controls['user_password'].errors">
                              This Is A Required Field  .
                           </span>
                         </div>
                          
                         <div class="form-group form-style" >
                           <label for="Role">Role :</label>
-                          <input type="text" formControlName="Role" class="form-control" id="Role">
-                            <span class="error"  *ngIf="(submitted || editUser.controls['Role'].touched ) && editUser.controls['Role'].errors">
+                          <select class="form-control selectpicker" data-style="btn-new"  formControlName="user_role_id">
+                            <option value=""> Select Role </option>
+                            <option *ngFor="let roleList of roleData" [ngValue]="roleList.role_id">{{roleList.role_name}}</option>
+                         </select>
+                          <!-- <input type="text" formControlName="Role" class="form-control" id="Role"> --> 
+                            <span class="error"  *ngIf="(submitted || editUser.controls['user_role_id'].touched ) && editUser.controls['user_role_id'].errors">
                             This Is A Required Field  .
                           </span>
                         </div>
                          
                         <div class="form-group form-style" >
                           <label for="CustomerLastPaymentDate">Active :</label>
-                          <input type="text" formControlName="Active" class="form-control" id="CustomerLastPaymentDate">
-                            <span class="error"  *ngIf="(submitted || editUser.controls['Active'].touched ) && editUser.controls['Active'].errors">
+
+                          <select class="form-control selectpicker"   data-style="btn-new"  formControlName="user_isactive">
+                            <option value=""> Select </option>
+                            <option *ngFor="let activeList of activeData" [ngValue]="activeList">{{activeList}}</option>
+                         </select>
+                         <!--  <input type="text" formControlName="Active" class="form-control" id="CustomerLastPaymentDate"> -->
+                            <span class="error"  *ngIf="(submitted || editUser.controls['user_isactive'].touched ) && editUser.controls['user_isactive'].errors">
                              This Is A Required Field .
                           </span>
                         </div>
@@ -83,11 +92,15 @@
                         
                          
                          
-                         <div class="form-group">
+                         <div class="form-group btn-space">
                              
                              <button [disabled]="!editUser.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Customer <nb-icon icon="save-outline"></nb-icon>
                             </button>
                          
+                         </div>
+
+                         <div *ngIf="showMessage | async" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+                          {{ messageText  }}
                          </div>
                          
                      </form>

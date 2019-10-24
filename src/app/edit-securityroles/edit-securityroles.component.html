@@ -103,6 +103,10 @@
                             </button>
                          
                          </div>
+
+                         <div *ngIf="showMessage" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+                                {{ messageText  }}
+                        </div>
                          
                      </form>
                  </div>

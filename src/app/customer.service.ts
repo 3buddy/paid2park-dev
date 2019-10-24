@@ -14,13 +14,13 @@ const httpOptions = {
 })
 export class CustomerService {
 
-  apiurl = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
-  private _addcustomer        = `${this.apiurl}/customer/add-customer`;
-  private _getcustomer        = `${this.apiurl}/customer/get-customer-list`;
-  private _updatecustomer     = `${this.apiurl}/customer/edit-customer`;
-  private _deletecustomer     = `${this.apiurl}/customer/delete-customer`;
-  private _getcustomerdetails = `${this.apiurl}/customer/get-customer-details/`; 
+  private _addcustomer        = `${this.apiUrl}/customer/add-customer`;
+  private _getcustomer        = `${this.apiUrl}/customer/get-customer-list`;
+  private _updatecustomer     = `${this.apiUrl}/customer/edit-customer`;
+  private _deletecustomer     = `${this.apiUrl}/customer/delete-customer`;
+  private _getcustomerdetails = `${this.apiUrl}/customer/get-customer-details`; 
   
 
   constructor(private http :HttpClient) { }

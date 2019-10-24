@@ -9,24 +9,23 @@ const _ = require("lodash");
 const moment = require("moment");
 const underScore = require("underscore");
 
+exports.addVehicle          =  addVehicle;
+exports.getVehicleList      =  getVehicleList;
+exports.getVehicleDetails   =  getVehicleDetails;
+exports.updateVehicle       =  updateVehicle;
+exports.deleteVehicle       =  deleteVehicle;
 
-exports.addKiosk           = addKiosk;
-exports.getKioskList       = getKioskList;
-exports.getKioskDetails    = getKioskDetails;
-exports.updateKiosk        = updateKiosk;
-exports.deleteKiosk        = deleteKiosk;
 
-
-function addKiosk(req,res,cb)
+function addVehicle(req,res,cb)
 {
-   let { kiosks_number , kiosks_mac_address , kiosks_guid , kiosks_password , kiosks_location_address , kiosks_city , kiosks_network_login , kiosks_network_password } = req.body;
+   const { customer_id , license , make , model , color } = req.body;
    let data = {
         status: 0,
         body: {},
         message: ""  
         }
 
-   const addKiosk = new Promise((resolve,reject) =>{
+   const addVehicle = new Promise((resolve,reject) =>{
        async.waterfall([
            add
        ],
@@ -59,9 +58,8 @@ function addKiosk(req,res,cb)
 
    function add(cb)
    {
-      kiosks_password = bcrypt.hashSync(kiosks_password, saltRounds);
-      kiosks_network_password = bcrypt.hashSync(kiosks_network_password, saltRounds);
-      con.query(`INSERT INTO kiosk (kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password) VALUES (?,?,?,?,?,?,?,?)`,[kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password] , (error,result) => {
+
+      con.query(`INSERT INTO customer_vehicle (customer_id,license,make,model,color) VALUES (?,?,?,?,?)`,[customer_id,license,make,model,color] , (error,result) => {
         if (error) 
         {
            cb(error)
@@ -75,7 +73,7 @@ function addKiosk(req,res,cb)
    }
 }
 
-function getKioskList(req,res,cb)
+function getVehicleList(req,res,cb)
 {
    
     let data = {
@@ -84,7 +82,7 @@ function getKioskList(req,res,cb)
         message: ""  
         }
 
-     const getKioskList   = new Promise((resolve,reject)=>{
+     const vehicleList   = new Promise((resolve,reject)=>{
          
          async.waterfall([getList],(error,result)=>{
               if(error) reject(error)
@@ -117,7 +115,7 @@ function getKioskList(req,res,cb)
 
      function getList(cb)
      {
-         con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk`,(err,result)=>{
+         con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle`,(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -135,9 +133,9 @@ function getKioskList(req,res,cb)
 
 }
 
-function getKioskDetails(req,res,cb)
+function getVehicleDetails(req,res,cb)
 {
-   const {  kioskId } = req.params;
+   const {  vehicleId } = req.params;
    let data = {
     status: 0,
     body: {},
@@ -172,7 +170,7 @@ function getKioskDetails(req,res,cb)
 
     function getDetails(cb)
     {
-        con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
+        con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_vehicle_id=?`,[vehicleId],(err,result)=>{
                if(err) cb(err)
                else
                {
@@ -191,9 +189,9 @@ function getKioskDetails(req,res,cb)
 
 }
 
-function updateKiosk(req,res,cb)
+function updateVehicle(req,res,cb)
 {
-    let { kioskId , kiosks_number , kiosks_mac_address , kiosks_guid , kiosks_password , kiosks_location_address , kiosks_city , kiosks_network_login , kiosks_network_password } = req.body;
+    let { vehicleId , license , make , model , color } = req.body;
     let data = {
          status: 0,
          body: {},
@@ -229,8 +227,8 @@ function updateKiosk(req,res,cb)
 
     function checkId(cb)
     {
-
-        con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
+        
+        con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_vehicle_id=?`,[vehicleId],(err,result)=>{
               if(err) cb(err)
               else cb(null,result)
         })
@@ -239,83 +237,45 @@ function updateKiosk(req,res,cb)
 
     function updateData(result,cb)
     {
-
-        if(!!kiosks_number)
+        if(!!license)
         {
-            kiosks_number = kiosks_number;
+            license = license;
         }
         else
         {
-            kiosks_number = result[0].kiosks_number;
+            license = result[0].license;
         }
 
-        if(!!kiosks_mac_address)
+        if(!!make)
         {
-            kiosks_mac_address = kiosks_mac_address;
+            make = make;
         }
         else
         {
-            kiosks_mac_address = result[0].kiosks_mac_address;
+            make = result[0].make;
         }
 
-        if(!!kiosks_guid)
+        if(!!model)
         {
-            kiosks_guid = kiosks_guid;
+            model = model;
         }
         else
         {
-            kiosks_guid = result[0].kiosks_guid;
+            model = result[0].model;
         }
 
-        if(!!kiosks_password)
+        if(!!color)
         {
-            kiosks_password = bcrypt.hashSync(kiosks_password, saltRounds);
+            color = color;
         }
         else
         {
-            kiosks_password = result[0].kiosks_password;
+            color = result[0].color;
         }
-
-        if(!!kiosks_location_address)
-        {
-            kiosks_location_address = kiosks_location_address;
-        }
-        else
-        {
-            kiosks_location_address = result[0].kiosks_location_address;
-        }
-
-        if(!!kiosks_city)
-        {
-            kiosks_city = kiosks_city;
-        }
-        else
-        {
-            kiosks_city = result[0].kiosks_city;
-        }
-
-        if(!!kiosks_network_login)
-        {
-            kiosks_network_login = kiosks_network_login;
-        }
-        else
-        {
-            kiosks_network_login = result[0].kiosks_network_login;
-        }
-
-        if(!!kiosks_network_password)
-        {
-            kiosks_network_password = bcrypt.hashSync(kiosks_network_password, saltRounds);
-        }
-        else
-        {
-            kiosks_network_password = result[0].kiosks_network_password;
-        }
-
 
         if(result.length > 0)
         {
-          con.query(`UPDATE kiosk SET kiosks_number=?,kiosks_mac_address=?,kiosks_guid=?,kiosks_password=? , kiosks_location_address =? , kiosks_city = ? , kiosks_network_login = ? , kiosks_network_password = ? WHERE kiosk_Id=?`,[kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password,kioskId],(error,result)=>{
+          con.query(`UPDATE customer_vehicle SET license=?,make=?,model=?,color=? WHERE customer_vehicle_id=?`,[license , make , model , color,vehicleId],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);
           }) 
@@ -327,9 +287,9 @@ function updateKiosk(req,res,cb)
     }
 }
 
-function deleteKiosk(req,res,cb)
+function deleteVehicle(req,res,cb)
 {
-    const { kioskId } = req.params;
+    const { vehicleId } = req.params;
     let data = {
         status: 0,
         body: {},
@@ -369,7 +329,7 @@ function deleteKiosk(req,res,cb)
 
     function deleteData(cb)
     {
-        con.query(`DELETE FROM kiosk WHERE kiosk_Id=?`,[kioskId],(error,result)=>{
+        con.query(`DELETE FROM customer_vehicle WHERE customer_vehicle_id=?`,[vehicleId],(error,result)=>{
               if(error) cb(error)
               else cb(null,result)
         })

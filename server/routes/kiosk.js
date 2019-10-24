@@ -1,7 +1,12 @@
-let express = require('express');
-let router = express.Router();
-let services = require('../services/kiosk');
+const express = require("express");
+const router = express.Router();
+const services = require("../services");
 
-router.post('/add',services.addBillingData);
+router.post('/add-kiosk',services.kiosk.addKiosk);
+router.get('/get-kiosk-list', services.kiosk.getKioskList);
+router.get('/get-kiosk-details/:kioskId', services.kiosk.getKioskDetails);
+router.post('/update-kiosk', services.kiosk.updateKiosk);
+router.delete("/delete-kiosk/:kioskId", services.kiosk.deleteKiosk);
 
-module.exports = router;
+
+module.exports = router

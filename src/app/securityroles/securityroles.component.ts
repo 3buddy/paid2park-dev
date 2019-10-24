@@ -40,10 +40,19 @@ export class SecurityrolesComponent implements OnInit {
     this._us.getRole()
     .subscribe(response =>{
 
-      ELEMENT_DATA = response['body'];
+      if(response['status'] === 1)
+      {
+        ELEMENT_DATA = response['body'];
+      }
+      else
+      {
+        ELEMENT_DATA = [];
+      }
+
       this.dataSource = new MatTableDataSource(ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      
     })
     
 	

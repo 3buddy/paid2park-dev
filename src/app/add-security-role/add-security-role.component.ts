@@ -24,42 +24,42 @@ export class AddSecurityRoleComponent implements OnInit {
     Deployment :[ 
          { name: 'Add New',  selected: true, id: 1  } ,
          { name: 'Allow Edit',  selected: false, id: 2 },
-         { name: 'Allow Edit',  selected: false, id: 3  },
+         { name: 'Both New and Edit',  selected: false, id: 3  },
          { name: 'See Info Only',  selected: false, id: 4  },
          { name: 'N/A (Unavailable)',  selected: false, id: 5  }
     ],
     Kiosks : [
       { name: 'Add New',  selected: true, id: 1  } ,
       { name: 'Allow Edit',  selected: false, id: 2 },
-      { name: 'Allow Edit',  selected: false, id: 3  },
+      { name: 'Both New and Edit',  selected: false, id: 3  },
       { name: 'See Info Only',  selected: false, id: 4  },
       { name: 'N/A (Unavailable)',  selected: false, id: 5  }
     ],
     Customers : [
       { name: 'Add New',  selected: true, id: 1  } ,
       { name: 'Allow Edit',  selected: false, id: 2 },
-      { name: 'Allow Edit',  selected: false, id: 3  },
+      { name: 'Both New and Edit',  selected: false, id: 3  },
       { name: 'See Info Only',  selected: false, id: 4  },
       { name: 'N/A (Unavailable)',  selected: false, id: 5  }
     ],
     Reports : [
       { name: 'Add New',  selected: true, id: 1  } ,
       { name: 'Allow Edit',  selected: false, id: 2 },
-      { name: 'Allow Edit',  selected: false, id: 3  },
+      { name: 'Both New and Edit',  selected: false, id: 3  },
       { name: 'See Info Only',  selected: false, id: 4  },
       { name: 'N/A (Unavailable)',  selected: false, id: 5  }
     ],
     Enforcements : [
       { name: 'Add New',  selected: true, id: 1  } ,
       { name: 'Allow Edit',  selected: false, id: 2 },
-      { name: 'Allow Edit',  selected: false, id: 3  },
+      { name: 'Both New and Edit',  selected: false, id: 3  },
       { name: 'See Info Only',  selected: false, id: 4  },
       { name: 'N/A (Unavailable)',  selected: false, id: 5  }
     ],
     Payments : [
       { name: 'Add New',  selected: true, id: 1  } ,
       { name: 'Allow Edit',  selected: false, id: 2 },
-      { name: 'Allow Edit',  selected: false, id: 3  },
+      { name: 'Both New and Edit',  selected: false, id: 3  },
       { name: 'See Info Only',  selected: false, id: 4  },
       { name: 'N/A (Unavailable)',  selected: false, id: 5  }
     ]
@@ -131,19 +131,68 @@ export class AddSecurityRoleComponent implements OnInit {
   
   onSubmit(form: FormGroup)
   {
+    //console.log(form.value);
      //this.submitted = true;
+
+     
 
     let role = {
       "role_name":form.value.RoleName,
       "role_permission":[{
-          "Deployment":[{"Add New": form.value.Deployment[0] ? "YES" : "NO" ,"Allow Edit":form.value.Deployment[1] ? "YES" : "NO","Both New and Edit":form.value.Deployment[2] ? "YES" : "NO","See Info Only":form.value.Deployment[3] ? "YES" : "NO","N/A (Unavailable)":form.value.Deployment[4] ? "YES" : "NO"}],
-          "Customer":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}],
-          "Kiosks":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}],
-          "PaymentsParking":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}],
-          "PaymentsTickets":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}],
-          "Passes":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}],
-          "Enforcement":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}],
-          "Reports":[{"Add New":"YES","Allow Edit":"YES","Both New and Edit":"YRS","See Info Only":"YES","N/A (Unavailable)":"YES"}]
+          "Deployment":[
+            {
+              "Add New"            : form.value.Deployment[0] ? "YES" : "NO",
+              "Allow Edit"         : form.value.Deployment[1] ? "YES" : "NO", 
+              "Both New and Edit"  : form.value.Deployment[2] ? "YES" : "NO",
+              "See Info Only"      : form.value.Deployment[3] ? "YES" : "NO", 
+              "N/A (Unavailable)"  : form.value.Deployment[4] ? "YES" : "NO"
+            }
+          ],
+          "Customers":[
+            {
+              "Add New"            : form.value.Customers[0] ? "YES" : "NO",
+              "Allow Edit"         : form.value.Customers[1] ? "YES" : "No",
+              "Both New and Edit"  : form.value.Customers[2] ? "YES" : "NO",
+              "See Info Only"      : form.value.Customers[3] ?  "YES" : "NO",
+              "N/A (Unavailable)"  : form.value.Customers[4] ? "YES" : "NO" 
+            }
+          ],
+          "Kiosks":[
+            {
+              "Add New"            : form.value.Kiosks[0] ? "YES" : "NO",
+              "Allow Edit"         : form.value.Kiosks[1] ? "YES" : "NO",
+              "Both New and Edit"  : form.value.Kiosks[2] ? "YES" : "NO",
+              "See Info Only"      : form.value.Kiosks[3] ? "YES" : "NO",
+              "N/A (Unavailable)"  : form.value.Kiosks[4] ? "YES" : "NO"
+            }
+          ],
+          "Payments":[
+            {
+              "Add New"            : form.value.Payments[0] ? "YES" : "NO",
+              "Allow Edit"         : form.value.Payments[1] ? "YES" : "NO",
+              "Both New and Edit"  : form.value.Payments[2] ? "YES" : "NO",
+              "See Info Only"      : form.value.Payments[3] ? "YES" : "NO",
+              "N/A (Unavailable)"  : form.value.Payments[4] ? "YES" : "NO"
+            }
+          ],
+          "Enforcements":[
+            {
+              "Add New"            : form.value.Enforcements[0] ? "YES" : "NO",
+              "Allow Edit"         : form.value.Enforcements[1] ? "YES" : "NO",
+              "Both New and Edit"  : form.value.Enforcements[2] ? "YES" : "NO",
+              "See Info Only"      : form.value.Enforcements[3] ? "YES" : "NO",
+              "N/A (Unavailable)"  : form.value.Enforcements[4] ? "YES" : "NO" 
+            }
+          ],
+          "Reports":[
+            {
+              "Add New"            : form.value.Reports[0] ? "YES" : "NO",
+              "Allow Edit"         : form.value.Reports[1] ? "YES" : "NO",
+              "Both New and Edit"  : form.value.Reports[2] ? "YES" : "NO",
+              "See Info Only"      : form.value.Reports[3] ? "YES" : "NO",
+              "N/A (Unavailable)"  : form.value.Reports[4] ? "YES" : "NO"
+            }
+          ]
         }]
     }
     // console.log(form);
@@ -152,13 +201,10 @@ export class AddSecurityRoleComponent implements OnInit {
     .subscribe(response =>{
         if(response['status'] === 1)
         {
-          
             this.showMessage = true;
             this.messageText = response['message'];
             this.messageClass = 'success';
             this.cd.detectChanges();
-
-
             setTimeout(() => {
               this.router.navigate(['/securityroles']);
              }, 3000);
@@ -166,7 +212,6 @@ export class AddSecurityRoleComponent implements OnInit {
         }
         else
         {
-
           this.showMessage = true;
           this.messageText = response['message'];
           this.messageClass = 'danger';
