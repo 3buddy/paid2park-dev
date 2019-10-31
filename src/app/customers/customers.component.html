@@ -77,15 +77,29 @@
 									  </button>
 						 </a>
 						   
-						    <a mat-flat-button color="info" [routerLink]="['/customers', row.customer_id,'add-vehicles']">
-									  <button  size="small" shape="semi-round" nbButton hero status="info"> 
+						 <a mat-flat-button color="info" [routerLink]="['/customers', row.customer_id,'vehicles']">
+							<button  size="small" shape="semi-round" nbButton hero status="info"> 
+								 Vehicles
+							  <nb-icon icon="car" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+							</button>
+			            </a>
+						   <!--
 
-										  Add Vehicles
-
-										  <nb-icon icon="plus-outline"></nb-icon>
-
+							<a mat-flat-button color="info" [routerLink]="['/customers', row.customer_id,'add-vehicles']">
+									  <button  size="tiny" shape="semi-round" nbButton hero status="info"> 
+										   Vehicles
+										<nb-icon icon="plus-outline"></nb-icon>
 									  </button>
 						 </a>
+
+						 <a mat-flat-button color="info" [routerLink]="['/customers', row.customer_id,'add-vehicles']">
+							 <button size="tiny" shape="semi-round" nbButton hero status="info">
+								 View Vehicles
+								 <nb-icon icon="plus-outline"></nb-icon>
+							 </button>
+						 </a> 
+
+						    --> 
 
 					   </td>
 					</ng-container>  

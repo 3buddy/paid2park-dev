@@ -10,30 +10,30 @@
 					
 					<ng-container matColumnDef="DeploymentName">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Deployment Name </th>
-					  <td mat-cell *matCellDef="let row"> {{row.DeploymentName}} </td>
+					  <td mat-cell *matCellDef="let row"> Will Add it Later </td>
 					</ng-container>
 
 					
-					<ng-container matColumnDef="KiosksNumber">
+					<ng-container matColumnDef="kiosks_number">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Kiosks Number </th>
-					  <td mat-cell *matCellDef="let row"> {{row.KiosksNumber}} </td>
+					  <td mat-cell *matCellDef="let row"> {{row.kiosks_number}} </td>
 					</ng-container>
 
 					
-					<ng-container matColumnDef="Location">
-					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
-					  <td mat-cell *matCellDef="let row" > {{row.Location}} </td>
+					<ng-container matColumnDef="kiosks_location_address">
+					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Kiosks Location </th>
+					  <td mat-cell *matCellDef="let row" > {{row.kiosks_location_address}} </td>
 					</ng-container>
 					  
 					  
-					<ng-container matColumnDef="MacAddress">
-					  <th mat-header-cell *matHeaderCellDef mat-sort-header> MacAddress </th>
-					  <td mat-cell *matCellDef="let row" > {{row.MacAddress}} </td>
+					<ng-container matColumnDef="kiosks_mac_address">
+					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Kiosks Mac Address </th>
+					  <td mat-cell *matCellDef="let row" > {{row.kiosks_mac_address}} </td>
 					</ng-container>
 					  
-					<ng-container matColumnDef="Guid">
-					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Guid </th>
-					  <td mat-cell *matCellDef="let row" > {{row.Guid}} </td>
+					<ng-container matColumnDef="kiosks_guid">
+					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Kiosks Guid </th>
+					  <td mat-cell *matCellDef="let row" > {{row.kiosks_guid}} </td>
 					</ng-container>
 					  
 
@@ -57,7 +57,7 @@
 					  <td mat-cell *matCellDef="let row" >
 
 
-						  <a mat-flat-button color="info" [routerLink]="['/kiosks',row._id,'edit']">
+						  <a mat-flat-button color="info" [routerLink]="['/kiosks',row.kiosk_Id,'edit']">
 									  <button  size="small" shape="semi-round" nbButton hero status="info"> 
 
 										  Edit 
@@ -67,7 +67,7 @@
 									  </button>
 						  </a>
 
-						  <a mat-flat-button color="info" [routerLink]="['/product-add']">
+						  <a mat-flat-button color="info" (click)="openDialog(row.kiosk_Id)">
 									  <button  size="small" shape="semi-round" nbButton hero status="warning"> 
 
 										  Delete

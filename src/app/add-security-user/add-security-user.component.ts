@@ -1,9 +1,7 @@
 import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
-
-import { UserService } from '../user.service'
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-add-security-user',
@@ -15,20 +13,20 @@ export class AddSecurityUserComponent implements OnInit {
   addUser: FormGroup;
   submitted = false;
 
-  showMessage:Promise<boolean>;
-  messageClass:string = '';
-  messageText:string = '';
-  
-  activeData : Array<string> = ['YES','NO'];
-  roleDate : [];
-	
-  constructor(private fb: FormBuilder , private US : UserService , private router :Router,private cdRef:ChangeDetectorRef) { }
+  showMessage: Promise<boolean>;
+  messageClass: string = '';
+  messageText: string = '';
+
+  activeData: Array<string> = ['YES','NO'];
+  roleDate: [];
+
+  constructor(private fb: FormBuilder , private US: UserService , private router: Router , private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-     
+
     this.getRoleList();
-    
-	  this.addUser = this.fb.group({
+
+    this.addUser = this.fb.group({
       user_fname: ['', Validators.required],
       user_lname: ['', Validators.required],
       user_title: ['', Validators.required],
@@ -39,29 +37,25 @@ export class AddSecurityUserComponent implements OnInit {
       user_role_id: ['', Validators.required],
       user_isactive: ['', Validators.required]
       });
-  
   }
 
-  
-  getRoleList()
-  {
+
+  getRoleList() {
     this.US.getRole()
     .subscribe( response => {
         this.roleDate = response['body'];
-    })
+    });
   }
 
   revert() {
    this.addUser.reset();
    }
-  
-  onSubmit(form: FormGroup)
-  {
+
+  onSubmit(form: FormGroup) {
     this.US.addUser(form.value)
     .subscribe( response => {
-          
-          if(response['status'] === 1)
-          {
+
+          if (response['status'] === 1) {
             this.showMessage = Promise.resolve(true);
             this.messageText = response['message'];
             this.messageClass = 'success';
@@ -70,17 +64,15 @@ export class AddSecurityUserComponent implements OnInit {
             setTimeout(() => {
               this.router.navigate(['/securityusers']);
              }, 3000);
-          }
-          else
-          {
+          } else {
             this.showMessage = Promise.resolve(true);
             this.messageText = response['message'];
             this.messageClass = 'danger';
             this.cdRef.detectChanges();
           }
-    })
-    
-  
+    });
+
+
   }
 
 }

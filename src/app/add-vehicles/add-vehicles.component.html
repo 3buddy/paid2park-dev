@@ -6,46 +6,49 @@
 				 <form  class="container px-4 py-3" [formGroup]="addVehicles"  (ngSubmit)="onSubmit(addVehicles)">
 					 
 					<div class="form-group form-style">
-					  <label for="License"> License :</label>
-					  <input type="text" formControlName="License" class="form-control" id="License"  >
-					  <span class="error" *ngIf="(submitted || addVehicles.controls['License'].touched ) && addVehicles.controls['License'].errors">
+					  <label for="license"> License :</label>
+					  <input type="text" formControlName="license" class="form-control" id="license"  >
+					  <span class="error" *ngIf="(submitted || addVehicles.controls['license'].touched ) && addVehicles.controls['license'].errors">
                          This Is A Required Field .
                       </span>
  
 					</div>
 					 
 					 <div class="form-group form-style" >
-					  <label for="Make"> Make :</label>
-					  <input type="text"  formControlName="Make" class="form-control" id="Make"  >
-					  <span class="error"  *ngIf="(submitted || addVehicles.controls['Make'].touched ) && addVehicles.controls['Make'].errors">
+					  <label for="make"> Make :</label>
+					  <input type="text"  formControlName="make" class="form-control" id="make"  >
+					  <span class="error"  *ngIf="(submitted || addVehicles.controls['make'].touched ) && addVehicles.controls['make'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class=" form-group form-style" >
-					  <label for="Model"> Model :</label>
-					  <input type="text" formControlName="Model" class="form-control"   id="Model">
-						<span class="error"  *ngIf="(submitted || addVehicles.controls['Model'].touched ) && addVehicles.controls['Model'].errors">
+					  <label for="model"> model :</label>
+					  <input type="text" formControlName="model" class="form-control"   id="model">
+						<span class="error"  *ngIf="(submitted || addVehicles.controls['model'].touched ) && addVehicles.controls['model'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="Color"> Color :</label>
-					  <input type="text" formControlName="Color" class="form-control" id="Color">
-						<span class="error"  *ngIf="(submitted || addVehicles.controls['Color'].touched ) && addVehicles.controls['Color'].errors">
+					  <label for="color"> Color :</label>
+					  <input type="text" formControlName="color" class="form-control" id="color">
+						<span class="error"  *ngIf="(submitted || addVehicles.controls['color'].touched ) && addVehicles.controls['color'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					
 					 
-					 <div class="form-group btn-spc">
+					 <div class="form-group btn-space">
 						 
 						 <button [disabled]="!addVehicles.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Vehicles <nb-icon icon="save-outline"></nb-icon>
 						</button>
 					 
 					 </div>
+					 <div *ngIf="showMessage | async" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+						{{ messageText  }}
+					</div>
 					 
 				 </form>
 			 </div>

@@ -7,11 +7,30 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {  ReactiveFormsModule ,FormsModule } from '@angular/forms';
 
 
-import { NbThemeModule ,NbMenuModule, NbLayoutModule , NbSidebarModule ,NbSidebarService , NbMenuService , NbMenuItem , NbIconModule ,NbButtonModule , NbCardModule} from '@nebular/theme'
+import {
+  NbThemeModule,
+  NbMenuModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbSidebarService,
+  NbMenuService,
+  NbMenuItem,
+  NbIconModule,
+  NbButtonModule,
+  NbCardModule } from '@nebular/theme';
+
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 
-import {MatToolbarModule, MatProgressBarModule , MatListModule , MatPaginatorModule , MatFormFieldModule , MatInputModule , MatTableModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatProgressBarModule,
+  MatListModule,
+  MatPaginatorModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTableModule } from '@angular/material';
+
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -56,6 +75,11 @@ import { EditSecurityusersComponent } from './edit-securityusers/edit-securityus
 
 import { DialogContentExampleDialog } from './securityusers/securityusers.component';
 import { DialogDeleteCustomer } from './customers/customers.component';
+import { DialogDeleteVehicle } from './vehicle/vehicle.component';
+import { DialogDeleteKiosk } from './kiosks/kiosks.component';
+
+
+import { VehicleComponent } from './vehicle/vehicle.component';
 
 
 @NgModule({
@@ -96,29 +120,32 @@ import { DialogDeleteCustomer } from './customers/customers.component';
     EditSecurityrolesComponent,
     EditSecurityusersComponent,
     DialogContentExampleDialog,
-    DialogDeleteCustomer
+    DialogDeleteCustomer,
+    VehicleComponent,
+    DialogDeleteVehicle,
+    DialogDeleteKiosk
   ],
   imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    AppRoutingModule,
-	HttpClientModule,
-	ReactiveFormsModule,
-    FormsModule, 
-	NbThemeModule.forRoot({ name: 'default' }),
-	NbMenuModule.forRoot(),
-	NbSidebarModule.forRoot(),
-	NbLayoutModule,
-	NbEvaIconsModule,
-	NbIconModule,
-	NbButtonModule,
-	NbCardModule,
-	MatTableModule,
-	MatFormFieldModule,
-	MatPaginatorModule,
-	MatFormFieldModule, 
-	MatInputModule,
-	MatIconModule,
+  BrowserAnimationsModule,
+  BrowserModule,
+  AppRoutingModule,
+  HttpClientModule,
+  ReactiveFormsModule,
+  FormsModule,
+  NbThemeModule.forRoot({ name: 'default' }),
+  NbMenuModule.forRoot(),
+  NbSidebarModule.forRoot(),
+  NbLayoutModule,
+  NbEvaIconsModule,
+  NbIconModule,
+  NbButtonModule,
+  NbCardModule,
+  MatTableModule,
+  MatFormFieldModule,
+  MatPaginatorModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
   MatListModule,
   MatDialogModule,
   MatProgressBarModule,
@@ -126,6 +153,6 @@ import { DialogDeleteCustomer } from './customers/customers.component';
   ],
   providers: [NbSidebarService, NbMenuService],
   bootstrap: [AppComponent],
-  entryComponents:[DialogContentExampleDialog,DialogDeleteCustomer]
+  entryComponents: [DialogContentExampleDialog, DialogDeleteCustomer, DialogDeleteVehicle, DialogDeleteKiosk]
 })
 export class AppModule { }

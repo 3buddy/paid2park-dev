@@ -36,6 +36,8 @@ app.use("/api/v1/claim", router.claim);
 app.use("/api/v1/role", router.role);
 app.use("/api/v1/user", router.user);
 app.use("/api/v1/customer", router.customer);
+app.use("/api/v1/vehicle", router.vehicle);
+app.use("/api/v1/kiosk" , router.kiosk);
 
 app.all('*', function (req, res) {
     res.status(200).sendFile(`/`, {root: '../dist/Paid2Park'});

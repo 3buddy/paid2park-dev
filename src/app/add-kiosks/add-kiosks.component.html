@@ -7,77 +7,81 @@
 					 
 					 
 					 <div class="form-group form-style" >
-					  <label for="kiosksNumber">kiosks Number :</label>
-					  <input type="text"  formControlName="kiosksNumber" class="form-control" id="kiosksNumber"  >
-					  <span class="error"  *ngIf="(submitted || addKiosks.controls['kiosksNumber'].touched ) && addKiosks.controls['kiosksNumber'].errors">
+					  <label for="kiosks_number">kiosks Number :</label>
+					  <input type="text"  formControlName="kiosks_number" class="form-control" id="kiosks_number"  >
+					  <span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_number'].touched ) && addKiosks.controls['kiosks_number'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class=" form-group form-style" >
-					  <label for="MacAddress">Mac Address :</label>
-					  <input type="text" formControlName="MacAddress" class="form-control"   id="MacAddress">
-						<span class="error"  *ngIf="(submitted || addKiosks.controls['MacAddress'].touched ) && addKiosks.controls['MacAddress'].errors">
+					  <label for="kiosks_mac_address">Mac Address :</label>
+					  <input type="text" formControlName="kiosks_mac_address" class="form-control"   id="kiosks_mac_address">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_mac_address'].touched ) && addKiosks.controls['kiosks_mac_address'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="GUID">GUID :</label>
-					  <input type="text" formControlName="GUID" class="form-control" id="GUID">
-						<span class="error"  *ngIf="(submitted || addKiosks.controls['GUID'].touched ) && addKiosks.controls['GUID'].errors">
+					  <label for="kiosks_guid">GUID :</label>
+					  <input type="text" formControlName="kiosks_guid" class="form-control" id="kiosks_guid">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_guid'].touched ) && addKiosks.controls['kiosks_guid'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="Password">Password :</label>
-					  <input type="text" formControlName="Password" class="form-control" id="Password">
-						<span  class="error"  *ngIf="(submitted || addKiosks.controls['Password'].touched ) && addKiosks.controls['Password'].errors">
+					  <label for="kiosks_password">Password :</label>
+					  <input type="text" formControlName="kiosks_password" class="form-control" id="kiosks_password">
+						<span  class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_password'].touched ) && addKiosks.controls['kiosks_password'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style "  >
-					  <label for="LocationAddress">Location Address :</label>
-					  <input type="text" formControlName="LocationAddress" class="form-control" id="LocationAddress">
-						<span class="error"  *ngIf="(submitted || addKiosks.controls['LocationAddress'].touched ) && addKiosks.controls['LocationAddress'].errors">
+					  <label for="kiosks_location_address">Location Address :</label>
+					  <input type="text" formControlName="kiosks_location_address" class="form-control" id="kiosks_location_address">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_location_address'].touched ) && addKiosks.controls['kiosks_location_address'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="City">City :</label>
-					  <input type="text" formControlName="City" class="form-control" id="City">
-						<span class="error"  *ngIf="(submitted || addKiosks.controls['City'].touched ) && addKiosks.controls['City'].errors">
+					  <label for="kiosks_city">City :</label>
+					  <input type="text" formControlName="kiosks_city" class="form-control" id="kiosks_city">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_city'].touched ) && addKiosks.controls['kiosks_city'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="NetworkLogin">Network Login :</label>
-					  <input type="text" formControlName="NetworkLogin" class="form-control" id="NetworkLogin">
-						<span class="error"  *ngIf="(submitted || addKiosks.controls['NetworkLogin'].touched ) && addKiosks.controls['NetworkLogin'].errors">
+					  <label for="kiosks_network_login">Network Login :</label>
+					  <input type="text" formControlName="kiosks_network_login" class="form-control" id="kiosks_network_login">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_network_login'].touched ) && addKiosks.controls['kiosks_network_login'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="NetworkPassword">Network Password:</label>
-					  <input type="text" formControlName="NetworkPassword" class="form-control" id="NetworkPassword">
-						<span class="error"  *ngIf="(submitted || addKiosks.controls['NetworkPassword'].touched ) && addKiosks.controls['NetworkPassword'].errors">
+					  <label for="kiosks_network_password">Network Password:</label>
+					  <input type="text" formControlName="kiosks_network_password" class="form-control" id="kiosks_network_password">
+						<span class="error"  *ngIf="(submitted || addKiosks.controls['kiosks_network_password'].touched ) && addKiosks.controls['kiosks_network_password'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					
 					 
-					 <div class="form-group">
+					 <div class="form-group btn-space">
 						 
 						 <button [disabled]="!addKiosks.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Kiosks <nb-icon icon="save-outline"></nb-icon>
 						</button>
 					 
 					 </div>
+
+					 <div *ngIf="showMessage" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+						{{ messageText  }}
+				     </div>
 					 
 				 </form>
 			 </div>

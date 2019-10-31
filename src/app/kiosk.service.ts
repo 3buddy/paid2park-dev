@@ -20,35 +20,29 @@ export class KioskService {
   private _getKiosk          =  `${this.apiUrl}/kiosk/get-kiosk-list`;
   private _updateKiosk       =  `${this.apiUrl}/kiosk/update-kiosk`;
   private _deleteKiosk       =  `${this.apiUrl}/kiosk/delete-kiosk`;
-  private _getKioskDetails   =  `${this.apiUrl}/kiosk/get-kiosk-details`; 
-  
+  private _getKioskDetails   =  `${this.apiUrl}/kiosk/get-kiosk-details`;
 
-  constructor(private http :HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  addKiosk(kiosk)
-  {
-   return this.http.post(this._addKiosk,kiosk,httpOptions);
+  addKiosk(kiosk) {
+   return this.http.post(this._addKiosk, kiosk, httpOptions);
   }
 
 
-  getKiosk()
-  {
-    return this.http.get(this._getKiosk,httpOptions);
+  getKiosk() {
+    return this.http.get(this._getKiosk, httpOptions);
   }
 
-  getKioskDetails(kioskId)
-  {
-    return this.http.get(`${this._getKioskDetails}/${kioskId}`,httpOptions);
+  getKioskDetails(kioskId) {
+    return this.http.get(`${this._getKioskDetails}/${kioskId}`, httpOptions);
   }
 
-  updateKiosk(kiosk)
-  {
-    return this.http.post(this._updateKiosk,kiosk,httpOptions);
+  updateKiosk(kiosk) {
+    return this.http.post(this._updateKiosk, kiosk, httpOptions);
   }
 
-  deleteKiosk(kioskId)
-  {
-    return this.http.delete(`${this._deleteKiosk}/${kioskId}`,httpOptions);
+  deleteKiosk(kioskId) {
+    return this.http.delete(`${this._deleteKiosk}/${kioskId}`, httpOptions);
   }
 
 }

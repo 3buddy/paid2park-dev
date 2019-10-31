@@ -75,7 +75,7 @@ function addVehicle(req,res,cb)
 
 function getVehicleList(req,res,cb)
 {
-   
+    const {  customerId } = req.params;
     let data = {
         status: 0,
         body: {},
@@ -115,7 +115,7 @@ function getVehicleList(req,res,cb)
 
      function getList(cb)
      {
-         con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle`,(err,result)=>{
+         con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_id =?`,[customerId],(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -152,7 +152,7 @@ function getVehicleDetails(req,res,cb)
             data.status = typeof resp == 'object' ? 1 : 0
             if(typeof resp == 'object')
             {
-            data.body = resp
+            data.body = resp[0]
             }
             
             if(typeof resp == 'string')
@@ -191,7 +191,7 @@ function getVehicleDetails(req,res,cb)
 
 function updateVehicle(req,res,cb)
 {
-    let { vehicleId , license , make , model , color } = req.body;
+    let { customer_vehicle_id , license , make , model , color } = req.body;
     let data = {
          status: 0,
          body: {},
@@ -207,14 +207,13 @@ function updateVehicle(req,res,cb)
     .then((resp)=>{
 
         data.status = typeof resp == 'object' ? 1 : 0
-        if(typeof resp == 'object')
+        if(resp.affectedRows > 0)
         {
-          data.body = resp
+           data.message = "Vehicle Has Been Updated Successfully !";
         }
-        
-        if(typeof resp == 'string')
+        else
         {
-        data.message = resp		
+            data.message = resp;
         }
         
         res.json(data)
@@ -228,7 +227,7 @@ function updateVehicle(req,res,cb)
     function checkId(cb)
     {
         
-        con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_vehicle_id=?`,[vehicleId],(err,result)=>{
+        con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_vehicle_id=?`,[customer_vehicle_id],(err,result)=>{
               if(err) cb(err)
               else cb(null,result)
         })
@@ -275,7 +274,7 @@ function updateVehicle(req,res,cb)
 
         if(result.length > 0)
         {
-          con.query(`UPDATE customer_vehicle SET license=?,make=?,model=?,color=? WHERE customer_vehicle_id=?`,[license , make , model , color,vehicleId],(error,result)=>{
+          con.query(`UPDATE customer_vehicle SET license=?,make=?,model=?,color=? WHERE customer_vehicle_id=?`,[license , make , model , color,customer_vehicle_id],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);
           }) 
@@ -307,22 +306,22 @@ function deleteVehicle(req,res,cb)
     .then((resp)=>{
 
         data.status = typeof resp == 'object' ? 1 : 0
-        if(typeof resp == 'object')
+
+        if(resp.affectedRows > 0)
         {
-          data.body = resp
+            data.message = "Vehicle Has Been Deleted Successfully !";
         }
-        
-        if(typeof resp == 'string')
+        else
         {
-        data.message = resp		
+            data.message = resp;
         }
         
         res.json(data)
 
     })
     .catch((error)=>{
-
-        data.message = error
+        console.log(error);
+        data.message = "Not Able To Delete The Vehicle : Error " + error;
         res.json(data);
 
     })

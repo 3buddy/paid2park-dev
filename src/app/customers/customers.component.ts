@@ -1,5 +1,5 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -9,8 +9,8 @@ import { CustomerService } from '../customer.service';
 
 
 export interface PeriodicElement {
-  customer_id:number;
-  //DeploymentName: string;
+  customer_id: number;
+  // DeploymentName: string;
   customer_first_name: string;
   customer_last_name: string;
   customer_email_address: string;
@@ -25,27 +25,23 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class CustomersComponent implements OnInit {
 
-
-  //displayedColumns: string[] = ['DeploymentName', 'FirstName', 'LastName','Email','IsActive','Action'];
-  
-  displayedColumns: string[] = ['DeploymentName','customer_first_name', 'customer_last_name','customer_email_address','Action'];
+  displayedColumns: string[] = ['DeploymentName', 'customer_first_name', 'customer_last_name', 'customer_email_address', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor( private CM : CustomerService , public dialog: MatDialog) {    }
+  constructor( private CM: CustomerService , public dialog: MatDialog) {    }
 
   openDialog(Id) {
 
-    const dialogRef = this.dialog.open(DialogDeleteCustomer,{
+    const dialogRef = this.dialog.open(DialogDeleteCustomer, {
       height: '18%',
       width: '25%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result === true)
-      {
+      if (result === true) {
         this.deleteCustomer(Id);
       }
     });
@@ -54,40 +50,38 @@ export class CustomersComponent implements OnInit {
   ngOnInit() {
      this.getCustomerList();
   }
-  
 
-  getCustomerList()
-  {
+
+  getCustomerList() {
     this.CM.getCustomer().subscribe( response => {
         ELEMENT_DATA = response['body'];
         this.dataSource = new MatTableDataSource(ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort; 
+        this.dataSource.sort = this.sort;
     });
   }
 
-  deleteCustomer(customerId)
-  {
+  deleteCustomer(customerId) {
     this.CM.deleteCustomer(customerId)
-    .subscribe(response =>{
+    .subscribe(response => {
       this.getCustomerList();
     });
   }
-  
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
 
 }
 
 @Component({
   selector: 'dialog-content-example-dialog',
   templateUrl: './dialog-content-example-dialog.html',
-  styleUrls:['./dialog-content-css.css']
+  styleUrls: ['./dialog-content-css.css']
 })
 
 export class DialogDeleteCustomer {}

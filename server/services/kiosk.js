@@ -41,7 +41,7 @@ function addKiosk(req,res,cb)
 			 if(typeof resp == 'object')
 			 {
                data.body = resp
-               data.message = "Vehicle Added Successfully .";
+               data.message = "Kiosk Added Successfully .";
 			 }
 			 
 			 if(typeof resp == 'string')
@@ -154,7 +154,7 @@ function getKioskDetails(req,res,cb)
             data.status = typeof resp == 'object' ? 1 : 0
             if(typeof resp == 'object')
             {
-            data.body = resp
+            data.body = resp[0]
             }
             
             if(typeof resp == 'string')
@@ -172,7 +172,7 @@ function getKioskDetails(req,res,cb)
 
     function getDetails(cb)
     {
-        con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
+        con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_location_address,kiosks_city,kiosks_network_login FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
                if(err) cb(err)
                else
                {
@@ -193,7 +193,8 @@ function getKioskDetails(req,res,cb)
 
 function updateKiosk(req,res,cb)
 {
-    let { kioskId , kiosks_number , kiosks_mac_address , kiosks_guid , kiosks_password , kiosks_location_address , kiosks_city , kiosks_network_login , kiosks_network_password } = req.body;
+
+    let { kiosk_Id , kiosks_number , kiosks_mac_address , kiosks_guid , kiosks_password , kiosks_location_address , kiosks_city , kiosks_network_login , kiosks_network_password } = req.body;
     let data = {
          status: 0,
          body: {},
@@ -209,14 +210,13 @@ function updateKiosk(req,res,cb)
     .then((resp)=>{
 
         data.status = typeof resp == 'object' ? 1 : 0
-        if(typeof resp == 'object')
+        if(resp.affectedRows > 0)
         {
-          data.body = resp
+            data.message = "Kiosk Has Been Updated Successfully !";
         }
-        
-        if(typeof resp == 'string')
+        else
         {
-        data.message = resp		
+            data.message = resp;
         }
         
         res.json(data)
@@ -230,7 +230,8 @@ function updateKiosk(req,res,cb)
     function checkId(cb)
     {
 
-        con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
+       var query = con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk WHERE kiosk_Id=?`,[kiosk_Id],(err,result)=>{
+             // console.log(query.sql);
               if(err) cb(err)
               else cb(null,result)
         })
@@ -239,6 +240,7 @@ function updateKiosk(req,res,cb)
 
     function updateData(result,cb)
     {
+        //console.log(result);
 
         if(!!kiosks_number)
         {
@@ -315,7 +317,7 @@ function updateKiosk(req,res,cb)
 
         if(result.length > 0)
         {
-          con.query(`UPDATE kiosk SET kiosks_number=?,kiosks_mac_address=?,kiosks_guid=?,kiosks_password=? , kiosks_location_address =? , kiosks_city = ? , kiosks_network_login = ? , kiosks_network_password = ? WHERE kiosk_Id=?`,[kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password,kioskId],(error,result)=>{
+          con.query(`UPDATE kiosk SET kiosks_number=?,kiosks_mac_address=?,kiosks_guid=?,kiosks_password=? , kiosks_location_address =? , kiosks_city = ? , kiosks_network_login = ? , kiosks_network_password = ? WHERE kiosk_Id=?`,[kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password,kiosk_Id],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);
           }) 
@@ -347,14 +349,13 @@ function deleteKiosk(req,res,cb)
     .then((resp)=>{
 
         data.status = typeof resp == 'object' ? 1 : 0
-        if(typeof resp == 'object')
+        if(resp.affectedRows > 0)
         {
-          data.body = resp
+            data.message = "Kiosk Has Been Deleted Successfully !";
         }
-        
-        if(typeof resp == 'string')
+        else
         {
-        data.message = resp		
+            data.message = resp;
         }
         
         res.json(data)

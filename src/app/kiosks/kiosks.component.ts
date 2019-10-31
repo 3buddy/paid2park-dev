@@ -1,25 +1,25 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { KioskService } from '../kiosk.service';
 
 
 export interface PeriodicElement {
-  _id : number;
-  DeploymentName: string;
-  KiosksNumber: string;
-  Location: string;
-  MacAddress:string;
-  Guid:string;
+  kiosk_Id: number;
+  kiosks_number: string;
+  kiosks_mac_address: string;
+  kiosks_guid: string;
+  kiosks_password: string;
+  kiosks_location_address: string;
+  kiosks_city: string;
+  kiosks_network_login: string;
+  kiosks_network_password: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {_id:1,DeploymentName: 'Dove Creek CO', KiosksNumber: '12345', Location: 'E Washiongton St',MacAddress:'Lorem ipsum dolar',Guid:'43257'},
-  {_id:2,DeploymentName: 'DTPHX Test Deployment', KiosksNumber: '12345', Location: '996 Addison Dr.Coram, NY 11727',MacAddress:'Lorem ipsum dolar',Guid:'43257'},
-  {_id:3,DeploymentName: 'Indian Wells Valley', KiosksNumber: '12345', Location: '651 Pacific St. Coram, CA 91762',MacAddress:'Lorem ipsum dolar',Guid:'43257'},
-  {_id:4,DeploymentName: 'Jons Test Deployment', KiosksNumber: '12345', Location: '9076 Redwood St. Findlay, OH 45840',MacAddress:'Lorem ipsum dolar',Guid:'43257'}
-];
+let ELEMENT_DATA: PeriodicElement[];
 
 
 @Component({
@@ -29,22 +29,56 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class KiosksComponent implements OnInit {
 
-  displayedColumns: string[] = ['DeploymentName', 'KiosksNumber', 'Location','MacAddress','Guid','Action'];
-  
+  displayedColumns: string[] = [
+    'DeploymentName',
+    'kiosks_number',
+    'kiosks_location_address',
+    'kiosks_mac_address',
+    'kiosks_guid',
+    'Action'];
+
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+  constructor(private ks: KioskService , public dialog: MatDialog) {}
+
+  openDialog(Id) {
+
+    const dialogRef = this.dialog.open(DialogDeleteKiosk, {
+      height: '18%',
+      width: '25%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteKiosk(Id);
+      }
+    });
   }
 
   ngOnInit() {
-  
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-	
+
+    this.getKioskList();
+
+  }
+
+
+  getKioskList() {
+    this.ks.getKiosk().subscribe( response => {
+        ELEMENT_DATA = response['body'];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    });
+  }
+
+  deleteKiosk(kioskId) {
+    this.ks.deleteKiosk(kioskId)
+    .subscribe(response => {
+      this.getKioskList();
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -54,5 +88,15 @@ export class KiosksComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
 }
+
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './dialog-content-example-dialog.html',
+  styleUrls: ['./dialog-content-css.css']
+})
+
+export class DialogDeleteKiosk {}
+

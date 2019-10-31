@@ -2,85 +2,91 @@
 <div layout="row">
 		  <div class="col-md-12 menu form">
 
-             <div class="menu form-2">
+             <div class="menu form-2" *ngIf="isloaded === true; else elseBlock">
 				 <form  class="container px-4 py-3" [formGroup]="editKiosks"  (ngSubmit)="onSubmit(editKiosks)">
 					 
 					 
 					 <div class="form-group form-style" >
-					  <label for="kiosksNumber">kiosks Number :</label>
-					  <input type="text"  formControlName="kiosksNumber" class="form-control" id="kiosksNumber"  >
-					  <span class="error"  *ngIf="(submitted || editKiosks.controls['kiosksNumber'].touched ) && editKiosks.controls['kiosksNumber'].errors">
+					  <label for="kiosks_number">kiosks Number :</label>
+					  <input type="text"  formControlName="kiosks_number" class="form-control" id="kiosks_number"  >
+					  <span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_number'].touched ) && editKiosks.controls['kiosks_number'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class=" form-group form-style" >
-					  <label for="MacAddress">Mac Address :</label>
-					  <input type="text" formControlName="MacAddress" class="form-control"   id="MacAddress">
-						<span class="error"  *ngIf="(submitted || editKiosks.controls['MacAddress'].touched ) && editKiosks.controls['MacAddress'].errors">
+					  <label for="kiosks_mac_address"> kiosks Mac Address :</label>
+					  <input type="text" formControlName="kiosks_mac_address" class="form-control"   id="kiosks_mac_address">
+						<span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_mac_address'].touched ) && editKiosks.controls['kiosks_mac_address'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="GUID">GUID :</label>
-					  <input type="text" formControlName="GUID" class="form-control" id="GUID">
-						<span class="error"  *ngIf="(submitted || editKiosks.controls['GUID'].touched ) && editKiosks.controls['GUID'].errors">
+					  <label for="kiosks_guid"> kiosks GUID :</label>
+					  <input type="text" formControlName="kiosks_guid" class="form-control" id="kiosks_guid">
+						<span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_guid'].touched ) && editKiosks.controls['kiosks_guid'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="Password">Password :</label>
-					  <input type="text" formControlName="Password" class="form-control" id="Password">
-						<span  class="error"  *ngIf="(submitted || editKiosks.controls['Password'].touched ) && editKiosks.controls['Password'].errors">
+					  <label for="kiosks_password">Password :</label>
+					  <input type="text" formControlName="kiosks_password" class="form-control" id="kiosks_password">
+						<span  class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_password'].touched ) && editKiosks.controls['kiosks_password'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style "  >
-					  <label for="LocationAddress">Location Address :</label>
-					  <input type="text" formControlName="LocationAddress" class="form-control" id="LocationAddress">
-						<span class="error"  *ngIf="(submitted || editKiosks.controls['LocationAddress'].touched ) && editKiosks.controls['LocationAddress'].errors">
+					  <label for="kiosks_location_address">Location Address :</label>
+					  <input type="text" formControlName="kiosks_location_address" class="form-control" id="kiosks_location_address">
+						<span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_location_address'].touched ) && editKiosks.controls['kiosks_location_address'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="City">City :</label>
-					  <input type="text" formControlName="City" class="form-control" id="City">
-						<span class="error"  *ngIf="(submitted || editKiosks.controls['City'].touched ) && editKiosks.controls['City'].errors">
+					  <label for="kiosks_city">City :</label>
+					  <input type="text" formControlName="kiosks_city" class="form-control" id="kiosks_city">
+						<span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_city'].touched ) && editKiosks.controls['kiosks_city'].errors">
                          This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="NetworkLogin">Network Login :</label>
-					  <input type="text" formControlName="NetworkLogin" class="form-control" id="NetworkLogin">
-						<span class="error"  *ngIf="(submitted || editKiosks.controls['NetworkLogin'].touched ) && editKiosks.controls['NetworkLogin'].errors">
+					  <label for="kiosks_network_login">Network Login :</label>
+					  <input type="text" formControlName="kiosks_network_login" class="form-control" id="kiosks_network_login">
+						<span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_network_login'].touched ) && editKiosks.controls['kiosks_network_login'].errors">
                         This Is A Required Field  .
                       </span>
 					</div>
 					 
 					<div class="form-group form-style" >
-					  <label for="NetworkPassword">Network Password:</label>
-					  <input type="text" formControlName="NetworkPassword" class="form-control" id="NetworkPassword">
-						<span class="error"  *ngIf="(submitted || editKiosks.controls['NetworkPassword'].touched ) && editKiosks.controls['NetworkPassword'].errors">
+					  <label for="kiosks_network_password">Network Password:</label>
+					  <input type="text" formControlName="kiosks_network_password" class="form-control" id="kiosks_network_password">
+						<span class="error"  *ngIf="(submitted || editKiosks.controls['kiosks_network_password'].touched ) && editKiosks.controls['kiosks_network_password'].errors">
                          This Is A Required Field .
                       </span>
 					</div>
 					 
 					
 					 
-					 <div class="form-group">
+					 <div class="form-group btn-space ">
 						 
 						 <button [disabled]="!editKiosks.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Kiosks <nb-icon icon="save-outline"></nb-icon>
 						</button>
 					 
 					 </div>
+
+					 <div *ngIf="showMessage" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+						{{ messageText  }}
+				     </div>
 					 
 				 </form>
 			 </div>
+             <ng-template #elseBlock>Please Wait We Are Loading Data For You .</ng-template>
+
 		</div>
 
 </div>	 

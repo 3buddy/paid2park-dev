@@ -44,6 +44,7 @@ import { EditKiosksComponent } from './edit-kiosks/edit-kiosks.component';
 
 import { CustomersComponent } from './customers/customers.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
 import { AddVehiclesComponent } from './add-vehicles/add-vehicles.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { EditVehiclesComponent } from './edit-vehicles/edit-vehicles.component';
@@ -66,47 +67,47 @@ const routes: Routes = [
 {
     path: 'dashboard',
     component: DashboardComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'reports',
     component: ReportsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'enforcements',
     component: EnforcementsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'enforcements/add',
     component: AddEnforcementsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'enforcements/:Id/edit',
     component: EditEnforcementsComponent,
-	canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
 },
 {
     path: 'kiosks',
     component: KiosksComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'kiosks/add',
     component: AddKiosksComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'kiosks/:Id/edit',
     component: EditKiosksComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'customers',
     component: CustomersComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
    path: 'customers/add',
@@ -114,7 +115,12 @@ const routes: Routes = [
    canActivate: [AuthGuard]
 },
 {
-   path: 'customers/:Id/add-vehicles',
+    path: 'customers/:customerId/vehicles',
+    component: VehicleComponent,
+    canActivate: [AuthGuard]
+},
+{
+   path: 'customers/:customerId/add-vehicles',
    component: AddVehiclesComponent,
    canActivate: [AuthGuard]
 },
@@ -124,104 +130,104 @@ const routes: Routes = [
    canActivate: [AuthGuard]
 },
 {
-   path: 'customers/:Id/edit-vehicles/:vehicleId',
+   path: 'customers/:customerId/edit-vehicles/:vehicleId',
    component: EditVehiclesComponent,
    canActivate: [AuthGuard]
 },
 {
     path: 'deployments',
     component: DeploymentsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'deployments/add',
     component: AddDeploymentComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'deployments/:deploymentId/edit',
     component: EditDeploymentComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'deployments/add-app-rate',
     component: AddAppRatesComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'deployments/add-pass-rate',
     component: AddPassRatesComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityclaims',
     component: SecurityclaimsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityclaims/add',
     component: AddSecurityClaimsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityroles',
     component: SecurityrolesComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityroles/add',
     component: AddSecurityRoleComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityroles/:roleId/edit',
     component: EditSecurityrolesComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityusers',
     component: SecurityusersComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityusers/add',
     component: AddSecurityUserComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'securityusers/:userId/edit',
     component: EditSecurityusersComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'payments',
     component: PaymentsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'payments/add',
     component: AddPaymentComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'payments/add-parking-payments',
     component: AddParkingPayemtsComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'payments/add-ticket-payments',
     component: AddTicketPaymentComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'passes',
     component: PassesComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 },
 {
     path: 'passes/add',
     component: AddPassesComponent,
-	canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
 }
 
 ];

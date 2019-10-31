@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit , ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
+import { KioskService } from '../kiosk.service';
+import { Router , ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-kiosks',
@@ -10,35 +13,70 @@ export class EditKiosksComponent implements OnInit {
 
   editKiosks: FormGroup;
   submitted = false;
-	
-  constructor(private fb: FormBuilder) { }
+
+  isloaded: boolean;
+  showMessage: boolean;
+  messageClass: string;
+  messageText: string;
+
+  constructor(
+       private router: Router,
+       private ar: ActivatedRoute,
+       private fb: FormBuilder,
+       private ks: KioskService, 
+       private cdRef: ChangeDetectorRef) { }
 
 
   ngOnInit() {
-  
-	  this.editKiosks = this.fb.group({
-			kiosksNumber: ['', Validators.required],
-			MacAddress: ['', Validators.required],
-			GUID: ['', Validators.required],
-			Password: ['', Validators.required],
-			LocationAddress: ['', Validators.required],
-			City: ['', Validators.required],
-			NetworkLogin: ['', Validators.required],
-			NetworkPassword: ['', Validators.required]
-		  });
+
+       this.ks.getKioskDetails(this.ar.snapshot.params['Id'])
+       .subscribe(
+          (response) => {
+
+             if (response['status'] === 1) {
+            this.isloaded = true;
+            this.editKiosks = this.fb.group({
+                kiosk_Id: [response['body']['kiosk_Id'], Validators.required],
+                kiosks_number: [response['body']['kiosks_number'], Validators.required],
+                kiosks_mac_address: [response['body']['kiosks_mac_address'], Validators.required],
+                kiosks_guid: [response['body']['kiosks_guid'], Validators.required],
+                kiosks_password: [''],
+                kiosks_location_address: [response['body']['kiosks_location_address'], Validators.required],
+                kiosks_city: [response['body']['kiosks_city'], Validators.required],
+                kiosks_network_login: [response['body']['kiosks_network_login'], Validators.required],
+                kiosks_network_password: ['']
+             });
+            this.cdRef.detectChanges();
+           }
+         });
   }
-  
-  
-	  revert() {
-	   this.editKiosks.reset();
-	   }
 
-	  onSubmit(form: FormGroup)
-	  {
-		this.submitted = true;
+    revert() {
+     this.editKiosks.reset();
+    }
 
-		 console.log(form);
+     onSubmit(form: FormGroup) {
+        console.log(form.value);
+        this.submitted = true;
+        this.ks.updateKiosk(form.value)
+        .subscribe( response => {
 
-	  }
+            if (response['status'] === 1) {
+             this.showMessage = true;
+             this.messageText = response['message'];
+             this.messageClass = 'success';
+
+             this.cdRef.detectChanges();
+             setTimeout(() => {
+                 this.router.navigate(['/kiosks']);
+                }, 3000);
+             } else {
+              this.showMessage = true;
+              this.messageText = response['message'];
+              this.messageClass = 'danger';
+              this.cdRef.detectChanges();
+          }
+        });
+      }
 
 }

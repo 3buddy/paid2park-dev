@@ -1,1 +1,61 @@
-<p>edit-vehicles works!</p>
+<div class="container bg-white"> 
+    <div layout="row">
+              <div class="col-md-12 menu form">
+    
+                 <div class="menu form-2" *ngIf="isLoaded === true; else elseBlock">
+                     <form  class="container px-4 py-3" [formGroup]="editVehicles"  (ngSubmit)="onSubmit(editVehicles)">
+                         
+                        <div class="form-group form-style">
+                          <label for="license"> License :</label>
+                          <input type="text" formControlName="license" class="form-control" id="license"  >
+                          <span class="error" *ngIf="(submitted || editVehicles.controls['license'].touched ) && editVehicles.controls['license'].errors">
+                             This Is A Required Field .
+                          </span>
+     
+                        </div>
+                         
+                         <div class="form-group form-style" >
+                          <label for="make"> Make :</label>
+                          <input type="text"  formControlName="make" class="form-control" id="make"  >
+                          <span class="error"  *ngIf="(submitted || editVehicles.controls['make'].touched ) && editVehicles.controls['make'].errors">
+                            This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class=" form-group form-style" >
+                          <label for="model"> model :</label>
+                          <input type="text" formControlName="model" class="form-control"   id="model">
+                            <span class="error"  *ngIf="(submitted || editVehicles.controls['model'].touched ) && editVehicles.controls['model'].errors">
+                             This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        <div class="form-group form-style" >
+                          <label for="color"> Color :</label>
+                          <input type="text" formControlName="color" class="form-control" id="color">
+                            <span class="error"  *ngIf="(submitted || editVehicles.controls['color'].touched ) && editVehicles.controls['color'].errors">
+                            This Is A Required Field  .
+                          </span>
+                        </div>
+                         
+                        
+                         
+                         <div class="form-group btn-space">
+                             
+                             <button [disabled]="!editVehicles.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Vehicles <nb-icon icon="save-outline"></nb-icon>
+                            </button>
+                         
+                         </div>
+                         <div *ngIf="showMessage | async" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+                            {{ messageText  }}
+                        </div>
+                         
+                     </form>
+                 </div>
+                 <ng-template #elseBlock>Please Wait We Are Loading The Data For You .</ng-template>
+            </div>
+    
+    </div>	 
+    
+    </div>
+    
