@@ -1,195 +1,199 @@
 <div class="container bg-white"> 
-<div layout="row">
+<div layout="row" *ngIf="loadThePage === true">
 		  <div class="col-md-12 menu form">
 
              <div class="menu form-2">
 				 <form  class="container px-4 py-3" [formGroup]="editEnforcements"  (ngSubmit)="onSubmit(editEnforcements)">
 					 
 					<div class="form-group form-style">
-					  <label for="Id">ID :</label>
-					  <input type="text" formControlName="Id" class="form-control" id="Id"  >
-					  <span class="error" *ngIf="(submitted || editEnforcements.controls['Id'].touched ) && editEnforcements.controls['Id'].errors">
-                         This Is A Required Field .
-                      </span>
- 
-					</div>
-					 
-					 <div class="form-group form-style" >
-					  <label for="FirstName">First Name:</label>
-					  <input type="text"  formControlName="FirstName" class="form-control" id="FirstName"  >
-					  <span class="error"  *ngIf="(submitted || editEnforcements.controls['FirstName'].touched ) && editEnforcements.controls['FirstName'].errors">
-                        This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class=" form-group form-style" >
-					  <label for="LastName"> Last Name :</label>
-					  <input type="text" formControlName="LastName" class="form-control"   id="LastName">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['LastName'].touched ) && editEnforcements.controls['LastName'].errors">
-                         This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="Address">Address:</label>
-					  <input type="text" formControlName="Address" class="form-control" id="Address">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['Address'].touched ) && editEnforcements.controls['Address'].errors">
-                        This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="City">City:</label>
-					  <input type="text" formControlName="City" class="form-control" id="City">
-						<span  class="error"  *ngIf="(submitted || editEnforcements.controls['City'].touched ) && editEnforcements.controls['City'].errors">
-                         This Is A Required Field .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style "  >
-					  <label for="State">State:</label>
-					  <input type="text" formControlName="State" class="form-control" id="State">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['State'].touched ) && editEnforcements.controls['State'].errors">
-                         This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="Zip">Zip:</label>
-					  <input type="text" formControlName="Zip" class="form-control" id="Zip">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['Zip'].touched ) && editEnforcements.controls['Zip'].errors">
-                         This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="Phone">Phone:</label>
-					  <input type="text" formControlName="Phone" class="form-control" id="Phone">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['Phone'].touched ) && editEnforcements.controls['Phone'].errors">
-                        This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="Email">Email :</label>
-					  <input type="text" formControlName="Email" class="form-control" id="Email">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['Email'].touched ) && editEnforcements.controls['Email'].errors">
-                         This Is A Required Field .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="DOB">DOB :</label>
-					  <input type="text" formControlName="DOB" class="form-control" id="DOB">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['DOB'].touched ) && editEnforcements.controls['DOB'].errors">
-                        This Is A Required Field  .
-                      </span>
-					</div>
-
-					<div class="form-group form-style" >
-					  <label for="SS">SS#:</label>
-					  <input type="text" formControlName="SS" class="form-control" id="SS">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['SS'].touched ) && editEnforcements.controls['SS'].errors">
-                        This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="HireDate">Hire Date:</label>
-					  <input type="text" formControlName="HireDate" class="form-control" id="HireDate">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['HireDate'].touched ) && editEnforcements.controls['HireDate'].errors">
-                         This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="StartDate">Start Date:</label>
-					  <input type="text"  formControlName="StartDate" class="form-control"  id="StartDate">
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['StartDate'].touched ) && editEnforcements.controls['StartDate'].errors">
-                         This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="AppLogin">App Login:</label>
-					  <input type="text" formControlName="AppLogin" class="form-control" id="AppLogin" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['AppLogin'].touched ) && editEnforcements.controls['AppLogin'].errors">
-                         This Is A Required Field .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="AppPassword">App Password:</label>
-					  <input type="text" formControlName="AppPassword" class="form-control" id="AppPassword" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['AppPassword'].touched ) && editEnforcements.controls['AppPassword'].errors">
-                         This Is A Required Field .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="HoursDesired">Hours Desired:</label>
-					  <input type="text" formControlName="HoursDesired" class="form-control" id="HoursDesired" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['HoursDesired'].touched ) && editEnforcements.controls['HoursDesired'].errors">
-                         This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="Wage">Wage:</label>
-					  <input type="text" formControlName="Wage" class="form-control" id="Wage" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['Wage'].touched ) && editEnforcements.controls['Wage'].errors">
-                         This Is A Required Field .
-                      </span>
-						
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="TicketBonus">Ticket Bonus #:</label>
-					  <input type="text" id="TicketBonus" formControlName="TicketBonus" class="form-control" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['TicketBonus'].touched ) && editEnforcements.controls['TicketBonus'].errors">
-                        This Is A Required Field  .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="W4Withholding">W-4 Withholding:</label>
-					  <input type="text" formControlName="W4Withholding" class="form-control" id="W4Withholding" >
-						<span  class="error"  *ngIf="(submitted || editEnforcements.controls['W4Withholding'].touched ) && editEnforcements.controls['W4Withholding'].errors">
-                         This Is A Required Field .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style" >
-					  <label for="StateWithholding">State Withholding:</label>
-					  <input type="text" formControlName="StateWithholding" class="form-control" id="StateWithholding" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['StateWithholding'].touched ) && editEnforcements.controls['StateWithholding'].errors">
-                         This Is A Required Field .
-                      </span>
-					</div>
-					 
-					<div class="form-group form-style">
-					  <label for="CompRate">Comp Rate:</label>
-					  <input type="text" formControlName="CompRate" class="form-control" id="CompRate" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['CompRate'].touched ) && editEnforcements.controls['CompRate'].errors">
-                        This Is A Required Field .
-                      </span>
-					</div>
-					 
-					 <div class="form-group form-style">
-					  <label for="OTRate">OT Rate:</label>
-					  <input type="text" formControlName="OTRate" class="form-control" id="OTRate" >
-						<span class="error"  *ngIf="(submitted || editEnforcements.controls['OTRate'].touched ) && editEnforcements.controls['OTRate'].errors">
-                        This Is A Required Field .
-                      </span>
-					</div>
-					 
-					 
-					 <div class="form-group">
-						 
-						 <button [disabled]="!editEnforcements.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Enforcements <nb-icon icon="save-outline"></nb-icon>
-						</button>
-					 
-					 </div>
+						<label for="enforcements_assign_id">ID :</label>
+						<input type="text" formControlName="enforcements_assign_id" class="form-control" id="enforcements_assign_id"  >
+						<span class="error" *ngIf="(submitted || editEnforcements.controls['enforcements_assign_id'].touched ) && editEnforcements.controls['enforcements_assign_id'].errors">
+						   This Is A Required Field .
+						</span>
+   
+					  </div>
+					   
+					   <div class="form-group form-style" >
+						<label for="enforcements_first_name">First Name:</label>
+						<input type="text"  formControlName="enforcements_first_name" class="form-control" id="enforcements_first_name"  >
+						<span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_first_name'].touched ) && editEnforcements.controls['enforcements_first_name'].errors">
+						  This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class=" form-group form-style" >
+						<label for="enforcements_last_name"> Last Name :</label>
+						<input type="text" formControlName="enforcements_last_name" class="form-control"   id="enforcements_last_name">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_last_name'].touched ) && editEnforcements.controls['enforcements_last_name'].errors">
+						   This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_address">Address:</label>
+						<input type="text" formControlName="enforcements_address" class="form-control" id="enforcements_address">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_address'].touched ) && editEnforcements.controls['enforcements_address'].errors">
+						  This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_city">City:</label>
+						<input type="text" formControlName="enforcements_city" class="form-control" id="enforcements_city">
+						  <span  class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_city'].touched ) && editEnforcements.controls['enforcements_city'].errors">
+						   This Is A Required Field .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style "  >
+						<label for="enforcements_state">State:</label>
+						<input type="text" formControlName="enforcements_state" class="form-control" id="enforcements_state">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_state'].touched ) && editEnforcements.controls['enforcements_state'].errors">
+						   This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_zip">Zip:</label>
+						<input type="text" formControlName="enforcements_zip" class="form-control" id="enforcements_zip">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_zip'].touched ) && editEnforcements.controls['enforcements_zip'].errors">
+						   This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_phone">Phone:</label>
+						<input type="text" formControlName="enforcements_phone" class="form-control" id="enforcements_phone">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_phone'].touched ) && editEnforcements.controls['enforcements_phone'].errors">
+						  This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_email">Email :</label>
+						<input type="text" formControlName="enforcements_email" class="form-control" id="enforcements_email">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_email'].touched ) && editEnforcements.controls['enforcements_email'].errors">
+						   This Is A Required Field .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_dob">DOB :</label>
+						<input type="text" formControlName="enforcements_dob" class="form-control" id="enforcements_dob">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_dob'].touched ) && editEnforcements.controls['enforcements_dob'].errors">
+						  This Is A Required Field  .
+						</span>
+					  </div>
+  
+					  <div class="form-group form-style" >
+						<label for="enforcements_ss">SS#:</label>
+						<input type="text" formControlName="enforcements_ss" class="form-control" id="enforcements_ss">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_ss'].touched ) && editEnforcements.controls['enforcements_ss'].errors">
+						  This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_hire_date">Hire Date:</label>
+						<input type="text" formControlName="enforcements_hire_date" class="form-control" id="enforcements_hire_date">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_hire_date'].touched ) && editEnforcements.controls['enforcements_hire_date'].errors">
+						   This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_start_date">Start Date:</label>
+						<input type="text"  formControlName="enforcements_start_date" class="form-control"  id="enforcements_start_date">
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_start_date'].touched ) && editEnforcements.controls['enforcements_start_date'].errors">
+						   This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_app_login">App Login:</label>
+						<input type="text" formControlName="enforcements_app_login" class="form-control" id="enforcements_app_login" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_app_login'].touched ) && editEnforcements.controls['enforcements_app_login'].errors">
+						   This Is A Required Field .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_app_password">App Password:</label>
+						<input type="text" formControlName="enforcements_app_password" class="form-control" id="enforcements_app_password" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_app_password'].touched ) && editEnforcements.controls['enforcements_app_password'].errors">
+						   This Is A Required Field .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_hours_desired">Hours Desired:</label>
+						<input type="text" formControlName="enforcements_hours_desired" class="form-control" id="enforcements_hours_desired" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_hours_desired'].touched ) && editEnforcements.controls['enforcements_hours_desired'].errors">
+						   This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_wage">Wage:</label>
+						<input type="text" formControlName="enforcements_wage" class="form-control" id="enforcements_wage" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_wage'].touched ) && editEnforcements.controls['enforcements_wage'].errors">
+						   This Is A Required Field .
+						</span>
+						  
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_ticket_bonus">Ticket Bonus #:</label>
+						<input type="text" id="enforcements_ticket_bonus" formControlName="enforcements_ticket_bonus" class="form-control" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_ticket_bonus'].touched ) && editEnforcements.controls['enforcements_ticket_bonus'].errors">
+						  This Is A Required Field  .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_w_4_with_holding">W-4 Withholding:</label>
+						<input type="text" formControlName="enforcements_w_4_with_holding" class="form-control" id="enforcements_w_4_with_holding" >
+						  <span  class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_w_4_with_holding'].touched ) && editEnforcements.controls['enforcements_w_4_with_holding'].errors">
+						   This Is A Required Field .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style" >
+						<label for="enforcements_start_with_holding">State Withholding:</label>
+						<input type="text" formControlName="enforcements_start_with_holding" class="form-control" id="enforcements_start_with_holding" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_start_with_holding'].touched ) && editEnforcements.controls['enforcements_start_with_holding'].errors">
+						   This Is A Required Field .
+						</span>
+					  </div>
+					   
+					  <div class="form-group form-style">
+						<label for="enforcements_comp_rate">Comp Rate:</label>
+						<input type="text" formControlName="enforcements_comp_rate" class="form-control" id="enforcements_comp_rate" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_comp_rate'].touched ) && editEnforcements.controls['enforcements_comp_rate'].errors">
+						  This Is A Required Field .
+						</span>
+					  </div>
+					   
+					   <div class="form-group form-style">
+						<label for="enforcements_ot_rate">OT Rate:</label>
+						<input type="text" formControlName="enforcements_ot_rate" class="form-control" id="enforcements_ot_rate" >
+						  <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_ot_rate'].touched ) && editEnforcements.controls['enforcements_ot_rate'].errors">
+						  This Is A Required Field .
+						</span>
+					  </div>
+					   
+					   
+					   <div class="form-group btn-space">
+						   
+						   <button [disabled]="!editEnforcements.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Enforcements <nb-icon icon="save-outline"></nb-icon>
+						  </button>
+					   
+					   </div>
+  
+					   <div *ngIf="showMessage" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+						  {{ messageText  }}
+					   </div>
 					 
 				 </form>
 			 </div>

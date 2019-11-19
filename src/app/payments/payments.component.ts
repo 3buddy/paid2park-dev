@@ -1,24 +1,26 @@
 import { Component, OnInit ,ViewChild } from '@angular/core';
-
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PaymentService } from '../payment.service';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
 
 export interface PeriodicElement {
-  CustomerName: string;
-  License: string;
-  TicketNumber: string;
-  AmountPaid:string;
-  Fundsby:string;
+      ticket_payment_id: number;
+      ticket_payment_tickets: string;
+      ticket_payment_license: string;
+      ticket_payment_ticket_fee: string;
+      ticket_payment_ticket_date: string;
+      ticket_payment_ticket_discount: string;
+      ticket_payment_ticket_balance: string;
+      ticket_payment_payment_amount: string;
+      ticket_payment_funded_by: string;
+      ticket_payment_balance_on_ticket: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {CustomerName: 'John Mac', License: 'S530-429-085-151',TicketNumber: '18032714540001',AmountPaid:'$ 48.78',Fundsby:'Card'},
-  {CustomerName: 'Rusi Hart', License: 'S530-429-085-152',TicketNumber: '18032714540002',AmountPaid:'$ 60.78',Fundsby:'Cash'},
-  {CustomerName: 'Cristal Roz', License: 'S530-429-085-153',TicketNumber: '18032714540003',AmountPaid:'$ 58.78',Fundsby:'Card'},
-  {CustomerName: 'Lucci Hart', License: 'S530-429-085-154',TicketNumber: '18032714540004',AmountPaid:'$ 68.78',Fundsby:'Cheque'}
-];
+let ELEMENT_DATA: PeriodicElement[];
 
 @Component({
   selector: 'app-payments',
@@ -27,22 +29,74 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PaymentsComponent implements OnInit {
 
-displayedColumns: string[] = ['CustomerName', 'License', 'TicketNumber','AmountPaid','Fundsby','Action'];
-  
+displayedColumns: string[] = ['TicketFee', 'License', 'TicketNumber', 'AmountPaid', 'Fundsby', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+  constructor(private services: PaymentService , public dialog: MatDialog ) {
+  }
+
+  openDialog(Id) {
+
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      height: '18%',
+      width: '25%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deletePayment(Id);
+      }
+    });
   }
 
   ngOnInit() {
-  
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-	
+
+    this.services.getTicketPayment().subscribe( (response) => {
+
+       if (response['status'] === 1) {
+        ELEMENT_DATA = response['body'];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+       } else {
+        ELEMENT_DATA = [];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+       }
+
+    });
+  }
+
+  deletePayment(Id) {
+    this.services.deleteTicketPayment(Id)
+    .subscribe(response => {
+      this.getPayment();
+    });
+  }
+
+  getPayment() {
+    this.services.getTicketPayment().subscribe( (response) => {
+
+      if ( response['status'] === 1) {
+
+        ELEMENT_DATA = response['body'];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      } else {
+
+        ELEMENT_DATA = [];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      }
+  });
   }
 
   applyFilter(filterValue: string) {
@@ -52,5 +106,4 @@ displayedColumns: string[] = ['CustomerName', 'License', 'TicketNumber','AmountP
       this.dataSource.paginator.firstPage();
     }
   }
-  
 }

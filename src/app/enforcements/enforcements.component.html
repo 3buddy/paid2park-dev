@@ -10,30 +10,30 @@
 					
 					<ng-container matColumnDef="DeploymentName">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Deployment Name </th>
-					  <td mat-cell *matCellDef="let row"> {{row.DeploymentName}} </td>
+					  <td mat-cell *matCellDef="let row"> Will Add it later </td>
 					</ng-container>
 
 					
 					<ng-container matColumnDef="FirstName">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-					  <td mat-cell *matCellDef="let row"> {{row.FirstName}} </td>
+					  <td mat-cell *matCellDef="let row"> {{row.enforcements_first_name}} </td>
 					</ng-container>
 
 					
 					<ng-container matColumnDef="LastName">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-					  <td mat-cell *matCellDef="let row" > {{row.LastName}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.enforcements_last_name}} </td>
 					</ng-container>
 					  
 					  
 					<ng-container matColumnDef="Email">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-					  <td mat-cell *matCellDef="let row" > {{row.Email}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.enforcements_email}} </td>
 					</ng-container>
 					  
 					<ng-container matColumnDef="PhoneNumber">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
-					  <td mat-cell *matCellDef="let row" > {{row.PhoneNumber}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.enforcements_phone}} </td>
 					</ng-container>
 					  
 
@@ -57,7 +57,7 @@
 					  <td mat-cell *matCellDef="let row" >
 
 
-						  <a mat-flat-button color="info" [routerLink]="['/enforcements',row._id,'edit']">
+						  <a mat-flat-button color="info" [routerLink]="['/enforcements',row.enforcements_id,'edit']">
 									  <button  size="small" shape="semi-round" nbButton hero status="info"> 
 
 										  Edit 
@@ -67,7 +67,7 @@
 									  </button>
 						  </a>
 
-						  <a mat-flat-button color="info" [routerLink]="['/enforcements/add']">
+						  <a mat-flat-button color="info" (click)="openDialog(row.enforcements_id)" >
 									  <button  size="small" shape="semi-round" nbButton hero status="warning"> 
 
 										  Delete

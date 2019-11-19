@@ -10,30 +10,30 @@
 					
 					<ng-container matColumnDef="CustomerName">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
-					  <td mat-cell *matCellDef="let row"> {{row.CustomerName}} </td>
+					  <td mat-cell *matCellDef="let row"> {{row.passes_customers_name}} </td>
 					</ng-container>
 
 					
 					<ng-container matColumnDef="License">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> License  </th>
-					  <td mat-cell *matCellDef="let row"> {{row.License}} </td>
+					  <td mat-cell *matCellDef="let row"> {{row.passes_license}} </td>
 					</ng-container>
 
 					
 					<ng-container matColumnDef="PassNumber">
-					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pass Number </th>
-					  <td mat-cell *matCellDef="let row" > {{row.PassNumber}} </td>
+					  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pass Reason </th>
+					  <td mat-cell *matCellDef="let row" > {{row.passes_reason}} </td>
 					</ng-container>
 					  
 					  
 					<ng-container matColumnDef="AmountPaid">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header> AmountPaid </th>
-					  <td mat-cell *matCellDef="let row" > {{row.AmountPaid}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.passes_amount_paid}} </td>
 					</ng-container>
 					  
 					<ng-container matColumnDef="Fundsby">
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header>  Funds by </th>
-					  <td mat-cell *matCellDef="let row" > {{row.Fundsby}} </td>
+					  <td mat-cell *matCellDef="let row" > {{row.passes_funds_by}} </td>
 					</ng-container>
 					  
 
@@ -42,7 +42,7 @@
 					  <th mat-header-cell *matHeaderCellDef mat-sort-header>  
 						  <div class="button-row">
 
-							  <a mat-flat-button color="info" [routerLink]="['/product-add']">
+							  <a mat-flat-button color="info" [routerLink]="['/passes/add']">
 									  <button size="small" shape="semi-round" nbButton hero status="info"> 
 
 										  Add Payments 
@@ -57,7 +57,7 @@
 					  <td mat-cell *matCellDef="let row" >
 
 
-						  <a mat-flat-button color="info" [routerLink]="['/product-add']">
+						  <a mat-flat-button color="info" [routerLink]="['/passes',row.passes_id,'edit']">
 									  <button  size="small" shape="semi-round" nbButton hero status="info"> 
 
 										  Edit 
@@ -67,7 +67,7 @@
 									  </button>
 						  </a>
 
-						  <a mat-flat-button color="info" [routerLink]="['/product-add']">
+						  <a mat-flat-button color="info" (click)="openDialog(row.passes_id)">
 									  <button  size="small" shape="semi-round" nbButton hero status="warning"> 
 
 										  Delete

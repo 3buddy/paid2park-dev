@@ -1,25 +1,27 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
 
-
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PassesService } from '../passes.service';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
 
 export interface PeriodicElement {
-  CustomerName: string;
-  License: string;
-  PassNumber: string;
-  AmountPaid:string;
-  Fundsby:string;
+  passes_id: number;
+  passes_license: string;
+  passes_customers_name: string;
+  passes_package: string;
+  passes_price: string;
+  passes_amount_paid: string;
+  passes_funds_by: string;
+  passes_reason: string;
+  passes_start_date: string;
+  passes_end_date: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {CustomerName: 'John Mac', License: 'S530-429-085-151',PassNumber: '18032714540001',AmountPaid:'$ 48.78',Fundsby:'Card'},
-  {CustomerName: 'Rusi Hart', License: 'S530-429-085-152',PassNumber: '18032714540002',AmountPaid:'$ 60.78',Fundsby:'Cash'},
-  {CustomerName: 'Cristal Roz', License: 'S530-429-085-153',PassNumber: '18032714540003',AmountPaid:'$ 58.78',Fundsby:'Card'},
-  {CustomerName: 'Lucci Hart', License: 'S530-429-085-154',PassNumber: '18032714540004',AmountPaid:'$ 68.78',Fundsby:'Cheque'}
-];
+let ELEMENT_DATA: PeriodicElement[];
 
 @Component({
   selector: 'app-passes',
@@ -28,22 +30,78 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PassesComponent implements OnInit {
 
-  displayedColumns: string[] = ['CustomerName', 'License', 'PassNumber','AmountPaid','Fundsby','Action'];
-  
+  displayedColumns: string[] = ['CustomerName', 'License', 'PassNumber', 'AmountPaid', 'Fundsby', 'Action'];
+
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+  constructor(private services: PassesService, public dialog: MatDialog) {
+  }
+
+  openDialog(Id) {
+
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      height: '18%',
+      width: '25%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deletePasses(Id);
+      }
+    });
   }
 
   ngOnInit() {
-  
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-	
+    this.services.getPasses().subscribe( (response) => {
+
+        if ( response['status'] === 1) {
+
+          ELEMENT_DATA = response['body'];
+          this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+        } else {
+
+          ELEMENT_DATA = [];
+          this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+        }
+    });
+
+  }
+
+  deletePasses(Id) {
+    this.services.deletePasses(Id)
+    .subscribe(response => {
+      this.getPasses();
+    });
+  }
+
+  getPasses() {
+    this.services.getPasses().subscribe( (response) => {
+
+      if ( response['status'] === 1) {
+
+        ELEMENT_DATA = response['body'];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      } else {
+
+        ELEMENT_DATA = [];
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      }
+  });
   }
 
   applyFilter(filterValue: string) {

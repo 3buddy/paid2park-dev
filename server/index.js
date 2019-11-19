@@ -38,13 +38,18 @@ app.use("/api/v1/user", router.user);
 app.use("/api/v1/customer", router.customer);
 app.use("/api/v1/vehicle", router.vehicle);
 app.use("/api/v1/kiosk" , router.kiosk);
+app.use("/api/v1/enforcements" , router.enforcements);
+app.use("/api/v1/payment" , router.payment);
+app.use("/api/v1/passes" , router.passes);
+app.use('/api/v1/deployment', router.deployment);
+
 
 app.all('*', function (req, res) {
     res.status(200).sendFile(`/`, {root: '../dist/Paid2Park'});
 });
 
 server.listen(PORT, () => {
-  //console.log(listEndpoints(app));
+  // console.log(listEndpoints(app));
   //console.log(dotenv);
   //console.log(process.env.mysql_host);
   console.log(`Server listening to PORT: ${PORT}`)

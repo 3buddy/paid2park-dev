@@ -33,6 +33,7 @@ import { AddTicketPaymentComponent } from './add-ticket-payment/add-ticket-payme
 
 import { PassesComponent } from './passes/passes.component';
 import { AddPassesComponent } from './add-passes/add-passes.component';
+import { EditPassesComponent } from './edit-passes/edit-passes.component';
 
 import { EnforcementsComponent } from './enforcements/enforcements.component';
 import { AddEnforcementsComponent } from './add-enforcements/add-enforcements.component';
@@ -48,8 +49,9 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { AddVehiclesComponent } from './add-vehicles/add-vehicles.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { EditVehiclesComponent } from './edit-vehicles/edit-vehicles.component';
-
-
+import { ParkingPaymentComponent } from './parking-payment/parking-payment.component';
+import { EditTicketPaymentComponent } from './edit-ticket-payment/edit-ticket-payment.component';
+import { EditParkingPaymentComponent } from './edit-parking-payment/edit-parking-payment.component';
 
 
 
@@ -205,6 +207,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 },
 {
+    path: 'ParkingPayment',
+    component: ParkingPaymentComponent,
+    canActivate: [AuthGuard]
+
+},
+{
     path: 'payments/add',
     component: AddPaymentComponent,
     canActivate: [AuthGuard]
@@ -220,6 +228,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 },
 {
+    path: 'ticket-payment/:Id/edit',
+    component: EditTicketPaymentComponent,
+    canActivate: [AuthGuard]
+
+},
+{
+    path: 'parking-payment/:Id/edit',
+    component: EditParkingPaymentComponent,
+    canActivate: [AuthGuard]
+
+},
+{
     path: 'passes',
     component: PassesComponent,
     canActivate: [AuthGuard]
@@ -228,7 +248,13 @@ const routes: Routes = [
     path: 'passes/add',
     component: AddPassesComponent,
     canActivate: [AuthGuard]
+},
+{
+    path: 'passes/:Id/edit',
+    component: EditPassesComponent,
+    canActivate: [AuthGuard]
 }
+
 
 ];
 

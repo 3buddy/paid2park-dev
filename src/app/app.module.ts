@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 /* import { FormsModule , ReactiveFormsModule } from '@angular/forms'; */
-import {  ReactiveFormsModule ,FormsModule } from '@angular/forms';
+import {  ReactiveFormsModule , FormsModule } from '@angular/forms';
 
 
 import {
@@ -80,6 +80,10 @@ import { DialogDeleteKiosk } from './kiosks/kiosks.component';
 
 
 import { VehicleComponent } from './vehicle/vehicle.component';
+import { EditPassesComponent } from './edit-passes/edit-passes.component';
+import { ParkingPaymentComponent } from './parking-payment/parking-payment.component';
+import { EditTicketPaymentComponent } from './edit-ticket-payment/edit-ticket-payment.component';
+import { EditParkingPaymentComponent } from './edit-parking-payment/edit-parking-payment.component';
 
 
 @NgModule({
@@ -123,7 +127,11 @@ import { VehicleComponent } from './vehicle/vehicle.component';
     DialogDeleteCustomer,
     VehicleComponent,
     DialogDeleteVehicle,
-    DialogDeleteKiosk
+    DialogDeleteKiosk,
+    EditPassesComponent,
+    ParkingPaymentComponent,
+    EditTicketPaymentComponent,
+    EditParkingPaymentComponent
   ],
   imports: [
   BrowserAnimationsModule,
@@ -153,6 +161,6 @@ import { VehicleComponent } from './vehicle/vehicle.component';
   ],
   providers: [NbSidebarService, NbMenuService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogContentExampleDialog, DialogDeleteCustomer, DialogDeleteVehicle, DialogDeleteKiosk]
+  entryComponents: [DialogBoxComponent , DialogContentExampleDialog, DialogDeleteCustomer, DialogDeleteVehicle, DialogDeleteKiosk]
 })
 export class AppModule { }
