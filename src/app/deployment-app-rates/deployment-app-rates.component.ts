@@ -5,35 +5,38 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeploymentService } from '../deployment.service';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-
+import { Router , ActivatedRoute } from '@angular/router';
 
 
 export interface PeriodicElement {
+  deployment_app_rate_id: number;
   deployment_id: number;
-  deployment_name: string;
-  deployment_billing_phone: string;
-  deployment_billing_email: string;
+  deployment_app_rate_rate: string;
+  deployment_app_rate_minutes: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
 
-
 @Component({
-  selector: 'app-deployments',
-  templateUrl: './deployments.component.html',
-  styleUrls: ['./deployments.component.css']
+  selector: 'app-deployment-app-rates',
+  templateUrl: './deployment-app-rates.component.html',
+  styleUrls: ['./deployment-app-rates.component.css']
 })
-export class DeploymentsComponent implements OnInit {
+export class DeploymentAppRatesComponent implements OnInit {
 
-  displayedColumns: string[] = ['deployment_name', 'deployment_billing_phone', 'deployment_billing_email', 'Action'];
+  displayedColumns: string[] = ['deployment_app_rate_rate', 'deployment_app_rate_minutes', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  deploymentId: number;
+
   constructor(
     public dialog: MatDialog,
-    private services: DeploymentService
+    private services: DeploymentService,
+    private router: Router,
+    private ar: ActivatedRoute
     ) {  }
 
     openDialog(Id) {
@@ -45,14 +48,15 @@ export class DeploymentsComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result === true) {
-          this.deleteDeployments(Id);
+          this.deleteDeploymentAppRate(Id);
         }
       });
     }
 
   ngOnInit() {
 
-    this.services.getDeployment().subscribe( (response) => {
+    this.deploymentId = this.ar.snapshot.params['deploymentId'];
+    this.services.getDeploymentAppRate(this.deploymentId).subscribe( (response) => {
 
       if (response['status'] === 1) {
         ELEMENT_DATA = response['body'];
@@ -69,15 +73,15 @@ export class DeploymentsComponent implements OnInit {
     });
   }
 
-  deleteDeployments(Id) {
-    this.services.deleteDeployment(Id)
+  deleteDeploymentAppRate(Id) {
+    this.services.deleteDeploymentAppRate(Id)
     .subscribe(response => {
-      this.getDeployments();
+      this.getDeploymentAppRate();
     });
   }
 
-  getDeployments() {
-    this.services.getDeployment().subscribe( (response) => {
+  getDeploymentAppRate() {
+    this.services.getDeploymentAppRate(this.deploymentId).subscribe( (response) => {
 
       if (response['status'] === 1) {
         ELEMENT_DATA = response['body'];
@@ -101,4 +105,5 @@ export class DeploymentsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }

@@ -1,1 +1,392 @@
-<p>add-deployment works!</p>
+<div class="container bg-white"> 
+    <div layout="row">
+              <div class="col-md-12 menu form">
+                 <div class="menu form-2">
+                     <form  class="container px-4 py-3" [formGroup]="addDeployment"  (ngSubmit)="onSubmit(addDeployment)">
+                            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                            <mat-step formGroupName="pageOne" >
+                                                    <ng-template matStepLabel> Page One</ng-template>
+                                                    <div class="form-group form-style" >
+                                                            <label for="deployment_assign_id">deployment_assign_id :</label>
+                                                            <input type="text"  formControlName="deployment_assign_id" class="form-control" id="deployment_assign_id"  >
+                                                            <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_assign_id'].touched ) && pageOne.controls['deployment_assign_id'].errors">
+                                                              This Is A Required Field  .
+                                                            </span>
+                                                          </div>
+                                                          <div class=" form-group form-style" >
+                                                            <label for="deployment_name"> deployment_name :</label>
+                                                            <input type="text" formControlName="deployment_name" class="form-control"   id="deployment_name">
+                                                              <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_name'].touched ) && pageOne.controls['deployment_name'].errors">
+                                                               This Is A Required Field  .
+                                                            </span>
+                                                          </div>
+                                                           
+                                                          <div class="form-group form-style" >
+                                                            <label for="deployment_billing_address">deployment_billing_address :</label>
+                                                            <input type="text" formControlName="deployment_billing_address" class="form-control" id="deployment_billing_address">
+                                                              <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_address'].touched ) && pageOne.controls['deployment_billing_address'].errors">
+                                                              This Is A Required Field  .
+                                                            </span>
+                                                          </div>
+                                                           
+                                                          <div class="form-group form-style" >
+                                                            <label for="deployment_billing_city">deployment_billing_city :</label>
+                                                            <input type="text" formControlName="deployment_billing_city" class="form-control" id="deployment_billing_city">
+                                                              <span  class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_city'].touched ) && pageOne.controls['deployment_billing_city'].errors">
+                                                               This Is A Required Field .
+                                                            </span>
+                                                          </div>
+                                                           
+                                                          <div class="form-group form-style "  >
+                                                            <label for="deployment_billing_state"> deployment_billing_state :</label>
+                                                            <input type="text" formControlName="deployment_billing_state" class="form-control" id="deployment_billing_state">
+                                                              <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_state'].touched ) && pageOne.controls['deployment_billing_state'].errors">
+                                                               This Is A Required Field  .
+                                                            </span>
+                                                          </div>
+                                                           
+                                                          <div class="form-group form-style" >
+                                                            <label for="deployment_billing_zip">deployment_billing_zip :</label>
+                                                            <input type="text" formControlName="deployment_billing_zip" class="form-control" id="deployment_billing_zip">
+                                                              <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_zip'].touched ) && pageOne.controls['deployment_billing_zip'].errors">
+                                                               This Is A Required Field  .
+                                                            </span>
+                                                          </div>
+                                                           
+                                                          <div class="form-group form-style" >
+                                                            <label for="deployment_billing_phone_contact">deployment_billing_phone_contact :</label>
+                                                            <input type="text" formControlName="deployment_billing_phone_contact" class="form-control" id="deployment_billing_phone_contact">
+                                                              <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_phone_contact'].touched ) && pageOne.controls['deployment_billing_phone_contact'].errors">
+                                                              This Is A Required Field  .
+                                                            </span>
+                                                          </div>
+                                                           
+                                                          <div class="form-group form-style" >
+                                                            <label for="deployment_billing_phone"> deployment_billing_phone:</label>
+                                                            <input type="text" formControlName="deployment_billing_phone" class="form-control" id="deployment_billing_phone">
+                                                              <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_phone'].touched ) && pageOne.controls['deployment_billing_phone'].errors">
+                                                               This Is A Required Field .
+                                                            </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_billing_email"> deployment_billing_email:</label>
+                                                                  <input type="text" formControlName="deployment_billing_email" class="form-control" id="deployment_billing_email">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_billing_email'].touched ) && pageOne.controls['deployment_billing_email'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_min_minutes_to_park"> deployment_min_minutes_to_park:</label>
+                                                                  <input type="text" formControlName="deployment_min_minutes_to_park" class="form-control" id="deployment_min_minutes_to_park">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_min_minutes_to_park'].touched ) && pageOne.controls['deployment_min_minutes_to_park'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_parking_charge_times"> deployment_parking_charge_times:</label>
+                                                                  <input type="text" formControlName="deployment_parking_charge_times" class="form-control" id="deployment_parking_charge_times">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_parking_charge_times'].touched ) && pageOne.controls['deployment_parking_charge_times'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_monday_start"> deployment_monday_start:</label>
+                                                                  <input type="text" formControlName="deployment_monday_start" class="form-control" id="deployment_monday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_monday_start'].touched ) && pageOne.controls['deployment_monday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_monday_end"> deployment_monday_end:</label>
+                                                                  <input type="text" formControlName="deployment_monday_end" class="form-control" id="deployment_monday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_monday_end'].touched ) && pageOne.controls['deployment_monday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_tuesday_start"> deployment_tuesday_start:</label>
+                                                                  <input type="text" formControlName="deployment_tuesday_start" class="form-control" id="deployment_tuesday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_tuesday_start'].touched ) && pageOne.controls['deployment_tuesday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_tuesday_end"> deployment_tuesday_end:</label>
+                                                                  <input type="text" formControlName="deployment_tuesday_end" class="form-control" id="deployment_tuesday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_tuesday_end'].touched ) && pageOne.controls['deployment_tuesday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_wednesday_start"> deployment_wednesday_start:</label>
+                                                                  <input type="text" formControlName="deployment_wednesday_start" class="form-control" id="deployment_wednesday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_wednesday_start'].touched ) && pageOne.controls['deployment_wednesday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_wednesday_end"> deployment_wednesday_end:</label>
+                                                                  <input type="text" formControlName="deployment_wednesday_end" class="form-control" id="deployment_wednesday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_wednesday_end'].touched ) && pageOne.controls['deployment_wednesday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_thursday_start"> deployment_thursday_start:</label>
+                                                                  <input type="text" formControlName="deployment_thursday_start" class="form-control" id="deployment_thursday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_thursday_start'].touched ) && pageOne.controls['deployment_thursday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_thursday_end"> deployment_thursday_end:</label>
+                                                                  <input type="text" formControlName="deployment_thursday_end" class="form-control" id="deployment_thursday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_thursday_end'].touched ) && pageOne.controls['deployment_thursday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_friday_start"> deployment_friday_start:</label>
+                                                                  <input type="text" formControlName="deployment_friday_start" class="form-control" id="deployment_friday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_friday_start'].touched ) && pageOne.controls['deployment_friday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_friday_end"> deployment_friday_end:</label>
+                                                                  <input type="text" formControlName="deployment_friday_end" class="form-control" id="deployment_friday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_friday_end'].touched ) && pageOne.controls['deployment_friday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_saturday_start"> deployment_saturday_start:</label>
+                                                                  <input type="text" formControlName="deployment_saturday_start" class="form-control" id="deployment_saturday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_saturday_start'].touched ) && pageOne.controls['deployment_saturday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_saturday_end"> deployment_saturday_end:</label>
+                                                                  <input type="text" formControlName="deployment_saturday_end" class="form-control" id="deployment_saturday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_saturday_end'].touched ) && pageOne.controls['deployment_saturday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_sunday_start"> deployment_sunday_start:</label>
+                                                                  <input type="text" formControlName="deployment_sunday_start" class="form-control" id="deployment_sunday_start">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_sunday_start'].touched ) && pageOne.controls['deployment_sunday_start'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                  
+                                                          <div class="form-group form-style" >
+                                                                  <label for="deployment_sunday_end"> deployment_sunday_end:</label>
+                                                                  <input type="text" formControlName="deployment_sunday_end" class="form-control" id="deployment_sunday_end">
+                                                                    <span class="error"  *ngIf="(submitted || pageOne.controls['deployment_sunday_end'].touched ) && pageOne.controls['deployment_sunday_end'].errors">
+                                                                     This Is A Required Field .
+                                                                  </span>
+                                                          </div>
+                                                          
+                                                          <div class="form-group btn-space">
+                                                                <button type="button"  [disabled]="!pageOne.valid" size="small" shape="semi-round" nbButton hero status="info" matStepperNext>Next</button>
+                                                           </div>
+                                          </mat-step>
+                                          <mat-step formGroupName="pageTwo"  >
+                                                <ng-template matStepLabel> Page Two</ng-template>
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_percentage"> deployment_parking_percentage:</label>
+                                                        <input type="text" formControlName="deployment_parking_percentage" class="form-control" id="deployment_parking_percentage">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_percentage'].touched ) && pageTwo.controls['deployment_parking_percentage'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_tickets_percentage"> deployment_tickets_percentage:</label>
+                                                        <input type="text" formControlName="deployment_tickets_percentage" class="form-control" id="deployment_tickets_percentage">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_tickets_percentage'].touched ) && pageTwo.controls['deployment_tickets_percentage'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_transaction_charges"> deployment_ticket_transaction_charges:</label>
+                                                        <input type="text" formControlName="deployment_ticket_transaction_charges" class="form-control" id="deployment_ticket_transaction_charges">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_transaction_charges'].touched ) && pageTwo.controls['deployment_ticket_transaction_charges'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_monthly_service_charge_parking"> deployment_monthly_service_charge_parking:</label>
+                                                        <input type="text" formControlName="deployment_monthly_service_charge_parking" class="form-control" id="deployment_monthly_service_charge_parking">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_monthly_service_charge_parking'].touched ) && pageTwo.controls['deployment_monthly_service_charge_parking'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_monthly_service_charge_enforcement"> deployment_monthly_service_charge_enforcement:</label>
+                                                        <input type="text" formControlName="deployment_monthly_service_charge_enforcement" class="form-control" id="deployment_monthly_service_charge_enforcement">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_monthly_service_charge_enforcement'].touched ) && pageTwo.controls['deployment_monthly_service_charge_enforcement'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_bill_day_of_month"> deployment_bill_day_of_month:</label>
+                                                        <input type="text" formControlName="deployment_bill_day_of_month" class="form-control" id="deployment_bill_day_of_month">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_bill_day_of_month'].touched ) && pageTwo.controls['deployment_bill_day_of_month'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_min_monthly_bill"> deployment_min_monthly_bill:</label>
+                                                        <input type="text" formControlName="deployment_min_monthly_bill" class="form-control" id="deployment_min_monthly_bill">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_min_monthly_bill'].touched ) && pageTwo.controls['deployment_min_monthly_bill'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_revenue"> deployment_parking_revenue:</label>
+                                                        <input type="text" formControlName="deployment_parking_revenue" class="form-control" id="deployment_parking_revenue">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_revenue'].touched ) && pageTwo.controls['deployment_parking_revenue'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_draft_day_of_month"> deployment_parking_draft_day_of_month:</label>
+                                                        <input type="text" formControlName="deployment_parking_draft_day_of_month" class="form-control" id="deployment_parking_draft_day_of_month">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_draft_day_of_month'].touched ) && pageTwo.controls['deployment_parking_draft_day_of_month'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_draft_routing"> deployment_parking_draft_routing:</label>
+                                                        <input type="text" formControlName="deployment_parking_draft_routing" class="form-control" id="deployment_parking_draft_routing">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_draft_routing'].touched ) && pageTwo.controls['deployment_parking_draft_routing'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_draft_account"> deployment_parking_draft_account:</label>
+                                                        <input type="text" formControlName="deployment_parking_draft_account" class="form-control" id="deployment_parking_draft_account">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_draft_account'].touched ) && pageTwo.controls['deployment_parking_draft_account'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_draft_bank_name"> deployment_parking_draft_bank_name:</label>
+                                                        <input type="text" formControlName="deployment_parking_draft_bank_name" class="form-control" id="deployment_parking_draft_bank_name">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_draft_bank_name'].touched ) && pageTwo.controls['deployment_parking_draft_bank_name'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_parking_draft_note"> deployment_parking_draft_note:</label>
+                                                        <input type="text" formControlName="deployment_parking_draft_note" class="form-control" id="deployment_parking_draft_note">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_parking_draft_note'].touched ) && pageTwo.controls['deployment_parking_draft_note'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_revenue"> deployment_ticket_revenue:</label>
+                                                        <input type="text" formControlName="deployment_ticket_revenue" class="form-control" id="deployment_ticket_revenue">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_revenue'].touched ) && pageTwo.controls['deployment_ticket_revenue'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_draft_day_of_month"> deployment_ticket_draft_day_of_month:</label>
+                                                        <input type="text" formControlName="deployment_ticket_draft_day_of_month" class="form-control" id="deployment_ticket_draft_day_of_month">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_draft_day_of_month'].touched ) && pageTwo.controls['deployment_ticket_draft_day_of_month'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_draft_routing"> deployment_ticket_draft_routing:</label>
+                                                        <input type="text" formControlName="deployment_ticket_draft_routing" class="form-control" id="deployment_ticket_draft_routing">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_draft_routing'].touched ) && pageTwo.controls['deployment_ticket_draft_routing'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_draft_account"> deployment_ticket_draft_account:</label>
+                                                        <input type="text" formControlName="deployment_ticket_draft_account" class="form-control" id="deployment_ticket_draft_account">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_draft_account'].touched ) && pageTwo.controls['deployment_ticket_draft_account'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_draft_bank_name"> deployment_ticket_draft_bank_name:</label>
+                                                        <input type="text" formControlName="deployment_ticket_draft_bank_name" class="form-control" id="deployment_ticket_draft_bank_name">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_draft_bank_name'].touched ) && pageTwo.controls['deployment_ticket_draft_bank_name'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_draft_note"> deployment_ticket_draft_note:</label>
+                                                        <input type="text" formControlName="deployment_ticket_draft_note" class="form-control" id="deployment_ticket_draft_note">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_ticket_draft_note'].touched ) && pageTwo.controls['deployment_ticket_draft_note'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+                                                <div class="form-group form-style" >
+                                                        <label for="deployment_ticket_draft_bank_name"> deployment_kiosks_price_per_hour:</label>
+                                                        <input type="text" formControlName="deployment_kiosks_price_per_hour" class="form-control" id="deployment_kiosks_price_per_hour">
+                                                          <span class="error"  *ngIf="(submitted || pageTwo.controls['deployment_kiosks_price_per_hour'].touched ) && pageTwo.controls['deployment_kiosks_price_per_hour'].errors">
+                                                           This Is A Required Field .
+                                                        </span>
+                                                </div>
+
+
+
+                                                <div class="form-group btn-space">
+                                                        <button  type="button" size="small" shape="semi-round" nbButton hero status="info" matStepperPrevious>Back</button>
+                                                        <button class="submit-btn" [disabled]="!addDeployment.valid" type="submit" size="small" shape="semi-round" nbButton hero status="info"> Save Deployments <nb-icon icon="save-outline"></nb-icon>
+                                                       </button>
+                                                </div>
+                               
+                                                <div *ngIf="showMessage" class="alert alert-{{messageClass}} alert-dismissible fade show " >
+                                                       {{ messageText  }}
+                                                </div>
+
+                                          </mat-step>
+                            </mat-horizontal-stepper>
+                     </form>
+                 </div>
+            </div>
+    </div>	 
+    </div>    

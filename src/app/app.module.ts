@@ -31,7 +31,8 @@ import {
   MatInputModule,
   MatTableModule } from '@angular/material';
 
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -73,6 +74,7 @@ import { EditSecurityusersComponent } from './edit-securityusers/edit-securityus
 
 /*  Delete Dialog  */
 
+
 import { DialogContentExampleDialog } from './securityusers/securityusers.component';
 import { DialogDeleteCustomer } from './customers/customers.component';
 import { DialogDeleteVehicle } from './vehicle/vehicle.component';
@@ -84,6 +86,10 @@ import { EditPassesComponent } from './edit-passes/edit-passes.component';
 import { ParkingPaymentComponent } from './parking-payment/parking-payment.component';
 import { EditTicketPaymentComponent } from './edit-ticket-payment/edit-ticket-payment.component';
 import { EditParkingPaymentComponent } from './edit-parking-payment/edit-parking-payment.component';
+import { DeploymentAppRatesComponent } from './deployment-app-rates/deployment-app-rates.component';
+import { DeploymentPassRatesComponent } from './deployment-pass-rates/deployment-pass-rates.component';
+import { EditPassRatesComponent } from './edit-pass-rates/edit-pass-rates.component';
+import { EditAppRatesComponent } from './edit-app-rates/edit-app-rates.component';
 
 
 @NgModule({
@@ -131,7 +137,11 @@ import { EditParkingPaymentComponent } from './edit-parking-payment/edit-parking
     EditPassesComponent,
     ParkingPaymentComponent,
     EditTicketPaymentComponent,
-    EditParkingPaymentComponent
+    EditParkingPaymentComponent,
+    DeploymentAppRatesComponent,
+    DeploymentPassRatesComponent,
+    EditPassRatesComponent,
+    EditAppRatesComponent
   ],
   imports: [
   BrowserAnimationsModule,
@@ -157,7 +167,8 @@ import { EditParkingPaymentComponent } from './edit-parking-payment/edit-parking
   MatListModule,
   MatDialogModule,
   MatProgressBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatStepperModule
   ],
   providers: [NbSidebarService, NbMenuService],
   bootstrap: [AppComponent],

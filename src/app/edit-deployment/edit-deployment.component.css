@@ -1,0 +1,23 @@
+.error
+{
+	color: red;
+}
+
+.form-style
+{
+    margin: 5px;
+    padding: 5px;
+}
+
+.bg-white
+{
+	background-color: rgba(0,0,0,0);
+}
+
+.btn-space {
+    margin: 15px 12px;
+}
+
+.submit-btn {
+    margin-left: 15px;
+}

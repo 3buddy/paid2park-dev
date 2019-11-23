@@ -4,11 +4,11 @@ import { DeploymentService } from '../deployment.service';
 import { Router , ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-add-app-rates',
-  templateUrl: './add-app-rates.component.html',
-  styleUrls: ['./add-app-rates.component.css']
+  selector: 'app-edit-app-rates',
+  templateUrl: './edit-app-rates.component.html',
+  styleUrls: ['./edit-app-rates.component.css']
 })
-export class AddAppRatesComponent implements OnInit {
+export class EditAppRatesComponent implements OnInit {
 
   addDeploymentAppRate: FormGroup;
   submitted = false;
@@ -16,6 +16,7 @@ export class AddAppRatesComponent implements OnInit {
   showMessage: boolean;
   messageClass: string;
   messageText: string;
+  isPageLoadded: boolean;
 
   constructor(
       private fb: FormBuilder,
@@ -26,12 +27,25 @@ export class AddAppRatesComponent implements OnInit {
 
 
   ngOnInit() {
+        this.getDeploymentAppRateDetails();
+  }
 
-        this.addDeploymentAppRate = this.fb.group({
-          deployment_id: [this.ar.snapshot.params['deploymentId'], Validators.required],
-          deployment_app_rate_rate: ['', Validators.required],
-          deployment_app_rate_minutes: ['', Validators.required]
-      });
+  getDeploymentAppRateDetails() {
+
+     this.services.getDeploymentAppRateDetails(this.ar.snapshot.params['Id'])
+     .subscribe( (response) => {
+           if ( response['status'] === 1) {
+            this.addDeploymentAppRate = this.fb.group({
+              deployment_app_rate_id: [response['body']['deployment_app_rate_id'] , Validators.required],
+              deployment_id: [response['body']['deployment_id'] , Validators.required],
+              deployment_app_rate_rate: [response['body']['deployment_app_rate_rate'] , Validators.required],
+              deployment_app_rate_minutes: [response['body']['deployment_app_rate_minutes'] , Validators.required]
+          });
+          this.isPageLoadded = true;
+          this.cdRef.detectChanges();
+           }
+     });
+
   }
 
 
@@ -42,7 +56,7 @@ export class AddAppRatesComponent implements OnInit {
 
     onSubmit(form: FormGroup) {
      this.submitted = true;
-     this.services.addDeploymentAppRate(form.value)
+     this.services.updateDeploymentAppRate(form.value)
     .subscribe( response => {
 
         if(response['status'] === 1) {

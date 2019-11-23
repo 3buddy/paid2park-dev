@@ -14,6 +14,10 @@ import { AddDeploymentComponent } from './add-deployment/add-deployment.componen
 import { AddAppRatesComponent } from './add-app-rates/add-app-rates.component';
 import { AddPassRatesComponent } from './add-pass-rates/add-pass-rates.component';
 import { EditDeploymentComponent } from './edit-deployment/edit-deployment.component';
+import { DeploymentAppRatesComponent } from './deployment-app-rates/deployment-app-rates.component';
+import { DeploymentPassRatesComponent } from './deployment-pass-rates/deployment-pass-rates.component';
+import { EditPassRatesComponent } from './edit-pass-rates/edit-pass-rates.component';
+import { EditAppRatesComponent } from './edit-app-rates/edit-app-rates.component';
 
 import { SecurityclaimsComponent } from './securityclaims/securityclaims.component';
 import { AddSecurityClaimsComponent } from './add-security-claims/add-security-claims.component';
@@ -152,13 +156,33 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 },
 {
-    path: 'deployments/add-app-rate',
+    path: 'deployments/:deploymentId/app-rate',
+    component: DeploymentAppRatesComponent,
+    canActivate: [AuthGuard]
+},
+{
+    path: 'deployments/:deploymentId/pass-rate',
+    component: DeploymentPassRatesComponent,
+    canActivate: [AuthGuard]
+},
+{
+    path: 'deployments/:deploymentId/add-app-rate',
     component: AddAppRatesComponent,
     canActivate: [AuthGuard]
 },
 {
-    path: 'deployments/add-pass-rate',
+    path: 'deployments/:deploymentId/add-pass-rate',
     component: AddPassRatesComponent,
+    canActivate: [AuthGuard]
+},
+{
+   path: 'deployments/:Id/edit-pass-rate/:deploymentId',
+   component: EditPassRatesComponent,
+   canActivate: [AuthGuard]
+},
+{
+    path: 'deployments/:Id/edit-app-rate/:deploymentId',
+    component: EditAppRatesComponent,
     canActivate: [AuthGuard]
 },
 {

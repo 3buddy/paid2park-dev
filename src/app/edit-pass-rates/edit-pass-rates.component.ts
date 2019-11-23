@@ -4,11 +4,11 @@ import { DeploymentService } from '../deployment.service';
 import { Router , ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-add-pass-rates',
-  templateUrl: './add-pass-rates.component.html',
-  styleUrls: ['./add-pass-rates.component.css']
+  selector: 'app-edit-pass-rates',
+  templateUrl: './edit-pass-rates.component.html',
+  styleUrls: ['./edit-pass-rates.component.css']
 })
-export class AddPassRatesComponent implements OnInit {
+export class EditPassRatesComponent implements OnInit {
 
   addDeploymentPassRate: FormGroup;
   submitted = false;
@@ -16,6 +16,7 @@ export class AddPassRatesComponent implements OnInit {
   showMessage: boolean;
   messageClass: string;
   messageText: string;
+  isPageLoadded: boolean;
 
   constructor(
       private fb: FormBuilder,
@@ -26,13 +27,25 @@ export class AddPassRatesComponent implements OnInit {
 
 
   ngOnInit() {
+      this.getDeploymentPassRateDetails();
+  }
 
-        this.addDeploymentPassRate = this.fb.group({
-          deployment_id: [this.ar.snapshot.params['deploymentId'], Validators.required],
-          deployment_pass_rate_name: ['', Validators.required],
-          deployment_pass_rate_day: ['', Validators.required],
-          deployment_pass_rate_cost: ['', Validators.required]
-      });
+  getDeploymentPassRateDetails() {
+    this.services.getDeploymentPassRateDetails(this.ar.snapshot.params['Id'])
+    .subscribe( (response) => {
+
+      if ( response['status'] === 1 ) {
+            this.addDeploymentPassRate = this.fb.group({
+              deployment_pass_rate_id: [ response['body']['deployment_pass_rate_id'], Validators.required],
+              deployment_id: [ response['body']['deployment_id'], Validators.required],
+              deployment_pass_rate_name: [ response['body']['deployment_pass_rate_name'] , Validators.required],
+              deployment_pass_rate_day: [ response['body']['deployment_pass_rate_day'], Validators.required],
+              deployment_pass_rate_cost: [ response['body']['deployment_pass_rate_cost'], Validators.required]
+          });
+          this.isPageLoadded = true;
+          this.cdRef.detectChanges();
+      }
+   });
   }
 
 
@@ -43,10 +56,10 @@ export class AddPassRatesComponent implements OnInit {
 
     onSubmit(form: FormGroup) {
      this.submitted = true;
-     this.services.addDeploymentPassRate(form.value)
+     this.services.updateDeploymentPassRate(form.value)
     .subscribe( response => {
 
-        if(response['status'] === 1) {
+        if (response['status'] === 1) {
           this.showMessage = true;
           this.messageText = response['message'];
           this.messageClass = 'success';

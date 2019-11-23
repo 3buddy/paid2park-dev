@@ -5,14 +5,618 @@ const moment = require("moment");
 const underScore = require("underscore");
 
 
+// Deployment
 exports.addDeployment           =  addDeployment;
 exports.getDeployment           =  getDeployment;
 exports.getDeploymentDetails    =  getDeploymentDetails;
 exports.deleteDeployment        =  deleteDeployment;
 exports.updateDeployment        =  updateDeployment;
 
+// App Rate 
+exports.addDeploymentAppRate           =  addDeploymentAppRate;
+exports.getDeploymentAppRate           =  getDeploymentAppRate;
+exports.getDeploymentAppRateDetails    =  getDeploymentAppRateDetails;
+exports.deleteDeploymentAppRate        =  deleteDeploymentAppRate;
+exports.updateDeploymentAppRate        =  updateDeploymentAppRate;
+
+
+
+// Pass Rate
+exports.addDeploymentPassRate           =  addDeploymentPassRate;
+exports.getDeploymentPassRate           =  getDeploymentPassRate;
+exports.getDeploymentPassRateDetails    =  getDeploymentPassRateDetails;
+exports.deleteDeploymentPassRate        =  deleteDeploymentPassRate;
+exports.updateDeploymentPassRate        =  updateDeploymentPassRate;
+
+
+function addDeploymentAppRate(req,res,cb) {
+    let response = { status: 0, body: {}, message: ""  }  
+    const { deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes } = req.body;    
+
+    const addDeploymentAppRate = new Promise( (resolve,reject) => {
+         async.waterfall([add],(error,result) => {
+             if (error) reject(error)
+             else resolve(result)
+         })
+    })
+    .then( (data) => {
+        if(data.insertId)
+	    {
+                response.status =  1;
+			    response.message = "Deployment App Rate Has Been Created Successfully !";
+        }
+        else 
+        {
+            response.message = data;
+        }
+			  
+		res.json(response)
+    })
+    .catch((error) => {
+         console.log(error);
+        response.message = "Not Able To Create The Deployment App Rate : Error " + error;	
+        res.json(response)
+    });
+        
+   
+   function add(cb) {
+            con.query(`
+            INSERT INTO deployment_app_rate ( deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes)
+            VALUES (?,?,?)
+            `,[deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes],(error,InsertData) => {
+                if (error) cb(error)
+                else {
+                    cb(null,InsertData);
+                }
+            })
+
+   }
+}
+
+function getDeploymentAppRate(req,res,cb) {
+    let response = { status: 0, body: {}, message: ""  }  
+    const { deployment_id } = req.params;  
+    
+    const  getDeploymentAppRate  = new Promise( (resolve,reject) => {
+        async.waterfall([get],(error,result) => {
+            if (error) reject(error)
+            else resolve(result)
+                    });
+            })
+            .then( (data) => {
+                if(data.length > 0)
+                {
+                response.status = typeof data == 'object' ? 1 : 0;
+                response.body = data;
+                }
+                else
+                {
+                response.message = "Sorry Deployment App Rate List Not Found";
+                }
+                res.json(response)
+            })
+            .catch( (error) => {
+                response.message = "Not Able To Get The Deployment App Rate List : Error " + error;	
+                res.json(response)
+            })
+
+
+            function get(cb) {
+                con.query(
+                    `SELECT * FROM deployment_app_rate WHERE deployment_id=?`,[deployment_id],
+                    (error,result) => {
+                            if (error) cb(error)
+                            else {
+                                cb(null,result);
+                            }
+                        })
+            }
+}
+
+function getDeploymentAppRateDetails(req,res,cb) {
+
+    const { deployment_app_rate_id } = req.params;
+    let response = {
+        status: 0,
+        body: {},
+        message: ""  
+        }  
+
+     const getDeploymentAppRateDetails = new Promise( (resolve,result) => {
+           async.waterfall([getDetails],(error,result) => {
+                 if (error) reject(error);
+                 else resolve(result);
+           }); 
+     })
+     .then((data) => {
+        if(data.length > 0)
+        {
+          response.status = typeof data == 'object' ? 1 : 0;
+          response.body = data[0];
+        }
+        else
+        {
+          response.message = "Sorry Deployment App Rate  Not Found";
+        }
+        res.json(response)
+     })
+     .catch( (error) => {
+        response.message = "Not Able To Get The Deployment App Rate : Error " + error;	
+        res.json(response)
+     })
+
+     function getDetails(cb) {
+        con.query(
+            `SELECT * FROM deployment_app_rate WHERE deployment_app_rate_id = ?`,
+            [deployment_app_rate_id],
+             (error,result) => {
+                   if (error) cb(error)
+                   else {
+                       cb(null,result);
+                   }
+                })
+     }
+}
+
+function deleteDeploymentAppRate(req,res,cb) {
+
+    const { deployment_app_rate_id } = req.params;
+    let response = {
+        status: 0,
+        body: {},
+        message: ""  
+        }  
+     const deleteDeploymentAppRate = new Promise((resolve, reject) => {
+
+        async.waterfall([
+            get,
+            remove
+        ], (error, result) => {
+            if (error) reject(error)
+            else resolve(result)
+        })
+
+    
+      })
+        .then((data) => {
+        //console.log(data)
+        response.status = typeof data == 'object' ? 1 : 0;
+        if(data.affectedRows > 0)
+        {
+            response.message = "Deployment App Rate Has Been Deleted Successfully !";
+        }
+        else
+        {
+            response.message = data;
+        }
+        res.json(response)
+        })
+        .catch((error) => {
+            response.message = "Not Able To Delete The Deployment App Rate : Error " + error;	
+            res.json(response)
+        })
+
+
+            function get(cb)
+            {
+                con.query(`
+                SELECT * FROM  deployment_app_rate WHERE deployment_app_rate_id  = ?
+                `, [deployment_app_rate_id], (err, result) => {
+                    if (err) cb(err)
+                    else {
+                        cb(null,result);
+                    }
+                })
+            }
+    
+        function remove(result,cb)
+        {
+            if(result.length > 0)
+            {
+                con.query(`
+                DELETE FROM deployment_app_rate WHERE deployment_app_rate_id  = ?
+                `, [deployment_app_rate_id], (err, result) => {
+                    if (err) cb(err)
+                    else {
+                        cb(null,result);
+                    }
+                })
+            }
+            else
+            {
+                
+                cb(null,"Sorry Not A Valid Deployment App Rate Id .");
+            }
+        }
+}
+
+function updateDeploymentAppRate(req,res,cb) {
+
+    let response = { status: 0, body: {},message: ""  };
+    let { deployment_app_rate_id,deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes } = req.body;        
+        
+    const updateDeploymentAppRate = new Promise( (resolve,reject) => {
+        async.waterfall( [check,updateData], (error,result) => {
+            if (error) reject(error)
+            else resolve(result)
+        });
+    })
+    .then( (data) => {
+        response.status = typeof data == 'object' ? 1 : 0;
+        if(data.affectedRows > 0)
+        {
+          response.message = "Deployment App Rates Has Been Updated Successfully !";
+        }
+        else
+        {
+            response.message = data;
+        }
+         res.json(response)
+    })
+    .catch( (error) => {
+        response.message = "Not Able To update The Deployment App Rates: Error " + error;	
+        res.json(response)
+    });
+
+    function check(cb) {
+        con.query(`
+        SELECT * FROM deployment_app_rate WHERE deployment_app_rate_id = ?
+      `, [deployment_app_rate_id], (err, result) => {
+            if (err) cb(err)
+            else {
+                cb(null,result);
+            }
+          })
+    }
+
+    function updateData(result,cb) {
+
+        if ( result.length > 0 ) {
+
+            if(!!deployment_id) {
+                deployment_id = deployment_id;
+            } else {
+                deployment_id = result[0].deployment_id;
+            }
+
+            if(!!deployment_app_rate_rate)  {
+                deployment_app_rate_rate = deployment_app_rate_rate;
+            } else {
+                deployment_app_rate_rate = result[0].deployment_app_rate_rate;
+            }
+
+            if(!!deployment_app_rate_minutes) {
+                deployment_app_rate_minutes = deployment_app_rate_minutes;
+            } else {
+                deployment_app_rate_minutes = result[0].deployment_app_rate_minutes;
+            }
+
+            con.query(`
+            Update deployment_app_rate SET deployment_id = ?, deployment_app_rate_rate =?, 
+            deployment_app_rate_minutes = ? WHERE deployment_app_rate_id = ?
+            `,[deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes,deployment_app_rate_id], 
+            (err, result) => {
+                  // console.log(err);
+                if (err) cb(err)
+                else {
+                    cb(null,result);
+                }
+              })
+
+
+
+        } else {
+            cb(null," Sorry Not A Valid Deployment App Rate Id . "); 
+        }
+
+
+    }
+
+}
+
+
+function addDeploymentPassRate(req,res,cb) {
+
+    let response = { status: 0, body: {}, message: ""  }  
+    const { deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost } = req.body;    
+
+    const addDeploymentPassRate = new Promise( (resolve,reject) => {
+         async.waterfall([add],(error,result) => {
+             if (error) reject(error)
+             else resolve(result)
+         })
+    })
+    .then( (data) => {
+        if(data.insertId)
+	    {
+                response.status =  1;
+			    response.message = "Deployment Pass Rate Has Been Created Successfully !";
+        }
+        else 
+        {
+            response.message = data;
+        }
+			  
+		res.json(response)
+    })
+    .catch((error) => {
+         console.log(error);
+        response.message = "Not Able To Create The Deployment Pass Rate : Error " + error;	
+        res.json(response)
+    });
+        
+   
+   function add(cb) {
+            con.query(`
+            INSERT INTO deployment_pass_rate ( deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost )
+            VALUES (?,?,?,?)
+            `,[deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost],(error,InsertData) => {
+                if (error) cb(error)
+                else {
+                    cb(null,InsertData);
+                }
+            })
+
+   }
+
+}
+
+function getDeploymentPassRate(req,res,cb) {
+
+    let response = { status: 0, body: {}, message: ""  }  
+    const { deployment_id } = req.params;  
+    
+    const  getDeploymentPassRate  = new Promise( (resolve,reject) => {
+        async.waterfall([get],(error,result) => {
+            if (error) reject(error)
+            else resolve(result)
+                    });
+            })
+            .then( (data) => {
+                if(data.length > 0)
+                {
+                response.status = typeof data == 'object' ? 1 : 0;
+                response.body = data;
+                }
+                else
+                {
+                response.message = "Sorry Deployment Pass Rate List Not Found";
+                }
+                res.json(response)
+            })
+            .catch( (error) => {
+                response.message = "Not Able To Get The Deployment Pass Rate List : Error " + error;	
+                res.json(response)
+            })
+
+
+            function get(cb) {
+                con.query(
+                    `SELECT * FROM deployment_pass_rate WHERE deployment_id=?`,[deployment_id],
+                    (error,result) => {
+                            if (error) cb(error)
+                            else {
+                                cb(null,result);
+                            }
+                        })
+            }
+
+}
+
+function getDeploymentPassRateDetails(req,res,cb) {
+
+    const { deployment_pass_rate_id } = req.params;
+    let response = {
+        status: 0,
+        body: {},
+        message: ""  
+        }  
+
+     const getDeploymentPassRateDetails = new Promise( (resolve,result) => {
+           async.waterfall([getDetails],(error,result) => {
+                 if (error) reject(error);
+                 else resolve(result);
+           }); 
+     })
+     .then((data) => {
+        if(data.length > 0)
+        {
+          response.status = typeof data == 'object' ? 1 : 0;
+          response.body = data[0];
+        }
+        else
+        {
+          response.message = "Sorry Deployment Pass Rate  Not Found";
+        }
+        res.json(response)
+     })
+     .catch( (error) => {
+        response.message = "Not Able To Get The Deployment Pass Rate : Error " + error;	
+        res.json(response)
+     })
+
+     function getDetails(cb) {
+        con.query(
+            `SELECT * FROM deployment_pass_rate WHERE deployment_pass_rate_id = ?`,
+            [deployment_pass_rate_id],
+             (error,result) => {
+                   if (error) cb(error)
+                   else {
+                       cb(null,result);
+                   }
+                })
+     }
+
+}
+
+function deleteDeploymentPassRate(req,res,cb) {
+
+    const { deployment_pass_rate_id } = req.params;
+    let response = {
+        status: 0,
+        body: {},
+        message: ""  
+        }  
+     const deleteDeploymentPassRate = new Promise((resolve, reject) => {
+
+        async.waterfall([
+            get,
+            remove
+        ], (error, result) => {
+            if (error) reject(error)
+            else resolve(result)
+        })
+
+    
+      })
+        .then((data) => {
+        //console.log(data)
+        response.status = typeof data == 'object' ? 1 : 0;
+        if(data.affectedRows > 0)
+        {
+            response.message = "Deployment Pass Rate Has Been Deleted Successfully !";
+        }
+        else
+        {
+            response.message = data;
+        }
+        res.json(response)
+        })
+        .catch((error) => {
+            response.message = "Not Able To Delete The Deployment Pass Rate : Error " + error;	
+            res.json(response)
+        })
+
+
+            function get(cb)
+            {
+                con.query(`
+                SELECT * FROM  deployment_pass_rate WHERE deployment_pass_rate_id  = ?
+                `, [deployment_pass_rate_id], (err, result) => {
+                    if (err) cb(err)
+                    else {
+                        cb(null,result);
+                    }
+                })
+            }
+    
+        function remove(result,cb)
+        {
+            if(result.length > 0)
+            {
+                con.query(`
+                DELETE FROM deployment_pass_rate WHERE deployment_pass_rate_id  = ?
+                `, [deployment_pass_rate_id], (err, result) => {
+                    if (err) cb(err)
+                    else {
+                        cb(null,result);
+                    }
+                })
+            }
+            else
+            {
+                
+                cb(null,"Sorry Not A Valid Deployment Pass Rate Id .");
+            }
+        }
+
+}
+
+function updateDeploymentPassRate(req,res,cb) {
+
+    let response = { status: 0, body: {},message: ""  };
+    let { deployment_pass_rate_id,deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost } = req.body;        
+        
+    const updateDeploymentPassRate = new Promise( (resolve,reject) => {
+        async.waterfall( [check,updateData], (error,result) => {
+            if (error) reject(error)
+            else resolve(result)
+        });
+    })
+    .then( (data) => {
+        response.status = typeof data == 'object' ? 1 : 0;
+        if(data.affectedRows > 0)
+        {
+          response.message = "Deployment Pass Rates Has Been Updated Successfully !";
+        }
+        else
+        {
+            response.message = data;
+        }
+         res.json(response)
+    })
+    .catch( (error) => {
+        response.message = "Not Able To update The Deployment Pass Rates: Error " + error;	
+        res.json(response)
+    });
+
+    function check(cb) {
+        con.query(`
+        SELECT * FROM deployment_pass_rate WHERE deployment_pass_rate_id = ?
+      `, [deployment_pass_rate_id], (err, result) => {
+            if (err) cb(err)
+            else {
+                cb(null,result);
+            }
+          })
+    }
+
+    function updateData(result,cb) {
+
+        if ( result.length > 0 ) {
+
+            if(!!deployment_id) {
+                deployment_id = deployment_id;
+            } else {
+                deployment_id = result[0].deployment_id;
+            }
+
+            if(!!deployment_pass_rate_name)  {
+                deployment_pass_rate_name = deployment_pass_rate_name;
+            } else {
+                deployment_pass_rate_name = result[0].deployment_pass_rate_name;
+            }
+
+            if(!!deployment_pass_rate_day) {
+                deployment_pass_rate_day = deployment_pass_rate_day;
+            } else {
+                deployment_pass_rate_day = result[0].deployment_pass_rate_day;
+            }
+
+            if(!!deployment_pass_rate_cost) {
+                deployment_pass_rate_cost = deployment_pass_rate_cost;
+            } else {
+                deployment_pass_rate_cost = result[0].deployment_pass_rate_cost;
+            }
+
+            con.query(`
+            Update deployment_pass_rate SET deployment_id = ?, deployment_pass_rate_name =?, 
+            deployment_pass_rate_day = ? , deployment_pass_rate_cost = ? WHERE deployment_pass_rate_id = ?
+            `,[deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost,deployment_pass_rate_id], 
+            (err, result) => {
+                  // console.log(err);
+                if (err) cb(err)
+                else {
+                    cb(null,result);
+                }
+              })
+
+
+
+        } else {
+            cb(null," Sorry Not A Valid Deployment Pass Rate Id . "); 
+        }
+
+
+    }
+
+}
+
+
 function addDeployment(req,res,cb) {
 
+    // res.send('Done');
+    
     let response = {
         status: 0,
         body: {},
@@ -31,13 +635,20 @@ function addDeployment(req,res,cb) {
             deployment_billing_email,
             deployment_min_minutes_to_park,
             deployment_parking_charge_times,
-            deployment_monday_start_and_end,
-            deployment_tuesday_start_and_end,
-            deployment_wednesday_start_and_end,
-            deployment_thursday_start_and_end,
-            deployment_friday_start_and_end,
-            deployment_saturday_start_and_end,
-            deployment_sunday_start_and_end,
+            deployment_monday_start,
+            deployment_monday_end,
+            deployment_tuesday_start,
+            deployment_tuesday_end,
+            deployment_wednesday_start,
+            deployment_wednesday_end,
+            deployment_thursday_start,
+            deployment_thursday_end,
+            deployment_friday_start,
+            deployment_friday_end,
+            deployment_saturday_start,
+            deployment_saturday_end,
+            deployment_sunday_start,
+            deployment_sunday_end,
             deployment_parking_percentage,
             deployment_tickets_percentage,
             deployment_ticket_transaction_charges,
@@ -60,7 +671,6 @@ function addDeployment(req,res,cb) {
             deployment_kiosks_price_per_hour
           } = req.body;    
 
-
     const addDeployment = new Promise( (resolve,reject) => {
          async.waterfall([check , add],(error,result) => {
              if (error) reject(error)
@@ -73,23 +683,27 @@ function addDeployment(req,res,cb) {
 	    {
                 response.status =  1;
 			    response.message = "Deployment Has Been Created Successfully !";
-		}
+        }
+        else 
+        {
+            response.message = data;
+        }
 			  
 		res.json(response)
     })
     .catch((error) => {
-        // console.log(error);
+         console.log(error);
         response.message = "Not Able To Create The Deployment : Error " + error;	
         res.json(response)
     });
         
-   function check() {
+   function check(cb) {
 
      con.query(
          `SELECT * FROM deployment WHERE deployment_billing_email =?`,
           [deployment_billing_email],
           (error,result) => {
-                if (err) cb(err)
+                if (error) cb(error)
                 else {
                     cb(null,result);
                 }
@@ -99,9 +713,7 @@ function addDeployment(req,res,cb) {
 
    function add(result,cb) {
        if(result.length > 0) {
-        response.status = 0;
-        response.message = "Deployment Already Exists . Please Check Email Address Fields . ";
-        cb(null,response);
+        cb(null,"Deployment Already Exists . Please Check Email Address Fields . ");
        } else {
             con.query(`
             INSERT INTO deployment (
@@ -116,13 +728,20 @@ function addDeployment(req,res,cb) {
                 deployment_billing_email,
                 deployment_min_minutes_to_park,
                 deployment_parking_charge_times,
-                deployment_monday_start_and_end,
-                deployment_tuesday_start_and_end,
-                deployment_wednesday_start_and_end,
-                deployment_thursday_start_and_end,
-                deployment_friday_start_and_end,
-                deployment_saturday_start_and_end,
-                deployment_sunday_start_and_end,
+                deployment_monday_start,
+                deployment_monday_end,
+                deployment_tuesday_start,
+                deployment_tuesday_end,
+                deployment_wednesday_start,
+                deployment_wednesday_end,
+                deployment_thursday_start,
+                deployment_thursday_end,
+                deployment_friday_start,
+                deployment_friday_end,
+                deployment_saturday_start,
+                deployment_saturday_end,
+                deployment_sunday_start,
+                deployment_sunday_end,
                 deployment_parking_percentage,
                 deployment_tickets_percentage,
                 deployment_ticket_transaction_charges,
@@ -144,8 +763,10 @@ function addDeployment(req,res,cb) {
                 deployment_ticket_draft_note,
                 deployment_kiosks_price_per_hour
             )
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-            `,[deployment_assign_id,
+            VALUES (
+                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            `,[
+                deployment_assign_id,
                 deployment_name,
                 deployment_billing_address,
                 deployment_billing_city,
@@ -156,13 +777,20 @@ function addDeployment(req,res,cb) {
                 deployment_billing_email,
                 deployment_min_minutes_to_park,
                 deployment_parking_charge_times,
-                deployment_monday_start_and_end,
-                deployment_tuesday_start_and_end,
-                deployment_wednesday_start_and_end,
-                deployment_thursday_start_and_end,
-                deployment_friday_start_and_end,
-                deployment_saturday_start_and_end,
-                deployment_sunday_start_and_end,
+                deployment_monday_start,
+                deployment_monday_end,
+                deployment_tuesday_start,
+                deployment_tuesday_end,
+                deployment_wednesday_start,
+                deployment_wednesday_end,
+                deployment_thursday_start,
+                deployment_thursday_end,
+                deployment_friday_start,
+                deployment_friday_end,
+                deployment_saturday_start,
+                deployment_saturday_end,
+                deployment_sunday_start,
+                deployment_sunday_end,
                 deployment_parking_percentage,
                 deployment_tickets_percentage,
                 deployment_ticket_transaction_charges,
@@ -183,14 +811,15 @@ function addDeployment(req,res,cb) {
                 deployment_ticket_draft_bank_name,
                 deployment_ticket_draft_note,
                 deployment_kiosks_price_per_hour],(error,InsertData) => {
-                if (err) cb(err)
+                if (error) cb(error)
                 else {
-                    cb(null,result);
+                    cb(null,InsertData);
                 }
             })
        }
 
    }
+
 
 }
 
@@ -230,7 +859,7 @@ function getDeployment(req,res,cb) {
         con.query(
             `SELECT * FROM deployment`,
              (error,result) => {
-                   if (err) cb(err)
+                   if (error) cb(error)
                    else {
                        cb(null,result);
                    }
@@ -276,7 +905,7 @@ function getDeploymentDetails(req,res,cb) {
             `SELECT * FROM deployment WHERE deployment_id = ?`,
             [deployment_id],
              (error,result) => {
-                   if (err) cb(err)
+                   if (error) cb(error)
                    else {
                        cb(null,result);
                    }
@@ -291,7 +920,7 @@ function updateDeployment(req,res,cb) {
         body: {},
         message: ""  
         }  
-        const {
+        let {
             deployment_id,
             deployment_assign_id,
             deployment_name,
@@ -304,13 +933,20 @@ function updateDeployment(req,res,cb) {
             deployment_billing_email,
             deployment_min_minutes_to_park,
             deployment_parking_charge_times,
-            deployment_monday_start_and_end,
-            deployment_tuesday_start_and_end,
-            deployment_wednesday_start_and_end,
-            deployment_thursday_start_and_end,
-            deployment_friday_start_and_end,
-            deployment_saturday_start_and_end,
-            deployment_sunday_start_and_end,
+            deployment_monday_start,
+            deployment_monday_end,
+            deployment_tuesday_start,
+            deployment_tuesday_end,
+            deployment_wednesday_start,
+            deployment_wednesday_end,
+            deployment_thursday_start,
+            deployment_thursday_end,
+            deployment_friday_start,
+            deployment_friday_end,
+            deployment_saturday_start,
+            deployment_saturday_end,
+            deployment_sunday_start,
+            deployment_sunday_end,
             deployment_parking_percentage,
             deployment_tickets_percentage,
             deployment_ticket_transaction_charges,
@@ -473,69 +1109,131 @@ function updateDeployment(req,res,cb) {
             }
 
 
-             if(!!deployment_monday_start_and_end)
+             if(!!deployment_monday_start)
             {
-                deployment_monday_start_and_end = deployment_monday_start_and_end;
+                deployment_monday_start = deployment_monday_start;
             }
             else
             {
-                deployment_monday_start_and_end = result[0].deployment_monday_start_and_end;
+                deployment_monday_start = result[0].deployment_monday_start;
             }
 
-            if(!!deployment_tuesday_start_and_end)
+            if(!!deployment_monday_end)
             {
-                deployment_tuesday_start_and_end = deployment_tuesday_start_and_end;
+                deployment_monday_end = deployment_monday_end;
             }
             else
             {
-                deployment_tuesday_start_and_end = result[0].deployment_tuesday_start_and_end;
+                deployment_monday_end = result[0].deployment_monday_end;
             }
 
-
-            if(!!deployment_wednesday_start_and_end)
+            if(!!deployment_tuesday_start)
             {
-                deployment_wednesday_start_and_end = deployment_wednesday_start_and_end;
+                deployment_tuesday_start = deployment_tuesday_start;
             }
             else
             {
-                deployment_wednesday_start_and_end = result[0].deployment_wednesday_start_and_end;
+                deployment_tuesday_start = result[0].deployment_tuesday_start;
             }
 
-            if(!!deployment_thursday_start_and_end)
+            if(!!deployment_tuesday_end)
             {
-                deployment_thursday_start_and_end = deployment_thursday_start_and_end;
+                deployment_tuesday_end = deployment_tuesday_end;
             }
             else
             {
-                deployment_thursday_start_and_end = result[0].deployment_thursday_start_and_end;
+                deployment_tuesday_end = result[0].deployment_tuesday_end;
             }
 
-            if(!!deployment_friday_start_and_end)
+            if(!!deployment_wednesday_start)
             {
-                deployment_friday_start_and_end = deployment_friday_start_and_end;
+                deployment_wednesday_start = deployment_wednesday_start;
             }
             else
             {
-                deployment_friday_start_and_end = result[0].deployment_friday_start_and_end;
+                deployment_wednesday_start = result[0].deployment_wednesday_start;
             }
 
-            if(!!deployment_saturday_start_and_end)
+            if(!!deployment_wednesday_end)
             {
-                deployment_saturday_start_and_end = deployment_saturday_start_and_end;
+                deployment_wednesday_end = deployment_wednesday_end;
             }
             else
             {
-                deployment_saturday_start_and_end = result[0].deployment_saturday_start_and_end;
+                deployment_wednesday_end = result[0].deployment_wednesday_end;
             }
 
-
-            if(!!deployment_sunday_start_and_end)
+            if(!!deployment_thursday_start)
             {
-                deployment_sunday_start_and_end = deployment_sunday_start_and_end;
+                deployment_thursday_start = deployment_thursday_start;
             }
             else
             {
-                deployment_sunday_start_and_end = result[0].deployment_sunday_start_and_end;
+                deployment_thursday_start = result[0].deployment_thursday_start;
+            }
+
+            if(!!deployment_thursday_end)
+            {
+                deployment_thursday_end = deployment_thursday_end;
+            }
+            else
+            {
+                deployment_thursday_end = result[0].deployment_thursday_end;
+            }
+
+            if(!!deployment_friday_start)
+            {
+                deployment_friday_start = deployment_friday_start;
+            }
+            else
+            {
+                deployment_friday_start = result[0].deployment_friday_start;
+            }
+
+            if(!!deployment_friday_end)
+            {
+                deployment_friday_end = deployment_friday_end;
+            }
+            else
+            {
+                deployment_friday_end = result[0].deployment_friday_end;
+            }
+
+            if(!!deployment_saturday_start)
+            {
+                deployment_saturday_start = deployment_saturday_start;
+            }
+            else
+            {
+                deployment_saturday_start = result[0].deployment_saturday_start;
+            }
+
+            if(!!deployment_saturday_end)
+            {
+                deployment_saturday_end = deployment_saturday_end;
+            }
+            else
+            {
+                deployment_saturday_end = result[0].deployment_saturday_end;
+            }
+
+
+            if(!!deployment_sunday_start)
+            {
+                deployment_sunday_start = deployment_sunday_start;
+            }
+            else
+            {
+                deployment_sunday_start = result[0].deployment_sunday_start;
+            }
+
+            if(!!deployment_sunday_end)
+            {
+                deployment_sunday_end = deployment_sunday_end;
+            }
+            else
+            {
+                deployment_sunday_end = result[0].deployment_sunday_end;
             }
 
 
@@ -722,44 +1420,51 @@ function updateDeployment(req,res,cb) {
 
             con.query(`
             Update deployment SET
-            deployment_assign_id,
-            deployment_name,
-            deployment_billing_address,
-            deployment_billing_city,
-            deployment_billing_state,
-            deployment_billing_zip,
-            deployment_billing_phone_contact,
-            deployment_billing_phone,
-            deployment_billing_email,
-            deployment_min_minutes_to_park,
-            deployment_parking_charge_times,
-            deployment_monday_start_and_end,
-            deployment_tuesday_start_and_end,
-            deployment_wednesday_start_and_end,
-            deployment_thursday_start_and_end,
-            deployment_friday_start_and_end,
-            deployment_saturday_start_and_end,
-            deployment_sunday_start_and_end,
-            deployment_parking_percentage,
-            deployment_tickets_percentage,
-            deployment_ticket_transaction_charges,
-            deployment_monthly_service_charge_parking,
-            deployment_monthly_service_charge_enforcement,
-            deployment_bill_day_of_month,
-            deployment_min_monthly_bill,
-            deployment_parking_revenue,
-            deployment_parking_draft_day_of_month,
-            deployment_parking_draft_routing,
-            deployment_parking_draft_account,
-            deployment_parking_draft_bank_name,
-            deployment_parking_draft_note,
-            deployment_ticket_revenue,
-            deployment_ticket_draft_day_of_month,
-            deployment_ticket_draft_routing,
-            deployment_ticket_draft_account,
-            deployment_ticket_draft_bank_name,
-            deployment_ticket_draft_note,
-            deployment_kiosks_price_per_hour  WHERE deployment_id = ?
+            deployment_assign_id = ?,
+            deployment_name =?,
+            deployment_billing_address = ?,
+            deployment_billing_city =?,
+            deployment_billing_state =?,
+            deployment_billing_zip=?,
+            deployment_billing_phone_contact=?,
+            deployment_billing_phone=?,
+            deployment_billing_email=?,
+            deployment_min_minutes_to_park=?,
+            deployment_parking_charge_times=?,
+            deployment_monday_start=?,
+            deployment_monday_end=?,
+            deployment_tuesday_start=?,
+            deployment_tuesday_end=?,
+            deployment_wednesday_start=?,
+            deployment_wednesday_end=?,
+            deployment_thursday_start=?,
+            deployment_thursday_end=?,
+            deployment_friday_start=?,
+            deployment_friday_end=?,
+            deployment_saturday_start=?,
+            deployment_saturday_end=?,
+            deployment_sunday_start=?,
+            deployment_sunday_end=?,
+            deployment_parking_percentage=?,
+            deployment_tickets_percentage=?,
+            deployment_ticket_transaction_charges=?,
+            deployment_monthly_service_charge_parking=?,
+            deployment_monthly_service_charge_enforcement=?,
+            deployment_bill_day_of_month=?,
+            deployment_min_monthly_bill=?,
+            deployment_parking_revenue=?,
+            deployment_parking_draft_day_of_month=?,
+            deployment_parking_draft_routing=?,
+            deployment_parking_draft_account=?,
+            deployment_parking_draft_bank_name=?,
+            deployment_parking_draft_note=?,
+            deployment_ticket_revenue=?,
+            deployment_ticket_draft_day_of_month=?,
+            deployment_ticket_draft_routing=?,
+            deployment_ticket_draft_account=?,
+            deployment_ticket_draft_bank_name=?,
+            deployment_ticket_draft_note=?,
+            deployment_kiosks_price_per_hour=?  WHERE deployment_id = ?
             `, [
                 deployment_assign_id,
                 deployment_name,
@@ -772,13 +1477,20 @@ function updateDeployment(req,res,cb) {
                 deployment_billing_email,
                 deployment_min_minutes_to_park,
                 deployment_parking_charge_times,
-                deployment_monday_start_and_end,
-                deployment_tuesday_start_and_end,
-                deployment_wednesday_start_and_end,
-                deployment_thursday_start_and_end,
-                deployment_friday_start_and_end,
-                deployment_saturday_start_and_end,
-                deployment_sunday_start_and_end,
+                deployment_monday_start,
+                deployment_monday_end,
+                deployment_tuesday_start,
+                deployment_tuesday_end,
+                deployment_wednesday_start,
+                deployment_wednesday_end,
+                deployment_thursday_start,
+                deployment_thursday_end,
+                deployment_friday_start,
+                deployment_friday_end,
+                deployment_saturday_start,
+                deployment_saturday_end,
+                deployment_sunday_start,
+                deployment_sunday_end,
                 deployment_parking_percentage,
                 deployment_tickets_percentage,
                 deployment_ticket_transaction_charges,
@@ -801,6 +1513,7 @@ function updateDeployment(req,res,cb) {
                 deployment_kiosks_price_per_hour,
                 deployment_id
               ], (err, result) => {
+                  // console.log(err);
                 if (err) cb(err)
                 else {
                     cb(null,result);
