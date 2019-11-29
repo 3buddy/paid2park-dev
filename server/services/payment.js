@@ -39,7 +39,8 @@ function addTicketPayment(req,res,cb)
     ticket_payment_ticket_balance,
     ticket_payment_payment_amount,
     ticket_payment_funded_by,
-    ticket_payment_balance_on_ticket
+    ticket_payment_balance_on_ticket,
+    ticket_payment_status
      } = req.body;
 
    let data = {
@@ -91,8 +92,9 @@ function addTicketPayment(req,res,cb)
         ticket_payment_ticket_balance,
         ticket_payment_payment_amount,
         ticket_payment_funded_by,
-        ticket_payment_balance_on_ticket
-          ) VALUES (?,?,?,?,?,?,?,?,?)`,[
+        ticket_payment_balance_on_ticket,
+        ticket_payment_status
+          ) VALUES (?,?,?,?,?,?,?,?,?,?)`,[
             ticket_payment_tickets,
             ticket_payment_license,
             ticket_payment_ticket_fee,
@@ -101,7 +103,8 @@ function addTicketPayment(req,res,cb)
             ticket_payment_ticket_balance,
             ticket_payment_payment_amount,
             ticket_payment_funded_by,
-            ticket_payment_balance_on_ticket] , (error,result) => {
+            ticket_payment_balance_on_ticket,
+            ticket_payment_status] , (error,result) => {
         if (error) 
         {
            cb(error)
@@ -167,7 +170,8 @@ function getTicketPayment(req,res,cb)
          ticket_payment_ticket_balance,
          ticket_payment_payment_amount,
          ticket_payment_funded_by,
-         ticket_payment_balance_on_ticket FROM ticket_payment`,(err,result)=>{
+         ticket_payment_balance_on_ticket,
+         ticket_payment_status FROM ticket_payment`,(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -233,7 +237,8 @@ function getTicketPaymentDetails(req,res,cb)
          ticket_payment_ticket_balance,
          ticket_payment_payment_amount,
          ticket_payment_funded_by,
-         ticket_payment_balance_on_ticket
+         ticket_payment_balance_on_ticket,
+         ticket_payment_status
          FROM ticket_payment 
          WHERE ticket_payment_id=?`,[ticket_payment_id],(err,result)=>{
                if(err) cb(err)
@@ -268,7 +273,8 @@ function updateTicketPayment(req,res,cb)
         ticket_payment_ticket_balance,
         ticket_payment_payment_amount,
         ticket_payment_funded_by,
-        ticket_payment_balance_on_ticket
+        ticket_payment_balance_on_ticket,
+        ticket_payment_status
      } = req.body;
 
     let data = {
@@ -315,7 +321,8 @@ function updateTicketPayment(req,res,cb)
        ticket_payment_ticket_balance,
        ticket_payment_payment_amount,
        ticket_payment_funded_by,
-       ticket_payment_balance_on_ticket
+       ticket_payment_balance_on_ticket,
+       ticket_payment_status
         FROM ticket_payment WHERE ticket_payment_id= ?`,[ticket_payment_id],(err,result)=>{
              // console.log(query.sql);
               if(err) cb(err)
@@ -408,6 +415,12 @@ function updateTicketPayment(req,res,cb)
         {
             ticket_payment_balance_on_ticket = result[0].ticket_payment_balance_on_ticket;
         }
+
+        if (!!ticket_payment_status) {
+            ticket_payment_status = ticket_payment_status;
+        } else {
+            ticket_payment_status = result[0].ticket_payment_status;
+        }
         
 
 
@@ -422,7 +435,8 @@ function updateTicketPayment(req,res,cb)
            ticket_payment_ticket_balance= ?,
            ticket_payment_payment_amount= ?,
            ticket_payment_funded_by= ?,
-           ticket_payment_balance_on_ticket=?
+           ticket_payment_balance_on_ticket=?,
+           ticket_payment_status=?
            WHERE ticket_payment_id=?`,[
             ticket_payment_tickets,
             ticket_payment_license,
@@ -433,6 +447,7 @@ function updateTicketPayment(req,res,cb)
             ticket_payment_payment_amount,
             ticket_payment_funded_by,
             ticket_payment_balance_on_ticket,
+            ticket_payment_status,
             ticket_payment_id],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);
@@ -501,7 +516,8 @@ function addParkingPayments(req,res,cb)
          parking_payment_app_packages_available,
          parking_payment_min_to_add_to_account,
          parking_payment_parking_amount_paid,
-         parking_payment_funds_by 
+         parking_payment_funds_by,
+         parking_payment_status 
         } = req.body;
    let data = {
         status: 0,
@@ -549,15 +565,17 @@ function addParkingPayments(req,res,cb)
         parking_payment_app_packages_available,
         parking_payment_min_to_add_to_account,
         parking_payment_parking_amount_paid,
-        parking_payment_funds_by 
-          ) VALUES (?,?,?,?,?,?)`,
+        parking_payment_funds_by,
+        parking_payment_status 
+          ) VALUES (?,?,?,?,?,?,?)`,
           [
             parking_payment_license,
             parking_payment_customer_name,
             parking_payment_app_packages_available,
             parking_payment_min_to_add_to_account,
             parking_payment_parking_amount_paid,
-            parking_payment_funds_by 
+            parking_payment_funds_by,
+            parking_payment_status 
           ] , (error,result) => {
         if (error) 
         {
@@ -621,7 +639,8 @@ function getParkingPayment(req,res,cb)
          parking_payment_app_packages_available,
          parking_payment_min_to_add_to_account,
          parking_payment_parking_amount_paid,
-         parking_payment_funds_by  FROM parking_payment`,(err,result)=>{
+         parking_payment_funds_by,
+         parking_payment_status  FROM parking_payment`,(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -683,7 +702,8 @@ function getParkingPaymentDetails(req,res,cb)
         parking_payment_app_packages_available,
         parking_payment_min_to_add_to_account,
         parking_payment_parking_amount_paid,
-        parking_payment_funds_by  FROM parking_payment WHERE parking_payment_id=?`,[parking_payment_id],(err,result)=>{
+        parking_payment_funds_by,
+        parking_payment_status  FROM parking_payment WHERE parking_payment_id=?`,[parking_payment_id],(err,result)=>{
                if(err) cb(err)
                else
                {
@@ -712,7 +732,8 @@ function updateParkingPayment(req,res,cb)
         parking_payment_app_packages_available,
         parking_payment_min_to_add_to_account,
         parking_payment_parking_amount_paid,
-        parking_payment_funds_by  
+        parking_payment_funds_by,
+        parking_payment_status  
     } = req.body;
 
     let data = {
@@ -757,7 +778,8 @@ function updateParkingPayment(req,res,cb)
         parking_payment_app_packages_available,
         parking_payment_min_to_add_to_account,
         parking_payment_parking_amount_paid,
-        parking_payment_funds_by
+        parking_payment_funds_by,
+        parking_payment_status
         FROM parking_payment WHERE parking_payment_id=?`,[parking_payment_id],(err,result)=>{
              // console.log(query.sql);
               if(err) cb(err)
@@ -824,6 +846,12 @@ function updateParkingPayment(req,res,cb)
             parking_payment_funds_by = result[0].parking_payment_funds_by;
         }
 
+        if (!!parking_payment_status) {
+            parking_payment_status = parking_payment_status;
+        } else {
+            parking_payment_status = result[0].parking_payment_status;
+        }
+
         
 
         if(result.length > 0)
@@ -834,7 +862,8 @@ function updateParkingPayment(req,res,cb)
           parking_payment_app_packages_available=?,
           parking_payment_min_to_add_to_account=?,
           parking_payment_parking_amount_paid =?,
-          parking_payment_funds_by = ? 
+          parking_payment_funds_by = ? ,
+          parking_payment_status =?
            WHERE parking_payment_id=?`,[
             parking_payment_license,
             parking_payment_customer_name,
@@ -842,6 +871,7 @@ function updateParkingPayment(req,res,cb)
             parking_payment_min_to_add_to_account,
             parking_payment_parking_amount_paid,
             parking_payment_funds_by,
+            parking_payment_status,
             parking_payment_id],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);

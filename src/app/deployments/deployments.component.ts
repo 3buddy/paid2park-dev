@@ -13,6 +13,7 @@ export interface PeriodicElement {
   deployment_name: string;
   deployment_billing_phone: string;
   deployment_billing_email: string;
+  deployment_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -25,7 +26,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class DeploymentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['deployment_name', 'deployment_billing_phone', 'deployment_billing_email', 'Action'];
+  displayedColumns: string[] = ['deployment_name', 'deployment_billing_phone', 'deployment_billing_email', 'Status', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

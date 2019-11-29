@@ -17,6 +17,8 @@ export class AddKiosksComponent implements OnInit {
   messageClass: string;
   messageText: string;
 
+  activeData: Array<string> = ['YES', 'NO'];
+
   constructor(
       private fb: FormBuilder,
       private ks: KioskService,
@@ -35,7 +37,8 @@ export class AddKiosksComponent implements OnInit {
           kiosks_location_address: ['', Validators.required],
           kiosks_city: ['', Validators.required],
           kiosks_network_login: ['', Validators.required],
-          kiosks_network_password: ['', Validators.required]
+          kiosks_network_password: ['', Validators.required],
+          kiosks_status: ['', Validators.required]
       });
   }
 

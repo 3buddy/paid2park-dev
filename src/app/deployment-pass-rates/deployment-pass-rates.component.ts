@@ -14,6 +14,7 @@ export interface PeriodicElement {
   deployment_pass_rate_name: string;
   deployment_pass_rate_day: string;
   deployment_pass_rate_cost: string;
+  deployment_pass_rate_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -25,7 +26,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class DeploymentPassRatesComponent implements OnInit {
 
-  displayedColumns: string[] = ['deployment_pass_rate_name', 'deployment_pass_rate_day', 'deployment_pass_rate_cost', 'Action'];
+  displayedColumns: string[] = ['deployment_pass_rate_name', 'deployment_pass_rate_day', 'deployment_pass_rate_cost', 'Status' , 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

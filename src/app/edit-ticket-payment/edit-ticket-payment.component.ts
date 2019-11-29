@@ -17,6 +17,7 @@ export class EditTicketPaymentComponent implements OnInit {
  messageClass: string;
  messageText: string;
  loadThePage: boolean;
+ activeData: Array<string> = ['YES', 'NO'];
 
  constructor(
    private fb: FormBuilder ,
@@ -42,7 +43,8 @@ ngOnInit() {
         ticket_payment_ticket_balance      : [response['body']['ticket_payment_ticket_balance'], Validators.required],
         ticket_payment_payment_amount      : [response['body']['ticket_payment_payment_amount'], Validators.required],
         ticket_payment_funded_by           : [response['body']['ticket_payment_funded_by'], Validators.required],
-        ticket_payment_balance_on_ticket   : [response['body']['ticket_payment_balance_on_ticket'], Validators.required]
+        ticket_payment_balance_on_ticket   : [response['body']['ticket_payment_balance_on_ticket'], Validators.required],
+        ticket_payment_status              : [response['body']['ticket_payment_status'], Validators.required]
       });
       this.loadThePage = true;
       this.cdRef.detectChanges();

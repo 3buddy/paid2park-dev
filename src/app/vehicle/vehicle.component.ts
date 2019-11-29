@@ -14,6 +14,7 @@ export interface PeriodicElement {
   make: string;
   model: string;
   color: string;
+  status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -28,7 +29,7 @@ export class VehicleComponent implements OnInit {
 
   customerId: number;
 
-  displayedColumns: string[] = ['license', 'make', 'model', 'color', 'Action'];
+  displayedColumns: string[] = ['license', 'make', 'model', 'color', 'status', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

@@ -17,6 +17,7 @@ export class AddVehiclesComponent implements OnInit {
   showMessage: Promise<boolean>;
   messageClass: string;
   messageText: string;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
     private ar: ActivatedRoute,
@@ -33,7 +34,8 @@ export class AddVehiclesComponent implements OnInit {
         license:     ['', Validators.required],
         make:        ['', Validators.required],
         model:       ['', Validators.required],
-        color:       ['', Validators.required]
+        color:       ['', Validators.required],
+        status:      ['', Validators.required]
       });
 
   }

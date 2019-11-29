@@ -18,6 +18,7 @@ export class AddCustomerComponent implements OnInit {
     showMessage: boolean;
     messageClass: string;
     messageText: string;
+    activeData: Array<string> = ['YES', 'NO'];
 
     constructor(private fb: FormBuilder, private CS: CustomerService , private router: Router, private cdRef: ChangeDetectorRef) { }
 
@@ -46,6 +47,7 @@ export class AddCustomerComponent implements OnInit {
         customer_cell_carrier: ['', Validators.required],
         customer_notify_mins_in_advance: ['', Validators.required],
         customer_number_of_tickets_ytd: ['', Validators.required],
+        customer_status: ['', Validators.required]
       });
 
 

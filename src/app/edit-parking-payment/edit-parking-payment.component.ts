@@ -17,6 +17,7 @@ export class EditParkingPaymentComponent implements OnInit {
   messageClass: string;
   messageText: string;
   loadThePage: boolean;
+  activeData: Array<string> = ['YES', 'NO'];
 
  constructor(
    private fb: FormBuilder ,
@@ -39,7 +40,8 @@ ngOnInit() {
         parking_payment_app_packages_available   : [response['body']['parking_payment_app_packages_available'], Validators.required],
         parking_payment_min_to_add_to_account    : [response['body']['parking_payment_min_to_add_to_account'], Validators.required],
         parking_payment_parking_amount_paid      : [response['body']['parking_payment_parking_amount_paid'], Validators.required],
-        parking_payment_funds_by                 : [response['body']['parking_payment_funds_by'], Validators.required]
+        parking_payment_funds_by                 : [response['body']['parking_payment_funds_by'], Validators.required],
+        parking_payment_status                   : [response['body']['parking_payment_status'], Validators.required]
        });
       this.loadThePage = true;
       this.cdRef.detectChanges();

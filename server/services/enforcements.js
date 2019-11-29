@@ -44,7 +44,8 @@ function addEnforcements(req,res,cb)
     enforcements_w_4_with_holding,
     enforcements_start_with_holding,
     enforcements_comp_rate,
-    enforcements_ot_rate 
+    enforcements_ot_rate ,
+    enforcements_status
        } = req.body;
 
 
@@ -133,9 +134,10 @@ function addEnforcements(req,res,cb)
                         enforcements_w_4_with_holding,
                         enforcements_start_with_holding,
                         enforcements_comp_rate,
-                        enforcements_ot_rate  
+                        enforcements_ot_rate,
+                        enforcements_status  
                          )
-                      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                     `, [
                         enforcements_assign_id,
                         enforcements_first_name,
@@ -158,7 +160,8 @@ function addEnforcements(req,res,cb)
                         enforcements_w_4_with_holding,
                         enforcements_start_with_holding,
                         enforcements_comp_rate,
-                        enforcements_ot_rate 
+                        enforcements_ot_rate,
+                        enforcements_status 
                     ], (err, result) => {
                         if (err) cb(err)
                         else {
@@ -206,7 +209,8 @@ function getEnforcements(req,res,cb)
               enforcements_w_4_with_holding,
               enforcements_start_with_holding,
               enforcements_comp_rate,
-              enforcements_ot_rate  FROM enforcements
+              enforcements_ot_rate,
+              enforcements_status  FROM enforcements
             `,  (err, result) => {
                 if (err) reject(err)
                 else {
@@ -273,7 +277,8 @@ function getEnforcementsDetails(req,res,cb)
               enforcements_w_4_with_holding,
               enforcements_start_with_holding,
               enforcements_comp_rate,
-              enforcements_ot_rate  FROM enforcements WHERE enforcements_id = ?
+              enforcements_ot_rate,
+              enforcements_status  FROM enforcements WHERE enforcements_id = ?
           `,[enforcements_id],  (err, result) => {
               if (err) reject(err)
               else {
@@ -408,7 +413,8 @@ function updateEnforcements(req,res,cb)
           enforcements_w_4_with_holding,
           enforcements_start_with_holding,
           enforcements_comp_rate,
-          enforcements_ot_rate } = req.body;
+          enforcements_ot_rate,
+          enforcements_status } = req.body;
 
         let response = {
         status: 0,
@@ -676,6 +682,13 @@ function updateEnforcements(req,res,cb)
               enforcements_ot_rate = result[0].enforcements_ot_rate;
             }
 
+            if (!!enforcements_status) {
+              enforcements_status = enforcements_status
+            } else {
+              enforcements_status = result[0].enforcements_status
+            }
+
+            
 
           con.query(`
           Update enforcements SET
@@ -700,7 +713,8 @@ function updateEnforcements(req,res,cb)
           enforcements_w_4_with_holding =?,
           enforcements_start_with_holding =?,
           enforcements_comp_rate =?,
-          enforcements_ot_rate=?  WHERE enforcements_id = ?
+          enforcements_ot_rate=?,
+          enforcements_status=?  WHERE enforcements_id = ?
           `, [
             enforcements_assign_id,
             enforcements_first_name,
@@ -724,6 +738,7 @@ function updateEnforcements(req,res,cb)
             enforcements_start_with_holding,
             enforcements_comp_rate,
             enforcements_ot_rate,
+            enforcements_status,
             enforcements_id
             ], (err, result) => {
               if (err) cb(err)

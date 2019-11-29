@@ -17,6 +17,7 @@ export class EditEnforcementsComponent implements OnInit {
   showMessage: boolean;
   messageClass: string;
   messageText: string;
+  activeData: Array<string> = ['YES', 'NO'];
 
     constructor(
       private fb: FormBuilder,
@@ -54,7 +55,8 @@ export class EditEnforcementsComponent implements OnInit {
                   enforcements_w_4_with_holding    : [response['body']['enforcements_w_4_with_holding'], Validators.required],
                   enforcements_start_with_holding  : [response['body']['enforcements_start_with_holding'], Validators.required],
                   enforcements_comp_rate           : [response['body']['enforcements_comp_rate'], Validators.required],
-                  enforcements_ot_rate             : [response['body']['enforcements_ot_rate'], Validators.required]
+                  enforcements_ot_rate             : [response['body']['enforcements_ot_rate'], Validators.required],
+                  enforcements_status              : [response['body']['enforcements_status'], Validators.required]
                   });
 
                 this.loadThePage = true;

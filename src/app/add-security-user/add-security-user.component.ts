@@ -17,7 +17,7 @@ export class AddSecurityUserComponent implements OnInit {
   messageClass: string = '';
   messageText: string = '';
 
-  activeData: Array<string> = ['YES','NO'];
+  activeData: Array<string> = ['YES', 'NO'];
   roleDate: [];
 
   constructor(private fb: FormBuilder , private US: UserService , private router: Router , private cdRef: ChangeDetectorRef) { }

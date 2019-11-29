@@ -17,6 +17,7 @@ export class EditVehiclesComponent implements OnInit {
   showMessage: Promise<boolean>;
   messageClass: string;
   messageText: string;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
     private ar: ActivatedRoute,
@@ -38,7 +39,8 @@ export class EditVehiclesComponent implements OnInit {
             license:     [ data['body']['license'], Validators.required],
             make:        [ data['body']['make'], Validators.required],
             model:       [ data['body']['model'], Validators.required],
-            color:       [ data['body']['color'], Validators.required]
+            color:       [ data['body']['color'], Validators.required],
+            status:      [ data['body']['status'], Validators.required]
           });
           this.cdRef.detectChanges();
         }

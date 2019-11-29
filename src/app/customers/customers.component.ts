@@ -10,10 +10,10 @@ import { CustomerService } from '../customer.service';
 
 export interface PeriodicElement {
   customer_id: number;
-  // DeploymentName: string;
   customer_first_name: string;
   customer_last_name: string;
   customer_email_address: string;
+  customer_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -25,7 +25,13 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class CustomersComponent implements OnInit {
 
-  displayedColumns: string[] = ['DeploymentName', 'customer_first_name', 'customer_last_name', 'customer_email_address', 'Action'];
+  displayedColumns: string[] = [
+    'DeploymentName',
+    'customer_first_name',
+    'customer_last_name',
+    'customer_email_address',
+    'customer_status',
+    'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

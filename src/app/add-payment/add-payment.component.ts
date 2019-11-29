@@ -16,6 +16,7 @@ export class AddPaymentComponent implements OnInit {
     showMessage: boolean;
     messageClass: string;
     messageText: string;
+    activeData: Array<string> = ['YES', 'NO'];
 
     constructor(
       private fb: FormBuilder ,
@@ -38,7 +39,8 @@ export class AddPaymentComponent implements OnInit {
       ticket_payment_ticket_balance      : ['', Validators.required],
       ticket_payment_payment_amount      : ['', Validators.required],
       ticket_payment_funded_by           : ['', Validators.required],
-      ticket_payment_balance_on_ticket   : ['', Validators.required]
+      ticket_payment_balance_on_ticket   : ['', Validators.required],
+      ticket_payment_status              : ['', Validators.required]
     });
   }
 

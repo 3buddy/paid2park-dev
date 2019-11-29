@@ -15,6 +15,7 @@ export class AddEnforcementsComponent implements OnInit {
     showMessage: boolean;
     messageClass: string;
     messageText: string;
+    activeData: Array<string> = ['YES', 'NO'];
 
     constructor(
       private fb: FormBuilder ,
@@ -50,7 +51,8 @@ export class AddEnforcementsComponent implements OnInit {
       enforcements_w_4_with_holding    : ['', Validators.required],
       enforcements_start_with_holding  : ['', Validators.required],
       enforcements_comp_rate           : ['', Validators.required],
-      enforcements_ot_rate             : ['', Validators.required]
+      enforcements_ot_rate             : ['', Validators.required],
+      enforcements_status              : ['', Validators.required]
     });
   }
 

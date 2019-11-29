@@ -16,6 +16,7 @@ export class AddPassesComponent implements OnInit {
     showMessage: boolean;
     messageClass: string;
     messageText: string;
+    activeData: Array<string> = ['YES', 'NO'];
 
     constructor(
       private fb: FormBuilder ,
@@ -38,7 +39,8 @@ export class AddPassesComponent implements OnInit {
       passes_funds_by          : ['', Validators.required],
       passes_reason            : ['', Validators.required],
       passes_start_date        : ['', Validators.required],
-      passes_end_date          : ['', Validators.required]
+      passes_end_date          : ['', Validators.required],
+      passes_status            : ['', Validators.required]
     });
   }
 

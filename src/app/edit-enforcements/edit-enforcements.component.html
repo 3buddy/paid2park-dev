@@ -182,6 +182,19 @@
 						  This Is A Required Field .
 						</span>
 					  </div>
+
+					  <div class="form-group form-style" >
+                            <label for="CustomerLastPaymentDate">status :</label>
+                
+                            <select class="form-control selectpicker"   data-style="btn-new"  formControlName="enforcements_status">
+                              <option value=""> Select </option>
+                              <option *ngFor="let activeList of activeData" [ngValue]="activeList">{{activeList}}</option>
+                             </select>
+                             
+                              <span class="error"  *ngIf="(submitted || editEnforcements.controls['enforcements_status'].touched ) && editEnforcements.controls['enforcements_status'].errors">
+                               This Is A Required Field .
+                            </span> 
+                    </div>
 					   
 					   
 					   <div class="form-group btn-space">

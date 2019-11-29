@@ -14,6 +14,7 @@ export interface PeriodicElement {
   parking_payment_min_to_add_to_account: string;
   parking_payment_parking_amount_paid: string;
   parking_payment_funds_by: string;
+  parking_payment_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -25,7 +26,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class ParkingPaymentComponent implements OnInit {
 
-  displayedColumns: string[] = ['CustomerName', 'License' , 'AmountPaid', 'Fundsby', 'Action'];
+  displayedColumns: string[] = ['CustomerName', 'License', 'AmountPaid', 'Fundsby', 'Status', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

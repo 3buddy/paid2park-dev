@@ -19,7 +19,16 @@ exports.deleteKiosk        = deleteKiosk;
 
 function addKiosk(req,res,cb)
 {
-   let { kiosks_number , kiosks_mac_address , kiosks_guid , kiosks_password , kiosks_location_address , kiosks_city , kiosks_network_login , kiosks_network_password } = req.body;
+   let { 
+       kiosks_number,
+       kiosks_mac_address,
+       kiosks_guid,
+       kiosks_password,
+       kiosks_location_address,
+       kiosks_city,
+       kiosks_network_login,
+       kiosks_network_password,
+       kiosks_status } = req.body;
    let data = {
         status: 0,
         body: {},
@@ -61,7 +70,26 @@ function addKiosk(req,res,cb)
    {
       kiosks_password = bcrypt.hashSync(kiosks_password, saltRounds);
       kiosks_network_password = bcrypt.hashSync(kiosks_network_password, saltRounds);
-      con.query(`INSERT INTO kiosk (kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password) VALUES (?,?,?,?,?,?,?,?)`,[kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password] , (error,result) => {
+      con.query(`INSERT INTO kiosk (
+          kiosks_number,
+          kiosks_mac_address,
+          kiosks_guid,
+          kiosks_password,
+          kiosks_location_address,
+          kiosks_city,
+          kiosks_network_login,
+          kiosks_network_password,
+          kiosks_status) VALUES (?,?,?,?,?,?,?,?,?)`,[
+              kiosks_number,
+              kiosks_mac_address,
+              kiosks_guid,
+              kiosks_password,
+              kiosks_location_address,
+              kiosks_city,
+              kiosks_network_login,
+              kiosks_network_password,
+              kiosks_status
+            ] , (error,result) => {
         if (error) 
         {
            cb(error)
@@ -117,7 +145,17 @@ function getKioskList(req,res,cb)
 
      function getList(cb)
      {
-         con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk`,(err,result)=>{
+         con.query(`SELECT 
+         kiosk_Id,
+         kiosks_number,
+         kiosks_mac_address,
+         kiosks_guid,
+         kiosks_password,
+         kiosks_location_address,
+         kiosks_city,
+         kiosks_network_login,
+         kiosks_network_password,
+         kiosks_status FROM kiosk`,(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -172,7 +210,15 @@ function getKioskDetails(req,res,cb)
 
     function getDetails(cb)
     {
-        con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_location_address,kiosks_city,kiosks_network_login FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
+        con.query(`SELECT 
+        kiosk_Id,
+        kiosks_number,
+        kiosks_mac_address,
+        kiosks_guid,
+        kiosks_location_address,
+        kiosks_city,
+        kiosks_network_login,
+        kiosks_status FROM kiosk WHERE kiosk_Id=?`,[kioskId],(err,result)=>{
                if(err) cb(err)
                else
                {
@@ -194,7 +240,19 @@ function getKioskDetails(req,res,cb)
 function updateKiosk(req,res,cb)
 {
 
-    let { kiosk_Id , kiosks_number , kiosks_mac_address , kiosks_guid , kiosks_password , kiosks_location_address , kiosks_city , kiosks_network_login , kiosks_network_password } = req.body;
+    let { 
+        kiosk_Id,
+        kiosks_number,
+        kiosks_mac_address,
+        kiosks_guid,
+        kiosks_password,
+        kiosks_location_address,
+        kiosks_city,
+        kiosks_network_login,
+        kiosks_network_password,
+        kiosks_status
+       } = req.body;
+
     let data = {
          status: 0,
          body: {},
@@ -230,7 +288,17 @@ function updateKiosk(req,res,cb)
     function checkId(cb)
     {
 
-       var query = con.query(`SELECT kiosk_Id,kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password FROM kiosk WHERE kiosk_Id=?`,[kiosk_Id],(err,result)=>{
+       var query = con.query(`SELECT 
+       kiosk_Id,
+       kiosks_number,
+       kiosks_mac_address,
+       kiosks_guid,
+       kiosks_password,
+       kiosks_location_address,
+       kiosks_city,
+       kiosks_network_login,
+       kiosks_network_password,kiosks_status
+       FROM kiosk WHERE kiosk_Id=?`,[kiosk_Id],(err,result)=>{
              // console.log(query.sql);
               if(err) cb(err)
               else cb(null,result)
@@ -314,10 +382,38 @@ function updateKiosk(req,res,cb)
             kiosks_network_password = result[0].kiosks_network_password;
         }
 
+        if (!!kiosks_status) {
+            kiosks_status = kiosks_status;
+        } else {
+            kiosks_status = result[0].kiosks_status
+        }
+
 
         if(result.length > 0)
         {
-          con.query(`UPDATE kiosk SET kiosks_number=?,kiosks_mac_address=?,kiosks_guid=?,kiosks_password=? , kiosks_location_address =? , kiosks_city = ? , kiosks_network_login = ? , kiosks_network_password = ? WHERE kiosk_Id=?`,[kiosks_number,kiosks_mac_address,kiosks_guid,kiosks_password,kiosks_location_address,kiosks_city,kiosks_network_login,kiosks_network_password,kiosk_Id],(error,result)=>{
+          con.query(`UPDATE kiosk SET 
+          kiosks_number=?,
+          kiosks_mac_address=?,
+          kiosks_guid=?,
+          kiosks_password=?,
+          kiosks_location_address=?,
+          kiosks_city=?,
+          kiosks_network_login=?,
+          kiosks_network_password=?,
+          kiosks_status=?
+          WHERE kiosk_Id=?`,
+          [
+            kiosks_number,
+            kiosks_mac_address,
+            kiosks_guid,
+            kiosks_password,
+            kiosks_location_address,
+            kiosks_city,
+            kiosks_network_login,
+            kiosks_network_password,
+            kiosks_status,
+            kiosk_Id
+        ],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);
           }) 

@@ -31,7 +31,7 @@ exports.updateDeploymentPassRate        =  updateDeploymentPassRate;
 
 function addDeploymentAppRate(req,res,cb) {
     let response = { status: 0, body: {}, message: ""  }  
-    const { deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes } = req.body;    
+    const { deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes,deployment_app_rate_status } = req.body;    
 
     const addDeploymentAppRate = new Promise( (resolve,reject) => {
          async.waterfall([add],(error,result) => {
@@ -61,9 +61,17 @@ function addDeploymentAppRate(req,res,cb) {
    
    function add(cb) {
             con.query(`
-            INSERT INTO deployment_app_rate ( deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes)
-            VALUES (?,?,?)
-            `,[deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes],(error,InsertData) => {
+            INSERT INTO deployment_app_rate ( 
+                deployment_id,
+                deployment_app_rate_rate,
+                deployment_app_rate_minutes,
+                deployment_app_rate_status)
+            VALUES (?,?,?,?)
+            `,[
+                deployment_id,
+                deployment_app_rate_rate,
+                deployment_app_rate_minutes,
+                deployment_app_rate_status],(error,InsertData) => {
                 if (error) cb(error)
                 else {
                     cb(null,InsertData);
@@ -233,7 +241,7 @@ function deleteDeploymentAppRate(req,res,cb) {
 function updateDeploymentAppRate(req,res,cb) {
 
     let response = { status: 0, body: {},message: ""  };
-    let { deployment_app_rate_id,deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes } = req.body;        
+    let { deployment_app_rate_id,deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes,deployment_app_rate_status } = req.body;        
         
     const updateDeploymentAppRate = new Promise( (resolve,reject) => {
         async.waterfall( [check,updateData], (error,result) => {
@@ -291,10 +299,16 @@ function updateDeploymentAppRate(req,res,cb) {
                 deployment_app_rate_minutes = result[0].deployment_app_rate_minutes;
             }
 
+            if (!!deployment_app_rate_status) {
+                deployment_app_rate_status = deployment_app_rate_status;
+            } else {
+                deployment_app_rate_status = result[0].deployment_app_rate_status;
+            }
+
             con.query(`
             Update deployment_app_rate SET deployment_id = ?, deployment_app_rate_rate =?, 
-            deployment_app_rate_minutes = ? WHERE deployment_app_rate_id = ?
-            `,[deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes,deployment_app_rate_id], 
+            deployment_app_rate_minutes = ? , deployment_app_rate_status = ? WHERE deployment_app_rate_id = ?
+            `,[deployment_id,deployment_app_rate_rate,deployment_app_rate_minutes,deployment_app_rate_status,deployment_app_rate_id], 
             (err, result) => {
                   // console.log(err);
                 if (err) cb(err)
@@ -318,7 +332,12 @@ function updateDeploymentAppRate(req,res,cb) {
 function addDeploymentPassRate(req,res,cb) {
 
     let response = { status: 0, body: {}, message: ""  }  
-    const { deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost } = req.body;    
+    const { 
+        deployment_id,
+        deployment_pass_rate_name,
+        deployment_pass_rate_day,
+        deployment_pass_rate_cost,
+        deployment_pass_rate_status } = req.body;    
 
     const addDeploymentPassRate = new Promise( (resolve,reject) => {
          async.waterfall([add],(error,result) => {
@@ -348,9 +367,19 @@ function addDeploymentPassRate(req,res,cb) {
    
    function add(cb) {
             con.query(`
-            INSERT INTO deployment_pass_rate ( deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost )
-            VALUES (?,?,?,?)
-            `,[deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost],(error,InsertData) => {
+            INSERT INTO deployment_pass_rate ( 
+                deployment_id,
+                deployment_pass_rate_name,
+                deployment_pass_rate_day,
+                deployment_pass_rate_cost,
+                deployment_pass_rate_status )
+            VALUES (?,?,?,?,?)
+            `,[
+                deployment_id,
+                deployment_pass_rate_name,
+                deployment_pass_rate_day,
+                deployment_pass_rate_cost,
+                deployment_pass_rate_status],(error,InsertData) => {
                 if (error) cb(error)
                 else {
                     cb(null,InsertData);
@@ -525,7 +554,13 @@ function deleteDeploymentPassRate(req,res,cb) {
 function updateDeploymentPassRate(req,res,cb) {
 
     let response = { status: 0, body: {},message: ""  };
-    let { deployment_pass_rate_id,deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost } = req.body;        
+    let { 
+        deployment_pass_rate_id,
+        deployment_id,
+        deployment_pass_rate_name,
+        deployment_pass_rate_day,
+        deployment_pass_rate_cost,
+        deployment_pass_rate_status } = req.body;        
         
     const updateDeploymentPassRate = new Promise( (resolve,reject) => {
         async.waterfall( [check,updateData], (error,result) => {
@@ -589,10 +624,16 @@ function updateDeploymentPassRate(req,res,cb) {
                 deployment_pass_rate_cost = result[0].deployment_pass_rate_cost;
             }
 
+            if (!!deployment_pass_rate_status) {
+                deployment_pass_rate_status = deployment_pass_rate_status;
+            } else {
+                deployment_pass_rate_status = result[0].deployment_pass_rate_status;
+            }
+
             con.query(`
             Update deployment_pass_rate SET deployment_id = ?, deployment_pass_rate_name =?, 
-            deployment_pass_rate_day = ? , deployment_pass_rate_cost = ? WHERE deployment_pass_rate_id = ?
-            `,[deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost,deployment_pass_rate_id], 
+            deployment_pass_rate_day = ? , deployment_pass_rate_cost = ? , deployment_pass_rate_status =? WHERE deployment_pass_rate_id = ?
+            `,[deployment_id,deployment_pass_rate_name,deployment_pass_rate_day,deployment_pass_rate_cost,deployment_pass_rate_status,deployment_pass_rate_id], 
             (err, result) => {
                   // console.log(err);
                 if (err) cb(err)
@@ -668,7 +709,8 @@ function addDeployment(req,res,cb) {
             deployment_ticket_draft_account,
             deployment_ticket_draft_bank_name,
             deployment_ticket_draft_note,
-            deployment_kiosks_price_per_hour
+            deployment_kiosks_price_per_hour,
+            deployment_status
           } = req.body;    
 
     const addDeployment = new Promise( (resolve,reject) => {
@@ -761,10 +803,11 @@ function addDeployment(req,res,cb) {
                 deployment_ticket_draft_account,
                 deployment_ticket_draft_bank_name,
                 deployment_ticket_draft_note,
-                deployment_kiosks_price_per_hour
+                deployment_kiosks_price_per_hour,
+                deployment_status
             )
             VALUES (
-                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             `,[
                 deployment_assign_id,
                 deployment_name,
@@ -810,7 +853,8 @@ function addDeployment(req,res,cb) {
                 deployment_ticket_draft_account,
                 deployment_ticket_draft_bank_name,
                 deployment_ticket_draft_note,
-                deployment_kiosks_price_per_hour],(error,InsertData) => {
+                deployment_kiosks_price_per_hour,
+                deployment_status],(error,InsertData) => {
                 if (error) cb(error)
                 else {
                     cb(null,InsertData);
@@ -966,7 +1010,8 @@ function updateDeployment(req,res,cb) {
             deployment_ticket_draft_account,
             deployment_ticket_draft_bank_name,
             deployment_ticket_draft_note,
-            deployment_kiosks_price_per_hour
+            deployment_kiosks_price_per_hour,
+            deployment_status
           } = req.body;        
         
     const updateDeployment = new Promise( (resolve,reject) => {
@@ -1418,6 +1463,12 @@ function updateDeployment(req,res,cb) {
                 deployment_kiosks_price_per_hour = result[0].deployment_kiosks_price_per_hour;
             }
 
+            if (!!deployment_status) {
+                deployment_status = deployment_status;
+            } else {
+                deployment_status = result[0].deployment_status;
+            }
+
             con.query(`
             Update deployment SET
             deployment_assign_id = ?,
@@ -1464,7 +1515,8 @@ function updateDeployment(req,res,cb) {
             deployment_ticket_draft_account=?,
             deployment_ticket_draft_bank_name=?,
             deployment_ticket_draft_note=?,
-            deployment_kiosks_price_per_hour=?  WHERE deployment_id = ?
+            deployment_kiosks_price_per_hour=?,
+            deployment_status=?  WHERE deployment_id = ?
             `, [
                 deployment_assign_id,
                 deployment_name,
@@ -1511,6 +1563,7 @@ function updateDeployment(req,res,cb) {
                 deployment_ticket_draft_bank_name,
                 deployment_ticket_draft_note,
                 deployment_kiosks_price_per_hour,
+                deployment_status,
                 deployment_id
               ], (err, result) => {
                   // console.log(err);

@@ -18,7 +18,7 @@ exports.deleteVehicle       =  deleteVehicle;
 
 function addVehicle(req,res,cb)
 {
-   const { customer_id , license , make , model , color } = req.body;
+   const { customer_id , license , make , model , color , status } = req.body;
    let data = {
         status: 0,
         body: {},
@@ -59,7 +59,20 @@ function addVehicle(req,res,cb)
    function add(cb)
    {
 
-      con.query(`INSERT INTO customer_vehicle (customer_id,license,make,model,color) VALUES (?,?,?,?,?)`,[customer_id,license,make,model,color] , (error,result) => {
+      con.query(`INSERT INTO customer_vehicle (
+          customer_id,
+          license,
+          make,
+          model,
+          color,
+          status
+          ) VALUES (?,?,?,?,?,?)`,[
+              customer_id,
+              license,
+              make,
+              model,
+              color,
+              status] , (error,result) => {
         if (error) 
         {
            cb(error)
@@ -115,7 +128,14 @@ function getVehicleList(req,res,cb)
 
      function getList(cb)
      {
-         con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_id =?`,[customerId],(err,result)=>{
+         con.query(`SELECT 
+         customer_vehicle_id,
+         customer_id,
+         license,
+         make,
+         model,
+         color,
+         status FROM customer_vehicle WHERE customer_id =?`,[customerId],(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -170,7 +190,14 @@ function getVehicleDetails(req,res,cb)
 
     function getDetails(cb)
     {
-        con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_vehicle_id=?`,[vehicleId],(err,result)=>{
+        con.query(`SELECT 
+        customer_vehicle_id,
+        customer_id,
+        license,
+        make,
+        model,
+        color,
+        status FROM customer_vehicle WHERE customer_vehicle_id=?`,[vehicleId],(err,result)=>{
                if(err) cb(err)
                else
                {
@@ -191,7 +218,7 @@ function getVehicleDetails(req,res,cb)
 
 function updateVehicle(req,res,cb)
 {
-    let { customer_vehicle_id , license , make , model , color } = req.body;
+    let { customer_vehicle_id , license , make , model , color, status } = req.body;
     let data = {
          status: 0,
          body: {},
@@ -227,7 +254,14 @@ function updateVehicle(req,res,cb)
     function checkId(cb)
     {
         
-        con.query(`SELECT customer_vehicle_id,customer_id,license,make,model,color FROM customer_vehicle WHERE customer_vehicle_id=?`,[customer_vehicle_id],(err,result)=>{
+        con.query(`SELECT 
+        customer_vehicle_id,
+        customer_id,
+        license,
+        make,
+        model,
+        color,
+        status FROM customer_vehicle WHERE customer_vehicle_id=?`,[customer_vehicle_id],(err,result)=>{
               if(err) cb(err)
               else cb(null,result)
         })
@@ -272,9 +306,27 @@ function updateVehicle(req,res,cb)
             color = result[0].color;
         }
 
+        if (!!status) {
+            status = status;
+        } else {
+            status = result[0].status;
+        }
+
         if(result.length > 0)
         {
-          con.query(`UPDATE customer_vehicle SET license=?,make=?,model=?,color=? WHERE customer_vehicle_id=?`,[license , make , model , color,customer_vehicle_id],(error,result)=>{
+          con.query(`UPDATE 
+          customer_vehicle SET 
+          license=?,
+          make=?,
+          model=?,
+          color=?,
+          status=? WHERE customer_vehicle_id=?`,[
+              license , 
+              make , 
+              model , 
+              color,
+              status,
+              customer_vehicle_id],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);
           }) 

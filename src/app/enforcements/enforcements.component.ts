@@ -31,6 +31,7 @@ export interface PeriodicElement {
   enforcements_start_with_holding: string;
   enforcements_comp_rate: string;
   enforcements_ot_rate: string;
+  enforcements_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -42,7 +43,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class EnforcementsComponent implements OnInit {
 
- displayedColumns: string[] = ['DeploymentName', 'FirstName', 'LastName', 'Email', 'PhoneNumber', 'Action'];
+ displayedColumns: string[] = ['DeploymentName', 'FirstName', 'LastName', 'Email', 'PhoneNumber', 'enforcements_status', 'Action'];
 
   dataSource: MatTableDataSource<PeriodicElement>;
 

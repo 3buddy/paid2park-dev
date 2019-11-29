@@ -17,6 +17,7 @@ export class EditAppRatesComponent implements OnInit {
   messageClass: string;
   messageText: string;
   isPageLoadded: boolean;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
       private fb: FormBuilder,
@@ -39,7 +40,8 @@ export class EditAppRatesComponent implements OnInit {
               deployment_app_rate_id: [response['body']['deployment_app_rate_id'] , Validators.required],
               deployment_id: [response['body']['deployment_id'] , Validators.required],
               deployment_app_rate_rate: [response['body']['deployment_app_rate_rate'] , Validators.required],
-              deployment_app_rate_minutes: [response['body']['deployment_app_rate_minutes'] , Validators.required]
+              deployment_app_rate_minutes: [response['body']['deployment_app_rate_minutes'] , Validators.required],
+              deployment_app_rate_status: [response['body']['deployment_app_rate_status'] , Validators.required]
           });
           this.isPageLoadded = true;
           this.cdRef.detectChanges();

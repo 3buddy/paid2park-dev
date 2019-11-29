@@ -17,6 +17,7 @@ export class EditPassesComponent implements OnInit {
     messageClass: string;
     messageText: string;
     loadThePage: boolean;
+    activeData: Array<string> = ['YES', 'NO'];
 
     constructor(
       private fb: FormBuilder ,
@@ -42,7 +43,8 @@ export class EditPassesComponent implements OnInit {
           passes_funds_by          : [response['body']['passes_funds_by'], Validators.required],
           passes_reason            : [response['body']['passes_reason'], Validators.required],
           passes_start_date        : [response['body']['passes_start_date'], Validators.required],
-          passes_end_date          : [response['body']['passes_end_date'], Validators.required]
+          passes_end_date          : [response['body']['passes_end_date'], Validators.required],
+          passes_status            : [response['body']['passes_status'], Validators.required]
         });
         this.loadThePage = true;
         this.cdRef.detectChanges();

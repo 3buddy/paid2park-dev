@@ -16,6 +16,7 @@ export class AddParkingPayemtsComponent implements OnInit {
  showMessage: boolean;
  messageClass: string;
  messageText: string;
+ activeData: Array<string> = ['YES', 'NO'];
 
  constructor(
    private fb: FormBuilder ,
@@ -35,7 +36,8 @@ createForm() {
   parking_payment_app_packages_available          : ['', Validators.required],
   parking_payment_min_to_add_to_account         : ['', Validators.required],
   parking_payment_parking_amount_paid     : ['', Validators.required],
-  parking_payment_funds_by      : ['', Validators.required]
+  parking_payment_funds_by      : ['', Validators.required],
+  parking_payment_status        : ['', Validators.required]
  });
 }
 

@@ -16,6 +16,7 @@ export class AddPassRatesComponent implements OnInit {
   showMessage: boolean;
   messageClass: string;
   messageText: string;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
       private fb: FormBuilder,
@@ -31,7 +32,8 @@ export class AddPassRatesComponent implements OnInit {
           deployment_id: [this.ar.snapshot.params['deploymentId'], Validators.required],
           deployment_pass_rate_name: ['', Validators.required],
           deployment_pass_rate_day: ['', Validators.required],
-          deployment_pass_rate_cost: ['', Validators.required]
+          deployment_pass_rate_cost: ['', Validators.required],
+          deployment_pass_rate_status: ['', Validators.required]
       });
   }
 

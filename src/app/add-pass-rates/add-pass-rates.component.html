@@ -29,6 +29,19 @@
                             This Is A Required Field  .
                           </span>
                         </div>
+
+                        <div class="form-group form-style" >
+                            <label for="CustomerLastPaymentDate">status :</label>
+                
+                            <select class="form-control selectpicker"   data-style="btn-new"  formControlName="deployment_pass_rate_status">
+                              <option value=""> Select </option>
+                              <option *ngFor="let activeList of activeData" [ngValue]="activeList">{{activeList}}</option>
+                             </select>
+                             
+                              <span class="error"  *ngIf="(submitted || addDeploymentPassRate.controls['deployment_pass_rate_status'].touched ) && addDeploymentPassRate.controls['deployment_pass_rate_status'].errors">
+                               This Is A Required Field .
+                            </span> 
+                        </div>
                          
                          
                          <div class="form-group btn-space">

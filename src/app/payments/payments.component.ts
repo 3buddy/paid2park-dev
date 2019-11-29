@@ -18,6 +18,7 @@ export interface PeriodicElement {
       ticket_payment_payment_amount: string;
       ticket_payment_funded_by: string;
       ticket_payment_balance_on_ticket: string;
+      ticket_payment_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -29,7 +30,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class PaymentsComponent implements OnInit {
 
-displayedColumns: string[] = ['TicketFee', 'License', 'TicketNumber', 'AmountPaid', 'Fundsby', 'Action'];
+displayedColumns: string[] = ['TicketFee', 'License', 'TicketNumber', 'AmountPaid', 'Fundsby', 'Status', 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

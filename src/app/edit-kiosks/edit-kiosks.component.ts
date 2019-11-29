@@ -19,6 +19,8 @@ export class EditKiosksComponent implements OnInit {
   messageClass: string;
   messageText: string;
 
+  activeData: Array<string> = ['YES', 'NO'];
+
   constructor(
        private router: Router,
        private ar: ActivatedRoute,
@@ -44,7 +46,8 @@ export class EditKiosksComponent implements OnInit {
                 kiosks_location_address: [response['body']['kiosks_location_address'], Validators.required],
                 kiosks_city: [response['body']['kiosks_city'], Validators.required],
                 kiosks_network_login: [response['body']['kiosks_network_login'], Validators.required],
-                kiosks_network_password: ['']
+                kiosks_network_password: [''],
+                kiosks_status: [response['body']['kiosks_status'], Validators.required]
              });
             this.cdRef.detectChanges();
            }

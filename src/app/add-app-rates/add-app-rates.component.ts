@@ -16,6 +16,7 @@ export class AddAppRatesComponent implements OnInit {
   showMessage: boolean;
   messageClass: string;
   messageText: string;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
       private fb: FormBuilder,
@@ -30,7 +31,8 @@ export class AddAppRatesComponent implements OnInit {
         this.addDeploymentAppRate = this.fb.group({
           deployment_id: [this.ar.snapshot.params['deploymentId'], Validators.required],
           deployment_app_rate_rate: ['', Validators.required],
-          deployment_app_rate_minutes: ['', Validators.required]
+          deployment_app_rate_minutes: ['', Validators.required],
+          deployment_app_rate_status: ['', Validators.required]
       });
   }
 

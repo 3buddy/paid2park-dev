@@ -17,6 +17,7 @@ export class EditCustomerComponent implements OnInit {
     showMessage: boolean = false;
     messageClass: string = '';
     messageText: string = '';
+    activeData: Array<string> = ['YES', 'NO'];
 
   constructor(private AR: ActivatedRoute , private fb: FormBuilder, private CS : CustomerService , private router : Router, private cdRef: ChangeDetectorRef) { }
 
@@ -63,6 +64,7 @@ export class EditCustomerComponent implements OnInit {
               customer_cell_carrier: [response['body']['customer_cell_carrier'], Validators.required],
               customer_notify_mins_in_advance: [response['body']['customer_notify_mins_in_advance'], Validators.required],
               customer_number_of_tickets_ytd: [response['body']['customer_number_of_tickets_ytd'], Validators.required],
+              customer_status: [response['body']['customer_status'], Validators.required]
             });
 
         }

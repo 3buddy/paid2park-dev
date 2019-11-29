@@ -19,6 +19,7 @@ export interface PeriodicElement {
   passes_reason: string;
   passes_start_date: string;
   passes_end_date: string;
+  passes_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -30,7 +31,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class PassesComponent implements OnInit {
 
-  displayedColumns: string[] = ['CustomerName', 'License', 'PassNumber', 'AmountPaid', 'Fundsby', 'Action'];
+  displayedColumns: string[] = ['CustomerName', 'License', 'PassNumber', 'AmountPaid', 'Fundsby', 'Status' , 'Action'];
 
   dataSource: MatTableDataSource<PeriodicElement>;
 

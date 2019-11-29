@@ -17,6 +17,7 @@ export interface PeriodicElement {
   kiosks_city: string;
   kiosks_network_login: string;
   kiosks_network_password: string;
+  kiosks_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -35,6 +36,7 @@ export class KiosksComponent implements OnInit {
     'kiosks_location_address',
     'kiosks_mac_address',
     'kiosks_guid',
+    'kiosks_status',
     'Action'];
 
   dataSource: MatTableDataSource<PeriodicElement>;

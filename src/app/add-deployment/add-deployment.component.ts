@@ -17,6 +17,7 @@ export class AddDeploymentComponent implements OnInit {
   showMessage: boolean;
   messageClass: string;
   messageText: string;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
       private fb: FormBuilder,
@@ -76,7 +77,8 @@ export class AddDeploymentComponent implements OnInit {
                 deployment_ticket_draft_account: new FormControl('', Validators.required),
                 deployment_ticket_draft_bank_name: new FormControl('', Validators.required),
                 deployment_ticket_draft_note: new FormControl('', Validators.required),
-                deployment_kiosks_price_per_hour: new FormControl('', Validators.required)
+                deployment_kiosks_price_per_hour: new FormControl('', Validators.required),
+                deployment_status: new FormControl('', Validators.required)
             })
         });
   }

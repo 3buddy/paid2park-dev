@@ -13,6 +13,7 @@ export interface PeriodicElement {
   deployment_id: number;
   deployment_app_rate_rate: string;
   deployment_app_rate_minutes: string;
+  deployment_app_rate_status: string;
 }
 
 let ELEMENT_DATA: PeriodicElement[];
@@ -24,7 +25,7 @@ let ELEMENT_DATA: PeriodicElement[];
 })
 export class DeploymentAppRatesComponent implements OnInit {
 
-  displayedColumns: string[] = ['deployment_app_rate_rate', 'deployment_app_rate_minutes', 'Action'];
+  displayedColumns: string[] = ['deployment_app_rate_rate', 'deployment_app_rate_minutes', 'Status' , 'Action'];
   dataSource: MatTableDataSource<PeriodicElement>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

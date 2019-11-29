@@ -29,7 +29,8 @@ function addPasses(req,res,cb)
     passes_funds_by,
     passes_reason,
     passes_start_date,
-    passes_end_date
+    passes_end_date,
+    passes_status
      } = req.body;
 
    let data = {
@@ -80,8 +81,9 @@ function addPasses(req,res,cb)
         passes_funds_by,
         passes_reason,
         passes_start_date,
-        passes_end_date
-          ) VALUES (?,?,?,?,?,?,?,?,?)`,[
+        passes_end_date,
+        passes_status
+          ) VALUES (?,?,?,?,?,?,?,?,?,?)`,[
             passes_license,
             passes_customers_name,
             passes_package,
@@ -90,7 +92,8 @@ function addPasses(req,res,cb)
             passes_funds_by,
             passes_reason,
             passes_start_date,
-            passes_end_date] , (error,result) => {
+            passes_end_date,
+            passes_status] , (error,result) => {
         if (error) 
         {
            cb(error)
@@ -156,7 +159,8 @@ function getPassesList(req,res,cb)
          passes_funds_by,
          passes_reason,
          passes_start_date,
-         passes_end_date FROM passes`,(err,result)=>{
+         passes_end_date,
+         passes_status FROM passes`,(err,result)=>{
              if(err) cb(err)
              else
              {
@@ -221,7 +225,8 @@ function getPassesDetails(req,res,cb)
          passes_funds_by,
          passes_reason,
          passes_start_date,
-         passes_end_date FROM passes WHERE passes_id=?`,[passes_id],(err,result)=>{
+         passes_end_date,
+         passes_status FROM passes WHERE passes_id=?`,[passes_id],(err,result)=>{
                if(err) cb(err)
                else
                {
@@ -253,7 +258,8 @@ function updatePasses(req,res,cb)
         passes_funds_by,
         passes_reason,
         passes_start_date,
-        passes_end_date 
+        passes_end_date,
+        passes_status 
     } = req.body;
 
     let data = {
@@ -301,7 +307,8 @@ function updatePasses(req,res,cb)
        passes_funds_by,
        passes_reason,
        passes_start_date,
-       passes_end_date FROM passes WHERE passes_id=?`,[passes_id],(err,result)=>{
+       passes_end_date,
+       passes_status FROM passes WHERE passes_id=?`,[passes_id],(err,result)=>{
              // console.log(query.sql);
               if(err) cb(err)
               else cb(null,result)
@@ -394,6 +401,11 @@ function updatePasses(req,res,cb)
             passes_end_date = result[0].passes_end_date;
         }
 
+        if (!!passes_status) {
+            passes_status = passes_status;
+        } else {
+            passes_status = result[0].passes_status;
+        }
         
 
         if(result.length > 0)
@@ -408,7 +420,8 @@ function updatePasses(req,res,cb)
           passes_funds_by = ?,
           passes_reason = ?,
           passes_start_date = ?,
-          passes_end_date = ? 
+          passes_end_date = ?,
+          passes_status = ? 
           WHERE passes_id=?`,[
             passes_license,
             passes_customers_name,
@@ -419,6 +432,7 @@ function updatePasses(req,res,cb)
             passes_reason,
             passes_start_date,
             passes_end_date,
+            passes_status,
             passes_id],(error,result)=>{
               if(error) cb(error)
               else cb(null,result);

@@ -18,6 +18,29 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Deployment App Minutes </th>
         <td mat-cell *matCellDef="let row"> {{row.deployment_app_rate_minutes}} </td>
       </ng-container>
+
+      <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>  Status </th>
+          <td mat-cell *matCellDef="let row" > 
+           
+            <div *ngIf="row.deployment_app_rate_status === 'YES' else inactiveBlock">
+            <button size="small" shape="semi-round" nbButton hero status="success"> 
+              Active 
+              <nb-icon icon="checkmark-outline"></nb-icon>
+            </button>
+            </div>
+        
+            <ng-template #inactiveBlock>
+            <button size="small" shape="semi-round" nbButton hero status="danger"> 
+              In-active 
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+            </ng-template>
+            
+            
+          </td>
+        </ng-container>
+
         <!-- Action Column -->
       <ng-container matColumnDef="Action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>  
@@ -47,15 +70,7 @@
                         </button>
             </a>
 
-            <a mat-flat-button color="info" (click)="openDialog(row.deployment_app_rate_id)">
-                        <button  size="small" shape="semi-round" nbButton hero status="warning"> 
-
-                            Delete
-
-                            <nb-icon icon="trash-outline"></nb-icon>
-
-                        </button>
-           </a>
+            
            
          </td>
       </ng-container>  

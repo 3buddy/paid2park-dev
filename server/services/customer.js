@@ -38,7 +38,8 @@ function addCustomer(req,res,cb)
     customer_cell,
     customer_cell_carrier,
     customer_notify_mins_in_advance,
-    customer_number_of_tickets_ytd 
+    customer_number_of_tickets_ytd,
+    customer_status
        } = req.body;
 
 
@@ -125,8 +126,9 @@ function addCustomer(req,res,cb)
                       customer_cell,
                       customer_cell_carrier,
                       customer_notify_mins_in_advance,
-                      customer_number_of_tickets_ytd  )
-                      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                      customer_number_of_tickets_ytd,
+                      customer_status  )
+                      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                     `, [customer_assign_id,
                       customer_last_name,
                       customer_first_name,
@@ -147,7 +149,8 @@ function addCustomer(req,res,cb)
                       customer_cell,
                       customer_cell_carrier,
                       customer_notify_mins_in_advance,
-                      customer_number_of_tickets_ytd], (err, result) => {
+                      customer_number_of_tickets_ytd,
+                      customer_status], (err, result) => {
                         if (err) cb(err)
                         else {
                             cb(null,result);
@@ -199,7 +202,8 @@ function getCustomer(req,res,cb)
              customer_cell,
              customer_cell_carrier,
              customer_notify_mins_in_advance,
-             customer_number_of_tickets_ytd FROM customers
+             customer_number_of_tickets_ytd,
+             customer_status FROM customers
             `,  (err, result) => {
                 if (err) reject(err)
                 else {
@@ -272,7 +276,8 @@ function getCustomerDetails(req,res,cb)
            customer_cell,
            customer_cell_carrier,
            customer_notify_mins_in_advance,
-           customer_number_of_tickets_ytd FROM customers WHERE customer_id = ?
+           customer_number_of_tickets_ytd,
+           customer_status FROM customers WHERE customer_id = ?
           `,[customerId],  (err, result) => {
               if (err) reject(err)
               else {
@@ -414,7 +419,8 @@ function updateCustomer(req,res,cb)
     customer_cell,
     customer_cell_carrier,
     customer_notify_mins_in_advance,
-    customer_number_of_tickets_ytd } = req.body;
+    customer_number_of_tickets_ytd,
+    customer_status } = req.body;
   let response = {
   status: 0,
   body: {},
@@ -671,6 +677,11 @@ function updateCustomer(req,res,cb)
               customer_number_of_tickets_ytd = result[0].customer_number_of_tickets_ytd;
             }
 
+            if (!!customer_status) {
+              customer_status = customer_status;
+            } else {
+              customer_status = result[0].customer_status;
+            }
 
           con.query(`
           Update customers SET
@@ -694,7 +705,8 @@ function updateCustomer(req,res,cb)
           customer_cell =?,
           customer_cell_carrier =?,
           customer_notify_mins_in_advance =?,
-          customer_number_of_tickets_ytd =?  WHERE customer_id = ?
+          customer_number_of_tickets_ytd =?,
+          customer_status=?  WHERE customer_id = ?
           `, [
             customer_assign_id,
             customer_last_name,
@@ -717,6 +729,7 @@ function updateCustomer(req,res,cb)
             customer_cell_carrier,
             customer_notify_mins_in_advance,
             customer_number_of_tickets_ytd,
+            customer_status,
             customer_id
             ], (err, result) => {
               if (err) cb(err)

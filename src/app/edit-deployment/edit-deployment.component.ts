@@ -18,6 +18,7 @@ export class EditDeploymentComponent implements OnInit {
   messageClass: string;
   messageText: string;
   isPageLaded: boolean;
+  activeData: Array<string> = ['YES', 'NO'];
 
   constructor(
       private fb: FormBuilder,
@@ -86,7 +87,8 @@ export class EditDeploymentComponent implements OnInit {
                   deployment_ticket_draft_account: new FormControl(response['body']['deployment_ticket_draft_account'], Validators.required),
                   deployment_ticket_draft_bank_name: new FormControl(response['body']['deployment_ticket_draft_bank_name'], Validators.required),
                   deployment_ticket_draft_note: new FormControl(response['body']['deployment_ticket_draft_note'], Validators.required),
-                  deployment_kiosks_price_per_hour: new FormControl(response['body']['deployment_kiosks_price_per_hour'], Validators.required)
+                  deployment_kiosks_price_per_hour: new FormControl(response['body']['deployment_kiosks_price_per_hour'], Validators.required),
+                  deployment_status: new FormControl(response['body']['deployment_status'], Validators.required)
               })
           });
             this.isPageLaded = true;
