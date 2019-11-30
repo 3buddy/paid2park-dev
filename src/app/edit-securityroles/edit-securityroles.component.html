@@ -1,4 +1,4 @@
-<div class="container bg-white" *ngIf="pageLoad; else loading"> 
+<div class="container bg-white" *ngIf="pageLoad === true; else loading"> 
 
     <div layout="row">
               <div class="col-md-12 menu form">
@@ -115,6 +115,7 @@
     </div>	 
     
     </div>
+
     <ng-template #loading>
             <div class="loader_custom">
                 <div class="loader">
@@ -125,4 +126,4 @@
                   </div>
                 </div>
               </div>
-        </ng-template>
+    </ng-template>
